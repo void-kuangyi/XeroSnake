@@ -1,0 +1,6 @@
+C:\Code\Windows\SampleIfs\SampleIfs\bin\Debug\SampleIfs.exe.config
+C:\Code\Windows\SampleIfs\SampleIfs\bin\Debug\SampleIfs.exe
+C:\Code\Windows\SampleIfs\SampleIfs\bin\Debug\SampleIfs.pdb
+C:\Code\Windows\SampleIfs\SampleIfs\obj\Debug\SampleIfs.csprojResolveAssemblyReference.cache
+C:\Code\Windows\SampleIfs\SampleIfs\obj\Debug\SampleIfs.exe
+C:\Code\Windows\SampleIfs\SampleIfs\obj\Debug\SampleIfs.pdb

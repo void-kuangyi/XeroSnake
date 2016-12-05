@@ -1,0 +1,6 @@
+C:\Code\Windows\Loops\Loops\bin\Debug\Loops.exe.config
+C:\Code\Windows\Loops\Loops\bin\Debug\Loops.exe
+C:\Code\Windows\Loops\Loops\bin\Debug\Loops.pdb
+C:\Code\Windows\Loops\Loops\obj\Debug\Loops.csprojResolveAssemblyReference.cache
+C:\Code\Windows\Loops\Loops\obj\Debug\Loops.exe
+C:\Code\Windows\Loops\Loops\obj\Debug\Loops.pdb

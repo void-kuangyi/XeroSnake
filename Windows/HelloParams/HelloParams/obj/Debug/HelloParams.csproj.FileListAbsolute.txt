@@ -1,0 +1,6 @@
+C:\Code\Windows\HelloParams\HelloParams\bin\Debug\HelloParams.exe.config
+C:\Code\Windows\HelloParams\HelloParams\bin\Debug\HelloParams.exe
+C:\Code\Windows\HelloParams\HelloParams\bin\Debug\HelloParams.pdb
+C:\Code\Windows\HelloParams\HelloParams\obj\Debug\HelloParams.csprojResolveAssemblyReference.cache
+C:\Code\Windows\HelloParams\HelloParams\obj\Debug\HelloParams.exe
+C:\Code\Windows\HelloParams\HelloParams\obj\Debug\HelloParams.pdb
