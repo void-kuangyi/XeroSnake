@@ -8,10 +8,24 @@ namespace TodoListBusinessLayer
 {
     public class TodoListBusinessLayer
     {
+
+        private TodoList.TodoList list;
+
+        public TodoListBusinessLayer()
+        {
+            list = new TodoList.TodoList();
+        }
         public string GetList()
         {
-            TodoList.TodoList list = new TodoList.TodoList();
             return list.GetList();
         }
+
+        public int WriteList(string input)
+        {
+            list.WriteList(input);
+            return 0;
+        }
+
+        
     }
 }

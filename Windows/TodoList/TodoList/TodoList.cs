@@ -8,10 +8,21 @@ namespace TodoList
 {
     public class TodoList
     {
+
+        private string[] Todo;
         public string GetList()
         {
-            string list = System.IO.File.ReadAllText(@"C:\Code\Windows\TodoList\TodoList.txt");
-            return list;
+            
+            return Todo;
         }
+
+
+        public string WriteList(string input)
+        {
+            Todo[] = input;
+            return 0;
+        }
+
+
     }
 }
