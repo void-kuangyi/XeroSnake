@@ -30,7 +30,9 @@ namespace TodoListClient
                         break;
 
                     case "read":
-                        Console.WriteLine(Todo.GetList());
+                        //  Console.WriteLine(Todo.GetList());
+                        Todo.GetList().ForEach(Console.WriteLine);
+
                         break;
 
                     default:

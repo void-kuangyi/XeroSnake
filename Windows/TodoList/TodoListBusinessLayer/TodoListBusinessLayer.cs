@@ -15,7 +15,7 @@ namespace TodoListBusinessLayer
         {
             list = new TodoList.TodoList();
         }
-        public string GetList()
+        public List<string> GetList()
         {
             return list.GetList();
         }

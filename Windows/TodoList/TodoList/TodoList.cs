@@ -9,17 +9,20 @@ namespace TodoList
     public class TodoList
     {
 
-        private string[] Todo;
-        public string GetList()
+
+
+        //private string Todo;
+        private List<string> Todo = new List<string> ();
+
+        public List<string> GetList()
         {
-            
             return Todo;
         }
 
 
-        public string WriteList(string input)
+        public int WriteList(string input)
         {
-            Todo[] = input;
+            Todo.Add(input);
             return 0;
         }
 
