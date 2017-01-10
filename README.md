@@ -28,8 +28,8 @@ Game inspired by [Slither.Io](www.slither.io)
 ## Game Rules
 
 * A snake eats food to grow in length
-* Each snakes have 3 lives
-* A snake looses a life if it runs into the other snake
+* Each snake has 3 lives
+* A snake looses a life if it runs into the other snake, enemy or wall
 * If a snake dies, it respawns with its initial length
 * Points earned when:
   * Snake eats food
