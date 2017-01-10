@@ -43,3 +43,5 @@ Game inspired by [Slither.Io](www.slither.io)
 Single Player: High Score
 
 2 Player (AI/Human): Game ends once a player looses all 3 lives. Winner is the player with highest score.
+
+
