@@ -4,3 +4,6 @@ C:\Code\Windows\XeroSnake\Snake\Snake\bin\Debug\Snake.pdb
 C:\Code\Windows\XeroSnake\Snake\Snake\obj\Debug\Snake.csprojResolveAssemblyReference.cache
 C:\Code\Windows\XeroSnake\Snake\Snake\obj\Debug\Snake.exe
 C:\Code\Windows\XeroSnake\Snake\Snake\obj\Debug\Snake.pdb
+C:\Users\Andrew.duff\Desktop\XeroSnake\Snake\Snake\bin\Debug\Snake.exe.config
+C:\Users\Andrew.duff\Desktop\XeroSnake\Snake\Snake\obj\Debug\Snake.exe
+C:\Users\Andrew.duff\Desktop\XeroSnake\Snake\Snake\obj\Debug\Snake.pdb

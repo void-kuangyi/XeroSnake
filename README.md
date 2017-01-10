@@ -10,7 +10,6 @@ Game inspired by [Slither.Io](https://slither.io)
 ### Required Features
 
 * Single Player
-* 2 Player
 * Score Board
 * Persistant Leader Score
 * Game screen/maze
@@ -19,6 +18,7 @@ Game inspired by [Slither.Io](https://slither.io)
 ### Additional Features
 
 * AI Snake
+* 2 Player
 * Diffirent levels
 * Different game modes
 * Different types of food 
