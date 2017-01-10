@@ -17,6 +17,7 @@ namespace Blog.Controllers
         // GET: Blogs
         public ActionResult Index()
         {
+
             return View(db.Blogs.ToList());
         }
 
