@@ -32,3 +32,8 @@ This is a Windows console based .Net game application.
   * Other snake looses its life
 * Points lost when snake runs into other snake 
 
+## Win Conditions
+
+Single Player: High Score
+
+2 Player (AI/Human): Game ends once a player looses all 3 lives. Winner is the player with highest score.
