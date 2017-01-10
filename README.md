@@ -6,10 +6,17 @@ This is a windows console based .Net game application.
 
 ## Features
 
-### Mandatory 
+### Required Features
 
 * 2 player
+* Score Board
+* Persistant High Score
 
-### Additional
+### Additional Features
 
 * AI
+* Diffirent levels
+
+## Game Rules
+
+* 
