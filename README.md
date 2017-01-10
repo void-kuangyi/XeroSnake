@@ -10,7 +10,7 @@ This is a Windows console based .Net game application.
 * Single Player
 * 2 Player
 * Score Board
-* Persistant High Score
+* Persistant Leader Score
 
 ### Additional Features
 
