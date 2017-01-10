@@ -27,12 +27,8 @@ This is a Windows console based .Net game application.
 * A snake looses a life if it runs into the other snake
 * If a snake dies, it respawns with its initial length
 * Points earned when:
-
-..* Snake eats food
-
-..* Different food may have different points
-
-..* Other snake looses its life
-
+  *Snake eats food
+  *Different food may have different points
+  *Other snake looses its life
 * Points lost when snake runs into other snake 
 
