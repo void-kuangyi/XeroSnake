@@ -10,6 +10,6 @@ This is a windows console based .Net game application.
 
 * 2 player
 
-### Optional
+### Additional
 
 * AI
