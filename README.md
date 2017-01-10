@@ -23,6 +23,7 @@ Game inspired by [Slither.Io](www.slither.io)
 * Different types of food 
 * Enemies
 * Different game boards
+* Game speed
 
 ## Game Rules
 
