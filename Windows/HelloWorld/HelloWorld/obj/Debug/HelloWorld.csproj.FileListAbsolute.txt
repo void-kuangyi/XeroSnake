@@ -1,6 +1,0 @@
-C:\Code\Windows\HelloWorld\HelloWorld\bin\Debug\HelloWorld.exe.config
-C:\Code\Windows\HelloWorld\HelloWorld\bin\Debug\HelloWorld.exe
-C:\Code\Windows\HelloWorld\HelloWorld\bin\Debug\HelloWorld.pdb
-C:\Code\Windows\HelloWorld\HelloWorld\obj\Debug\HelloWorld.csprojResolveAssemblyReference.cache
-C:\Code\Windows\HelloWorld\HelloWorld\obj\Debug\HelloWorld.exe
-C:\Code\Windows\HelloWorld\HelloWorld\obj\Debug\HelloWorld.pdb
