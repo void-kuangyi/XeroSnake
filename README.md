@@ -13,7 +13,7 @@ Game inspired by [Slither.Io](www.slither.io)
 * 2 Player
 * Score Board
 * Persistant Leader Score
-* One game board
+* Game screen/maze
 
 ### Additional Features
 
@@ -22,7 +22,7 @@ Game inspired by [Slither.Io](www.slither.io)
 * Different game modes
 * Different types of food 
 * Enemies
-* Different game boards
+* Different game screens/mazes
 * Game speed
 
 ## Game Rules
