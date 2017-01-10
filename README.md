@@ -14,6 +14,7 @@ Game inspired by [Slither.Io](https://slither.io)
 * Score Board
 * Persistant Leader Score
 * Game screen/maze
+* Menu for options selection
 
 ### Additional Features
 
