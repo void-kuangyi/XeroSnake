@@ -2,7 +2,9 @@
 
 ## Introduction
 
-This is a Windows console based .Net game application. 
+This is a Windows console based .Net game application. It will run on a local machine.
+
+Game inspired by [Slither.Io](www.slither.io)
 
 ## Features
 ### Required Features
@@ -11,6 +13,7 @@ This is a Windows console based .Net game application.
 * 2 Player
 * Score Board
 * Persistant Leader Score
+* One game board
 
 ### Additional Features
 
@@ -19,6 +22,7 @@ This is a Windows console based .Net game application.
 * Different game modes
 * Different types of food 
 * Enemies
+* Different game boards
 
 ## Game Rules
 
@@ -28,9 +32,10 @@ This is a Windows console based .Net game application.
 * If a snake dies, it respawns with its initial length
 * Points earned when:
   * Snake eats food
-  * Different food may have different points
+  * Different food has different points
   * Other snake looses its life
 * Points lost when snake runs into other snake 
+* Snake will not run into itself. It will pass through its own body.
 
 ## Win Conditions
 
