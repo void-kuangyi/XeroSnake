@@ -34,7 +34,7 @@ Game inspired by [Slither.Io](www.slither.io)
 * Points earned when:
   * Snake eats food
   * Different food has different points
-  * Other snake looses its life
+  * Other snake looses its life by hitting said snake (will not earn points if other snake looses life by bumping into enemies/wall)
 * Points lost when snake runs into other snake 
 * Snake will not run into itself. It will pass through its own body.
 
