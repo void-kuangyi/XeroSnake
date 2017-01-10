@@ -1,6 +1,6 @@
-# User stories for sprint 1 (11/1/16 - ?/1/16)
+# User Stories for Sprint 1 (11/1/16 - ?/1/16)
 
-# User persona
+## User Persona
 
 As a user 
 - I want to be able to start a game. 
@@ -9,7 +9,7 @@ As a user
 - I want to see my score
 - I want to be able to exit the game
 
-# System persona
+## System Persona
 
 As the system
 - I want to render a maze 
