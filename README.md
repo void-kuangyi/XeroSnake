@@ -1,27 +1,28 @@
-<<<<<<< HEAD
-# PracticeCode
-Homework in Xero
-=======
 # XeroSnake
 
 ## Introduction
 
-This is a windows console based .Net game application.
+This is a Windows console based .Net game application. 
 
 ## Features
-
 ### Required Features
 
-* 2 player
+* 2 Player
 * Score Board
 * Persistant High Score
 
 ### Additional Features
 
-* AI
+* AI Snake
 * Diffirent levels
+* Different types of food 
+* Enemies
 
 ## Game Rules
 
-* 
->>>>>>> dbd9d6cb26587de8ee8716d443685cf223cfaca5
+* A snake eats food to grow in length
+* Each snakes have 3 lives
+* A snake looses a life if it runs into the other snake
+* If a snake dies, it respawns with its initial length
+* Points earned when:
+  **
