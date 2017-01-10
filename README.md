@@ -4,7 +4,7 @@
 
 This is a Windows console based .Net game application. It will run on a local machine.
 
-Game inspired by [Slither.Io](slither.io)
+Game inspired by [Slither.Io](https://slither.io)
 
 ## Features
 ### Required Features
