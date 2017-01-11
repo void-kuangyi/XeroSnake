@@ -1,4 +1,4 @@
-# User Stories for Sprint 1 (11/1/16 - ?/1/16)
+# User Stories for Sprint 1 (11/1/16 - 16/1/16)
 
 ## User Persona
 
