@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLayer;
 
 namespace Snake
 {
@@ -12,6 +13,7 @@ namespace Snake
         {
             System.Console.WriteLine("Hello World");
             Console.ReadKey();
+            GameSnake temp = new GameSnake(3);
         }
     }
 }
