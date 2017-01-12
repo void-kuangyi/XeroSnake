@@ -33,6 +33,7 @@ namespace Snake
             }
             while (ExitGame == false);
 
+           // GameSnake temp = new GameSnake(3);
         }
 
         public static void Draw(int[,] DynamicMaze)
