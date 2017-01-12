@@ -25,12 +25,13 @@ namespace DatabaseLayer
             return highScore;
         }
 
-        public void setHighScore(int highScore)
+        public bool setHighScore(int highScore)
         {
             using (BinaryWriter writer = new BinaryWriter(File.Open(FILENAME, FileMode.Create)))
             {
                 writer.Write(highScore);
             }
+            return true;
         }
 
     }

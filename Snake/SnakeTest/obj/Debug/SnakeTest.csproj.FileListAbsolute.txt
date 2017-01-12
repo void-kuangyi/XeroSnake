@@ -1,0 +1,8 @@
+C:\Code\Windows\XeroSnake\Snake\SnakeTest\bin\Debug\SnakeTest.dll
+C:\Code\Windows\XeroSnake\Snake\SnakeTest\bin\Debug\SnakeTest.pdb
+C:\Code\Windows\XeroSnake\Snake\SnakeTest\bin\Debug\DatabaseLayer.dll
+C:\Code\Windows\XeroSnake\Snake\SnakeTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Code\Windows\XeroSnake\Snake\SnakeTest\bin\Debug\DatabaseLayer.pdb
+C:\Code\Windows\XeroSnake\Snake\SnakeTest\obj\Debug\SnakeTest.csprojResolveAssemblyReference.cache
+C:\Code\Windows\XeroSnake\Snake\SnakeTest\obj\Debug\SnakeTest.dll
+C:\Code\Windows\XeroSnake\Snake\SnakeTest\obj\Debug\SnakeTest.pdb

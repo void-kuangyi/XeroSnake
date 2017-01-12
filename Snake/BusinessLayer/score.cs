@@ -6,6 +6,11 @@ namespace Snake
     {
         private int currentScore;
         Database db = new Database();
+
+        Score()
+        {
+            currentScore = 0;
+        }
        
         public int getScore()
         {
@@ -24,7 +29,10 @@ namespace Snake
 
         public void setHighScore(int highScore)
         {
-            db.setHighScore(highScore);
+            if (db.setHighScore(highScore) == false)
+            {
+                throw new System.Exception("Database fail");
+            }
         }
     }
 }
