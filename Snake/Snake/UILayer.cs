@@ -17,9 +17,11 @@ namespace Snake
 
             do
             {
+                //This 2D Array is only for reference to check the Draw method
                 int[,] Maze = new int[5, 5] { { 1, 1, 1, 1, 1 }, { 1, 6, 6, 6, 1 }, { 1, 6, 3, 6, 1 }, { 1, 6, 6, 6, 1 }, { 1, 1, 1, 1, 1 } };
-                Draw(Maze);
 
+                //Draw method for creading a new instance of the maze and its contents
+                Draw(Maze);
 
 
                 UserExitRequest = Console.ReadLine().ToString();
