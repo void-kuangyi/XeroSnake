@@ -4,43 +4,52 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuisnessLayer
+namespace BusinessLayer
 {
-    class maze
+     public class maze
     {
+        private const int border = 1;
+        private const int no_border = 0;
+        private int width, height;
 
-        static int[,] CreateMaze(int w,int h)
+
+
+
+        public maze(int w,int h)
         {
-            int width, height;
             width = w;
             height = h;
+        }
 
-
+        public int[,] CreateMaze(int w,int h)
+        {
             int[,] maze = new int[width,height];
-
             
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
-                    maze[i,j] = 0;   
+                    maze[i,j] = no_border;   
                 }
 
             }
 
             for (int i = 0; i < width; i++)
             {
+                //every row of first column and last column should be marked as border 
                 if (i == 0 || i == width - 1)
                 {
                     for (int j = 0; j < height; j++)
                     {
-                        maze[i, j] = 1;
+                        maze[i, j] = border;
                     } 
                 }
+
+                //first and last row of other columns should be marked as border
                 else
                 {
-                    maze[i, 0] = 1;
-                    maze[i, height - 1] = 1;
+                    maze[i, 0] = border;
+                    maze[i, height - 1] = border;
                 }
             }
 
