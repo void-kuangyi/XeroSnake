@@ -6,3 +6,12 @@ C:\Code\Windows\XeroSnake\Snake\SnakeTest\bin\Debug\DatabaseLayer.pdb
 C:\Code\Windows\XeroSnake\Snake\SnakeTest\obj\Debug\SnakeTest.csprojResolveAssemblyReference.cache
 C:\Code\Windows\XeroSnake\Snake\SnakeTest\obj\Debug\SnakeTest.dll
 C:\Code\Windows\XeroSnake\Snake\SnakeTest\obj\Debug\SnakeTest.pdb
+C:\Code\Windows\KennethBranch\XeroSnake\Snake\SnakeTest\bin\Debug\SnakeTest.dll
+C:\Code\Windows\KennethBranch\XeroSnake\Snake\SnakeTest\bin\Debug\SnakeTest.pdb
+C:\Code\Windows\KennethBranch\XeroSnake\Snake\SnakeTest\bin\Debug\BusinessLayer.dll
+C:\Code\Windows\KennethBranch\XeroSnake\Snake\SnakeTest\bin\Debug\DatabaseLayer.dll
+C:\Code\Windows\KennethBranch\XeroSnake\Snake\SnakeTest\bin\Debug\BusinessLayer.pdb
+C:\Code\Windows\KennethBranch\XeroSnake\Snake\SnakeTest\bin\Debug\DatabaseLayer.pdb
+C:\Code\Windows\KennethBranch\XeroSnake\Snake\SnakeTest\obj\Debug\SnakeTest.csprojResolveAssemblyReference.cache
+C:\Code\Windows\KennethBranch\XeroSnake\Snake\SnakeTest\obj\Debug\SnakeTest.dll
+C:\Code\Windows\KennethBranch\XeroSnake\Snake\SnakeTest\obj\Debug\SnakeTest.pdb
