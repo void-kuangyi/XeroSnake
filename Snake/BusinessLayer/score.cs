@@ -1,13 +1,13 @@
 ﻿using DatabaseLayer;
 
-namespace Snake
+namespace BusinessLayer
 {
-    class Score
+    public class Score
     {
         private int currentScore;
         Database db = new Database();
 
-        Score()
+        public Score()
         {
             currentScore = 0;
         }
