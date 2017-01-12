@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
+using DatabaseLayer;
 
 namespace Snake
 {
     class Score
     {
         private int currentScore;
+        Database db = new Database();
        
         public int getScore()
         {
@@ -23,12 +24,12 @@ namespace Snake
 
         public int getHighScore()
         {
-
+            return db.getHighSCore();
         }
 
         public void setHighScore(int highScore)
         {
-
+            db.setHighScore(highScore);
         }
     }
 }

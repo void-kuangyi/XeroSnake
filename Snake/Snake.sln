@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snake", "Snake\Snake.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{EC88E2EA-40B9-41F8-AC3B-AC8699272D75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseLayer", "DatabaseLayer\DatabaseLayer.csproj", "{1D617FB1-BD69-4FDC-BCAE-25F50556E98E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EC88E2EA-40B9-41F8-AC3B-AC8699272D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC88E2EA-40B9-41F8-AC3B-AC8699272D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC88E2EA-40B9-41F8-AC3B-AC8699272D75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D617FB1-BD69-4FDC-BCAE-25F50556E98E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D617FB1-BD69-4FDC-BCAE-25F50556E98E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D617FB1-BD69-4FDC-BCAE-25F50556E98E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D617FB1-BD69-4FDC-BCAE-25F50556E98E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
