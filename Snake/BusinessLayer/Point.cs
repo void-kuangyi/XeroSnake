@@ -11,7 +11,7 @@ namespace BuisnessLayer
         private int x;
         private int y;
 
-        public Point (int newX, int newY, Boolean head)
+        public Point (int newX, int newY)
         {
             this.x = newX;
             this.y = newY;

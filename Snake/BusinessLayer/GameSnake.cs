@@ -9,6 +9,7 @@ namespace BuisnessLayer
     class GameSnake
     {
         private int currentDirection;  //direction the snake is facing
+        private int length;
 
 
         //Contructor
@@ -22,7 +23,7 @@ namespace BuisnessLayer
         {
             
             //create head node (head of snake)
-            Point head = new BuisnessLayer.Point(width / 2, height / 2, true);
+            Point head = new BuisnessLayer.Point(width / 2, height / 2);
             List<Point> snakePoints = new List<Point>();
 
             //create rest of nodes (body of snake)
@@ -30,7 +31,7 @@ namespace BuisnessLayer
             int headX = head.returnX() - 1;
             for (int x = 0; x < length; x++)
             {
-                Point temp = new BuisnessLayer.Point(headX, head.returnY(), false);
+                Point temp = new BuisnessLayer.Point(headX, head.returnY());
                 headX--;
             }
 
