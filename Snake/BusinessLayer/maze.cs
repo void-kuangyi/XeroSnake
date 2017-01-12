@@ -24,7 +24,6 @@ namespace BusinessLayer
         public int[,] CreateMaze(int w,int h)
         {
             int[,] maze = new int[width,height];
-            
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
@@ -54,12 +53,7 @@ namespace BusinessLayer
             }
 
             return maze;
-
         }
-
-
-
-
 
     }
 }
