@@ -1,3 +1,5 @@
 Snake/.vs/*
 Snake/Snake/obj/*
 Snake/Snake/bin/*
+Snake/BusinessLayer/obj/*
+Snake/BusinessLayer/bin/*

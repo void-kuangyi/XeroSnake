@@ -1,5 +1,0 @@
-C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BuisnessLayer\bin\Debug\BuisnessLayer.dll
-C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BuisnessLayer\bin\Debug\BuisnessLayer.pdb
-C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BuisnessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
-C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BuisnessLayer\obj\Debug\BuisnessLayer.dll
-C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BuisnessLayer\obj\Debug\BuisnessLayer.pdb
