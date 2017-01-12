@@ -10,9 +10,7 @@ namespace Snake
     class Score
     {
         private int currentScore;
-        private FileStream fileReader = new FileStream("highscore.txt", FileMode.OpenOrCreate, FileAccess.Read);
-        private FileStream fileWriter = new FileStream("highscore.txt", FileMode.Open, FileAccess.Write);
-
+       
         public int getScore()
         {
             return currentScore;
@@ -23,9 +21,13 @@ namespace Snake
             currentScore += increment;
         }
 
-        public void gameEndOperations()
+        public int getHighScore()
         {
 
+        }
+
+        public void setHighScore(int highScore)
+        {
 
         }
     }
