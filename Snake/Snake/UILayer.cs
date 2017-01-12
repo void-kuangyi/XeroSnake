@@ -13,7 +13,7 @@ namespace Snake
         {
             System.Console.WriteLine("Hello World");
             Console.ReadKey();
-            GameSnake temp = new GameSnake(3);
+           // GameSnake temp = new GameSnake(3);
         }
     }
 }

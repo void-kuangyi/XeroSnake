@@ -10,6 +10,7 @@ namespace BuisnessLayer
     {
         private int currentDirection;  //direction the snake is facing
         private int length;
+        private List<Point> currentPosition;
 
 
         //Contructor
@@ -35,8 +36,11 @@ namespace BuisnessLayer
                 headX--;
             }
 
+            this.currentPosition = snakePoints;
             return snakePoints;
         }
+
+
 
     }
 }
