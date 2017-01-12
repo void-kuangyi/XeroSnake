@@ -5,3 +5,6 @@ Snake/BusinessLayer/obj/*
 Snake/BusinessLayer/bin/*
 Snake/DatabaseLayer/bin/*
 Snake/DatabaseLayer/obj/*
+Snake/SnakeTest/bin/*
+Snake/SnakeTest/obj/*
+Snake/TestResults/*
