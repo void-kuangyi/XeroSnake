@@ -9,11 +9,10 @@ namespace SnakeTest
         [TestMethod]
         public void Constructor_Score_Initialised_To_Zero()
         {
-            BusinessLayer.Score score;
             int initialisedScore;
 
-            score = new Score();
-            initialisedScore = score.getScore();
+            //score = new Score();
+            initialisedScore = Score.getScore();
 
             Assert.IsTrue(initialisedScore == 0, "Score not initialised to zero at the start");
         }
@@ -21,14 +20,15 @@ namespace SnakeTest
         [TestMethod]
         public void incrementScore_Increments_The_Score()
         {
-            BusinessLayer.Score score = new Score();
-            int incrementValue = 30;
+            int incrementValue1 = 30;
+            int incrementValue2 = 30;
             int incrementedScore;
+            
+            Score.incrementScore(incrementValue1);
+            Score.incrementScore(incrementValue2);
+            incrementedScore = Score.getScore();
 
-            score.incrementScore(incrementValue);
-            incrementedScore = score.getScore();
-
-            Assert.IsTrue(incrementedScore == incrementValue, "Error in incrementing score");
+            Assert.IsTrue(incrementedScore == (incrementValue1 + incrementValue2), "Error in incrementing score");
         }
     }
 }
