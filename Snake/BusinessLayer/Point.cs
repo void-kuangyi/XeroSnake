@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    class Point
+    public class Point
     {
         private int x;
         private int y;

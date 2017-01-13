@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    class Engine
+    public class Engine
     {
         private const int SNAKEINITIALLENGTH = 4;
         private const int MAZEBODY = 1;
@@ -16,6 +16,7 @@ namespace BusinessLayer
         private int mazeLength { get; set; }
         private int mazeWidth { get; set; }
         private int[,] mazeArray { get; set; }
+        private Score gameScore;
 
         private maze gameMaze;
 
@@ -43,14 +44,22 @@ namespace BusinessLayer
             switch(currentMode)
             {
                 case gameMode.basic:
+
+                    gameScore = new Score();
                     // Create a New Maze and initialize it
-                    gameMaze = new maze(mazeLength, mazeWidth);
+                    gameMaze = new maze(mazeWidth, mazeLength);
                     mazeArray = gameMaze.CreateMaze();
 
                     // Add the Snake
                     gameSnake1 = new GameSnake();
-                    List<Point> snakeBody = gameSnake1.createFirstSnake(mazeLength, mazeWidth, SNAKEINITIALLENGTH);
+                    //List<Point> snakeBody = new List<Point>();
+                    List<Point> snakeBody = gameSnake1.createFirstSnake(20, 40, 5);
 
+                    gameSnake1.snakeMove(4, false);
+
+
+                   // snakeBody.Add(new Point(2, 4));
+                    //snakeBody.Add(new Point(3, 4));
                     // Make the whole snake as body first
                     foreach (Point value in snakeBody)
                     {
@@ -69,7 +78,7 @@ namespace BusinessLayer
                     {
                         isValid = validateNewFoodLocation(newFood);
                     }while (!isValid);
-                    foodList.Add(newFood);
+                   // foodList.Add(newFood);
                     mazeArray[newFood.getXLocation(), newFood.getyLocation()] = FOOD;
                     break;
 
@@ -83,15 +92,17 @@ namespace BusinessLayer
 
         public bool validateNewFoodLocation(Food newFood)
         {
-            if (mazeArray[newFood.getXLocation(), newFood.getyLocation()] == MAZEBODY)
+            int x = newFood.getXLocation();
+            int y = newFood.getyLocation();
+            if (mazeArray[x,y] == MAZEBODY)
             {
                 return false;
             }
-            if (mazeArray[newFood.getXLocation(), newFood.getyLocation()] == SNAKEBODY)
+            if (mazeArray[x, y] == SNAKEBODY)
             {
                 return false;
             }
-            if (mazeArray[newFood.getXLocation(), newFood.getyLocation()] == SNAKEHEAD)
+            if (mazeArray[x, y] == SNAKEHEAD)
             {
                 return false;
             }

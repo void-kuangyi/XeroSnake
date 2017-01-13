@@ -30,8 +30,8 @@ namespace BusinessLayer
             {
                 return false; // Negative number input
             }
-            int xLocation = randomGenerate(xBorder);
-            int yLocation = randomGenerate(yBorder);
+            this.xLocation = randomGenerate(xBorder - 1);
+            this.yLocation = randomGenerate(yBorder - 1);
 
             return true;
         }
@@ -39,7 +39,7 @@ namespace BusinessLayer
         private int randomGenerate(int numberLimit)
         {
             Random randomNumber = new Random();
-            return randomNumber.Next(numberLimit + BUFFER);
+            return randomNumber.Next(numberLimit);
         }
 
         public int getXLocation()

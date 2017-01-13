@@ -40,25 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="Engine.cs" />
-=======
->>>>>>> f1730bfed98d74df251424410552ed8d5c82be68
     <Compile Include="Food.cs" />
     <Compile Include="GameSnake.cs" />
     <Compile Include="maze.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="score.cs" />
-<<<<<<< HEAD
-=======
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DatabaseLayer\DatabaseLayer.csproj">
       <Project>{1d617fb1-bd69-4fdc-bcae-25f50556e98e}</Project>
       <Name>DatabaseLayer</Name>
     </ProjectReference>
->>>>>>> f1730bfed98d74df251424410552ed8d5c82be68
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
