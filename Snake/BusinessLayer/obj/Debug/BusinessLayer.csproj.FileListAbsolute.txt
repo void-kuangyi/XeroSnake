@@ -1,7 +1,0 @@
-C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BusinessLayer\bin\Debug\BuisnessLayer.dll
-C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BusinessLayer\bin\Debug\BuisnessLayer.pdb
-C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BusinessLayer\bin\Debug\BuisnessLayer.dll.CodeAnalysisLog.xml
-C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BusinessLayer\bin\Debug\BuisnessLayer.dll.lastcodeanalysissucceeded
-C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
-C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BusinessLayer\obj\Debug\BuisnessLayer.dll
-C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BusinessLayer\obj\Debug\BuisnessLayer.pdb
