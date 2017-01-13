@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    class GameSnake
+    public class GameSnake
     {
         enum Direction {right, down, left, up};
         Direction directionFacing;
         private int snakeLength;
         private List<Point> currentPosition;
 
-
-        
         //Method to create new snake
         public List<Point> createFirstSnake(int width, int height, int newLength)
         {
@@ -43,6 +41,7 @@ namespace BusinessLayer
             //make new list equal to position to previous state of snake
             List<Point> snakeMoveList = currentPosition;
             Point snakeTurn = new Point(0, 0);
+            //.directionFacing = direction;
 
             switch(direction)
             {
