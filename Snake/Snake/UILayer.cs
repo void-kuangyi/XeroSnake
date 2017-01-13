@@ -15,11 +15,6 @@ namespace Snake
 
         static void Main(string[] args)
         {
-<<<<<<< HEAD
-            System.Console.WriteLine("Hello World");
-            Console.ReadKey();
-
-=======
             // Game engine = new game engine
             // Pass scoreObj to game engine
 
@@ -82,7 +77,6 @@ namespace Snake
                 }
                 Console.Write(Environment.NewLine);
             }
->>>>>>> f1730bfed98d74df251424410552ed8d5c82be68
         }
 
         public static void drawScore(int score)
