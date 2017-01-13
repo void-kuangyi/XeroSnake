@@ -9,9 +9,9 @@ namespace BusinessLayer
     public class Food
     {
         public const int BUFFER = 1;
-        public int yLocation { get; set; }
-        public int xLocation { get; set; }
-        private enum foodType
+        private int yLocation;
+        private int xLocation;
+        public enum foodType
         {
             basic
         }
@@ -42,6 +42,14 @@ namespace BusinessLayer
             return randomNumber.Next(numberLimit + BUFFER);
         }
 
+        public int getXLocation()
+        {
+            return xLocation;
+        }
 
+        public int getyLocation()
+        {
+            return yLocation;
+        }
     }
 }
