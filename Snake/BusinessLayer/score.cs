@@ -4,30 +4,30 @@ namespace BusinessLayer
 {
     public class Score
     {
-        private int currentScore;
-        Database db = new Database();
+        private static int currentScore;
+        static Database db = new Database();
 
         public Score()
         {
             currentScore = 0;
         }
        
-        public int getScore()
+        public static int getScore()
         {
             return currentScore;
         }
 
-        public void incrementScore(int increment)
+        public static void incrementScore(int increment)
         {
             currentScore += increment;
         }
 
-        public int getHighScore()
+        public static int getHighScore()
         {
             return db.getHighSCore();
         }
 
-        public void setHighScore(int highScore)
+        public static void setHighScore(int highScore)
         {
             if (db.setHighScore(highScore) == false)
             {
