@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuisnessLayer
+namespace BusinessLayer
 {
     class GameSnake
     {
@@ -13,18 +13,14 @@ namespace BuisnessLayer
         private List<Point> currentPosition;
 
 
-        //Contructor
-        public GameSnake(int newLength)
-        {
-            this.length = newLength;
-        }
         
         //Method to create new snake
-        public List<Point> createFirstSnake(int width, int height, int length)
+        public List<Point> createFirstSnake(int width, int height, int newLength)
         {
-            
+
+            this.length = newLength;   
             //create head node (head of snake)
-            Point head = new BuisnessLayer.Point(width / 2, height / 2);
+            Point head = new BusinessLayer.Point(width / 2, height / 2);
             List<Point> snakePoints = new List<Point>();
 
             //create rest of nodes (body of snake)
@@ -32,7 +28,7 @@ namespace BuisnessLayer
             int headX = head.returnX() - 1;
             for (int x = 0; x < length; x++)
             {
-                Point temp = new BuisnessLayer.Point(headX, head.returnY());
+                Point temp = new BusinessLayer.Point(headX, head.returnY());
                 headX--;
             }
 
