@@ -21,34 +21,34 @@ namespace BusinessLayer
             height = h;
         }
 
-        public int[,] CreateMaze(int w,int h)
+        public int[,] CreateMaze()
         {
-            int[,] maze = new int[width,height];
-            for (int i = 0; i < width; i++)
+            int[,] maze = new int[height,width];
+            for (int i = 0; i < height; i++)
             {
-                for (int j = 0; j < height; j++)
+                for (int j = 0; j < width; j++)
                 {
                     maze[i,j] = no_border;   
                 }
 
             }
 
-            for (int i = 0; i < width; i++)
+            for (int i = 0; i < height; i++)
             {
-                //every row of first column and last column should be marked as border 
-                if (i == 0 || i == width - 1)
+                //every colum of first row and last row should be marked as border 
+                if (i == 0 || i == height - 1)
                 {
-                    for (int j = 0; j < height; j++)
+                    for (int j = 0; j < width; j++)
                     {
                         maze[i, j] = border;
                     } 
                 }
 
-                //first and last row of other columns should be marked as border
+                //first and last colum of other rows should be marked as border
                 else
                 {
                     maze[i, 0] = border;
-                    maze[i, height - 1] = border;
+                    maze[i, width - 1] = border;
                 }
             }
 
