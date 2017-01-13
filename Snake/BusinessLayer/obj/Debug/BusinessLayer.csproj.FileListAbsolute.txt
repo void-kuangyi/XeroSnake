@@ -5,3 +5,10 @@ C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BusinessLayer\bin\Debug\Buis
 C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
 C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BusinessLayer\obj\Debug\BuisnessLayer.dll
 C:\Users\Abhi.Dutta\Documents\repos\XeroSnake\Snake\BusinessLayer\obj\Debug\BuisnessLayer.pdb
+C:\Users\kuangyi.xing\XeroSnake\Snake\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\kuangyi.xing\XeroSnake\Snake\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\kuangyi.xing\XeroSnake\Snake\BusinessLayer\bin\Debug\DatabaseLayer.dll
+C:\Users\kuangyi.xing\XeroSnake\Snake\BusinessLayer\bin\Debug\DatabaseLayer.pdb
+C:\Users\kuangyi.xing\XeroSnake\Snake\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
+C:\Users\kuangyi.xing\XeroSnake\Snake\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\kuangyi.xing\XeroSnake\Snake\BusinessLayer\obj\Debug\BusinessLayer.pdb
