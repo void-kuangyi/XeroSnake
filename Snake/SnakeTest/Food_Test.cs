@@ -25,7 +25,7 @@ namespace SnakeTest
             bool result = food.generateFood(26, -3);
 
 
-            Assert.IsFalse(result, "Accepted Invalid X input");
+            Assert.IsFalse(result, "Accepted Invalid Y input");
 
         }
 

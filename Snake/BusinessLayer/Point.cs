@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuisnessLayer
+namespace BusinessLayer
 {
-    class Point
+    public class Point
     {
         private int x;
         private int y;
