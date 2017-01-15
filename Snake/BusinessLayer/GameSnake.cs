@@ -21,13 +21,16 @@ namespace BusinessLayer
             //create head node (head of snake)
             Point head = new BusinessLayer.Point(width / 2, height / 2);
             List<Point> snakePoints = new List<Point>();
+            snakePoints.Add(head);
 
             //create rest of nodes (body of snake)
 
             int headX = head.returnX() - 1;
-            for (int x = 0; x < snakeLength; x++)
+            for (int x = 0; x < snakeLength-1; x++)
             {
                 Point temp = new BusinessLayer.Point(headX, head.returnY());
+                snakePoints.Add(temp);
+
                 headX--;
             }
 
@@ -77,6 +80,12 @@ namespace BusinessLayer
             this.currentPosition = snakeMoveList;
 
             return snakeMoveList;
+        }
+
+        //return current snake position
+        public List<Point> returnCurrentSnakePosition()
+        {
+            return this.currentPosition;
         }
 
      }
