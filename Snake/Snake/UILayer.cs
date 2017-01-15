@@ -9,20 +9,23 @@ namespace Snake
 {
     class Program
     {
-
+        
         static bool ExitGame = false;
         static string UserExitRequest;
 
         static void Main(string[] args)
         {
             // Game engine = new game engine
+            Engine gameEngine = new Engine(20, 40, 1);
+            int[,] Maze = gameEngine.initializeGame();
+            // Pass scoreObj to game engine
 
             do
             {
                 //This 2D Array is only for reference to check the Draw method
-                int[,] Maze = new int[5, 5] { { 1, 1, 1, 1, 1 }, { 1, 6, 6, 6, 1 }, { 1, 6, 3, 6, 1 }, { 1, 6, 6, 6, 1 }, { 1, 1, 1, 1, 1 } };
+                //int[,] Maze = new int[5, 5] { { 1, 1, 1, 1, 1 }, { 1, 6, 6, 6, 1 }, { 1, 6, 3, 6, 1 }, { 1, 6, 6, 6, 1 }, { 1, 1, 1, 1, 1 } };
                 //Belongs in a test file
-
+                
                 //Draw method for creading a new instance of the maze and its contents
                 Draw(Maze);
 
@@ -57,20 +60,23 @@ namespace Snake
                 {
                     switch (DynamicMaze[i, j])
                     {
+                        case 0:
+                            Console.Write(" "); //Empty cell
+                            break;
                         case 1:
                             Console.Write("*"); //border horizontal 
                             break;
-                        case 3:
+                        case 2:
                             Console.Write("0"); //snake head
                             break;
-                        case 4:
+                        case 3:
                             Console.Write("o"); //snake body
                             break;
-                        case 5:
+                        case 4:
                             Console.Write("@"); //food
                             break;
-                        case 6:
-                            Console.Write("-"); //snake body
+                        default:
+                            Console.Write("Should not reach here. Unexpected error!"); //food
                             break;
                     }
                 }
