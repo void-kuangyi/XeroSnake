@@ -76,7 +76,7 @@ namespace Snake
                             Console.Write("@"); //food
                             break;
                         default:
-                            Console.Write("Were fucked!"); //food
+                            Console.Write("Should not reach here. Unexpected error!"); //food
                             break;
                     }
                 }

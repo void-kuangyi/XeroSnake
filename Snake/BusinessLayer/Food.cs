@@ -51,5 +51,15 @@ namespace BusinessLayer
         {
             return yLocation;
         }
+
+        public void setXLocation(int newSetXLocation)
+        {
+            xLocation = newSetXLocation;
+        }
+
+        public void setYLocation(int newSetYLocation)
+        {
+            yLocation = newSetYLocation;
+        }
     }
 }

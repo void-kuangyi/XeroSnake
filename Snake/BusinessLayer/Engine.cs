@@ -20,9 +20,9 @@ namespace BusinessLayer
 
         private maze gameMaze;
 
-        private GameSnake gameSnake1;
+        private GameSnake gameSnake1; 
         private GameSnake gameSnake2;
-        private List<Food> foodList;
+        private List<Food> foodList = new List<Food>();
 
 
         private enum gameMode
@@ -53,13 +53,8 @@ namespace BusinessLayer
                     // Add the Snake
                     gameSnake1 = new GameSnake();
                     //List<Point> snakeBody = new List<Point>();
-                    List<Point> snakeBody = gameSnake1.createFirstSnake(20, 40, 5);
+                    List<Point> snakeBody = gameSnake1.createFirstSnake(mazeLength, mazeWidth, SNAKEINITIALLENGTH);
 
-                    gameSnake1.snakeMove(4, false);
-
-
-                   // snakeBody.Add(new Point(2, 4));
-                    //snakeBody.Add(new Point(3, 4));
                     // Make the whole snake as body first
                     foreach (Point value in snakeBody)
                     {
@@ -70,16 +65,19 @@ namespace BusinessLayer
                     mazeArray[head.returnX(), head.returnY()] = SNAKEHEAD;
 
                     // Add the Food
-                    Food newFood = new BusinessLayer.Food();
-                    newFood.generateFood(mazeLength, mazeWidth);
+                    foodList.Add(new Food());
 
-                    bool isValid = true;
-                    do
+                    foreach(Food value in foodList)
                     {
-                        isValid = validateNewFoodLocation(newFood);
-                    }while (!isValid);
-                   // foodList.Add(newFood);
-                    mazeArray[newFood.getXLocation(), newFood.getyLocation()] = FOOD;
+                        value.generateFood(mazeLength, mazeWidth);
+                        bool isValid = true;
+                        do
+                        {
+                            isValid = validateNewFoodLocation(value);
+                        } while (!isValid);
+                        mazeArray[value.getXLocation(), value.getyLocation()] = FOOD;
+                    }
+
                     break;
 
                 default :
@@ -94,6 +92,11 @@ namespace BusinessLayer
         {
             int x = newFood.getXLocation();
             int y = newFood.getyLocation();
+
+            if ((x >= mazeLength) || (y >= mazeWidth))
+            {
+                return false;
+            }
             if (mazeArray[x,y] == MAZEBODY)
             {
                 return false;
