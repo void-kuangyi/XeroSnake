@@ -16,7 +16,6 @@ namespace Snake
         static void Main(string[] args)
         {
             // Game engine = new game engine
-            // Pass scoreObj to game engine
 
             do
             {
