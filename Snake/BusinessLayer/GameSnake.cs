@@ -32,6 +32,7 @@ namespace BusinessLayer
                 snakePoints.Add(temp);
 
                 headX--;
+                snakePoints.Add(temp);
             }
 
             this.currentPosition = snakePoints;
@@ -90,3 +91,4 @@ namespace BusinessLayer
 
      }
 }
+
