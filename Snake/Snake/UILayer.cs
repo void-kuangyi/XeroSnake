@@ -76,8 +76,8 @@ namespace Snake
                             Console.Write("@"); //food
                             break;
                         default:
-                            Console.Write("Should not reach here. Unexpected error!"); //food
-                            break;
+                            throw new System.Exception("Invalid Game Element seen!");
+
                     }
                 }
                 Console.Write(Environment.NewLine);

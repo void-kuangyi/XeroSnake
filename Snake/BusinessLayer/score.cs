@@ -7,10 +7,10 @@ namespace BusinessLayer
         private static int currentScore;
         static Database db = new Database();
 
-        public Score()
-        {
-            currentScore = 0;
-        }
+        //public Score()
+        //{
+        //    currentScore = 0;
+        //}
        
         public static int getScore()
         {
