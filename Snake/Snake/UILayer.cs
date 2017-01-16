@@ -53,6 +53,10 @@ namespace Snake
                         break;
                 }
 
+                if (UpdateMaze[0,0] == 5)
+                {
+                    ExitGame = true;
+                }
                 System.Console.Clear();
                 Draw(UpdateMaze);
                 System.Threading.Thread.Sleep(1);
