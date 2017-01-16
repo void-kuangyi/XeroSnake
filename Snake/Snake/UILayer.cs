@@ -53,6 +53,10 @@ namespace Snake
                         break;
                 }
 
+                if (UpdateMaze[0,0] == 5)
+                {
+                    ExitGame = true;
+                }
                 System.Console.Clear();
                 Draw(UpdateMaze);
                 System.Threading.Thread.Sleep(1);
@@ -116,7 +120,9 @@ namespace Snake
             UserReplay = Console.ReadLine().ToString();
             if (UserReplay == "R" || UserReplay == "r")
             {
-                // todo: replay
+                ExitGame = false;
+                Console.Clear();
+                Main(null);
             }
         }
     }
