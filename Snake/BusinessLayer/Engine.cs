@@ -62,7 +62,7 @@ namespace BusinessLayer
             {
                 case gameMode.basic:
 
-                    
+
                     // Create a New Maze and initialize it
                     gameMaze = new maze(mazeWidth, mazeLength);
                     mazeArray = gameMaze.CreateMaze();
@@ -113,11 +113,11 @@ namespace BusinessLayer
             {
 
                 case MAZEBODY:  // snake hits the maze
-                    if(Score.getScore() > Score.getHighScore())
+                    if (Score.getScore() > Score.getHighScore())
                     {
                         Score.setHighScore(Score.getScore());
                     }
-                    mazeArray[0,0] = SNAKEHITSMAZE;
+                    mazeArray[0, 0] = SNAKEHITSMAZE;
                     return mazeArray;
 
 
@@ -135,14 +135,15 @@ namespace BusinessLayer
                     int foodToRemove = 0;
                     foreach (Food value in foodList)
                     {
-                       if((newSnakeHead.returnX() == value.getXLocation()) && (newSnakeHead.returnY() == value.getyLocation()))
+                        if ((newSnakeHead.returnX() == value.getXLocation()) && (newSnakeHead.returnY() == value.getyLocation()))
                         {
                             Score.incrementScore(value.getFoodType());
                             foodToRemove = foodList.IndexOf(value);
                         }
                     }
                     foodList.RemoveAt(foodToRemove);
-                    
+
+
 
                     Food newFood = new Food();
                     bool isValid = true;
@@ -150,13 +151,13 @@ namespace BusinessLayer
                     {
                         newFood.generateFood(mazeLength, mazeWidth);
                         isValid = validateNewFoodLocation(newFood);
-                        if(isValid)
+                        if (isValid)
                         {
                             foodList.Add(newFood);
                             mazeArray[newFood.getXLocation(), newFood.getyLocation()] = FOOD;
                         }
                     } while (!isValid);
-                    
+
 
                     break;
 
@@ -170,6 +171,12 @@ namespace BusinessLayer
                     Point newhead = snakesNewLocation[0];
                     mazeArray[newhead.returnX(), newhead.returnY()] = SNAKEHEAD;
 
+                    foreach (Food value in foodList)
+                    {
+                        mazeArray[value.getXLocation(), value.getyLocation()] = FOOD;
+                    }
+
+
                     break;
             }
             return mazeArray;
@@ -177,7 +184,7 @@ namespace BusinessLayer
 
         private Point getNewHead(int snakeDirection)
         {
-            List<Point> snakeBody = gameSnake1.createFirstSnake(mazeLength, mazeWidth, SNAKEINITIALLENGTH);
+            List<Point> snakeBody = gameSnake1.returnCurrentSnakePosition();
 
             // Check current snake head location.
             Point snakeHead = snakeBody.First();
@@ -210,7 +217,7 @@ namespace BusinessLayer
             }
             return newSnakeHead;
         }
-    public bool validateNewFoodLocation(Food newFood)
+        public bool validateNewFoodLocation(Food newFood)
         {
             int x = newFood.getXLocation();
             int y = newFood.getyLocation();
@@ -219,7 +226,7 @@ namespace BusinessLayer
             {
                 return false;
             }
-            if (mazeArray[x,y] == MAZEBODY)
+            if (mazeArray[x, y] == MAZEBODY)
             {
                 return false;
             }
