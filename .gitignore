@@ -10,3 +10,4 @@ Snake/SnakeTest/obj/*
 Snake/TestResults/*
 *.user
 *.cache
+*.txt

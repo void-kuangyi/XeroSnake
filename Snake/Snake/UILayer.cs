@@ -116,7 +116,9 @@ namespace Snake
             UserReplay = Console.ReadLine().ToString();
             if (UserReplay == "R" || UserReplay == "r")
             {
-                // todo: replay
+                ExitGame = false;
+                Console.Clear();
+                Main(null);
             }
         }
     }
