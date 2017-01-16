@@ -5,11 +5,12 @@ namespace BusinessLayer
     public class Score
     {
         private static int currentScore;
+        private const int NEWSCORE = 0;
         static Database db = new Database();
 
         public Score()
         {
-            currentScore = 0;
+            currentScore = NEWSCORE;
         }
        
         public static int getScore()
@@ -20,6 +21,11 @@ namespace BusinessLayer
         public static void incrementScore(int increment)
         {
             currentScore += increment;
+        }
+
+        public static void resetScore()
+        {
+            currentScore = NEWSCORE;
         }
 
         public static int getHighScore()

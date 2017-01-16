@@ -5,42 +5,61 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessLayer;
 
+
 namespace Snake
 {
     class Program
     {
-        
+
         static bool ExitGame = false;
-        static string UserExitRequest;
+        static string UserReplay;
+
 
         static void Main(string[] args)
         {
+
             // Game engine = new game engine
-            Engine gameEngine = new Engine(20, 40, 1);
+            Engine gameEngine = new Engine(20, 70, 1);
             int[,] Maze = gameEngine.initializeGame();
-            // Pass scoreObj to game engine
+            int[,] UpdateMaze = Maze;
+
+            Draw(Maze);
 
             do
             {
-                //This 2D Array is only for reference to check the Draw method
-                //int[,] Maze = new int[5, 5] { { 1, 1, 1, 1, 1 }, { 1, 6, 6, 6, 1 }, { 1, 6, 3, 6, 1 }, { 1, 6, 6, 6, 1 }, { 1, 1, 1, 1, 1 } };
-                //Belongs in a test file
-                
-                //Draw method for creading a new instance of the maze and its contents
-                Draw(Maze);
-
                 int score = Score.getScore(); // Get score from business layer
-                drawScore(score); 
+                drawScore(score);
 
-                UserExitRequest = Console.ReadLine().ToString();
-                if (UserExitRequest == "Q" || UserExitRequest == "q")
+
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        UpdateMaze = gameEngine.updateGame(2);
+                        break;
+                    case ConsoleKey.DownArrow:
+                        UpdateMaze = gameEngine.updateGame(0);
+                        break;
+                    case ConsoleKey.RightArrow:
+                        UpdateMaze = gameEngine.updateGame(3);
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        UpdateMaze = gameEngine.updateGame(1);
+                        break;
+                    case ConsoleKey.Q:
+                        ExitGame = true;
+                        break;
+                    default:
+                        break;
+                }
+
+                if (UpdateMaze[0,0] == 5)
                 {
                     ExitGame = true;
                 }
-
                 System.Console.Clear();
-
-                System.Threading.Thread.Sleep(500);
+                Draw(UpdateMaze);
+                System.Threading.Thread.Sleep(1);
             }
             while (ExitGame == false);
 
@@ -64,7 +83,7 @@ namespace Snake
                             Console.Write(" "); //Empty cell
                             break;
                         case 1:
-                            Console.Write("*"); //border horizontal 
+                            Console.Write("*"); //border  
                             break;
                         case 2:
                             Console.Write("0"); //snake head
@@ -75,8 +94,11 @@ namespace Snake
                         case 4:
                             Console.Write("@"); //food
                             break;
+                        case 5:
+                            Console.Write("Game Over"); //food
+                            break;
                         default:
-                            Console.Write("Should not reach here. Unexpected error!"); //food
+                            Console.Write("Should not reach here. Unexpected error!"); //Error 
                             break;
                     }
                 }
@@ -95,11 +117,13 @@ namespace Snake
             System.Console.WriteLine("The high score is " + Score.getHighScore());
             System.Console.WriteLine("Enter r to replay.");
 
-            UserExitRequest = Console.ReadLine().ToString();
-            if (UserExitRequest == "R" || UserExitRequest == "r")
+            UserReplay = Console.ReadLine().ToString();
+            if (UserReplay == "R" || UserReplay == "r")
             {
-                // replay
+                ExitGame = false;
+                Console.Clear();
+                Main(null);
             }
-        } 
+        }
     }
 }
