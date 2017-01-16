@@ -32,7 +32,6 @@ namespace BusinessLayer
                 snakePoints.Add(temp);
 
                 headX--;
-                snakePoints.Add(temp);
             }
 
             this.currentPosition = snakePoints;
@@ -40,6 +39,7 @@ namespace BusinessLayer
         }
 
 
+        //right = 0, down = 1, left = 2, up = 3
         public List<Point> snakeMove(int direction, Boolean hasEaten)
         {
             //make new list equal to position to previous state of snake
@@ -91,4 +91,3 @@ namespace BusinessLayer
 
      }
 }
-
