@@ -14,7 +14,7 @@ namespace BusinessLayer
         private const int SNAKEHEAD = 2;
         private const int FOOD = 4;
         private const int STEP = 1;
-        private const int SNAKEHITSMAZE = 4;
+        private const int SNAKEHITSMAZE = 5;
         private int mazeLength { get; set; }
         private int mazeWidth { get; set; }
         private int[,] mazeArray { get; set; }
@@ -52,6 +52,7 @@ namespace BusinessLayer
         {
             mazeLength = length;
             mazeWidth = width;
+            Score.resetScore();
         }
 
         public int[,] initializeGame()
@@ -61,7 +62,7 @@ namespace BusinessLayer
             {
                 case gameMode.basic:
 
-                    gameScore = new Score();
+                    
                     // Create a New Maze and initialize it
                     gameMaze = new maze(mazeWidth, mazeLength);
                     mazeArray = gameMaze.CreateMaze();
@@ -85,10 +86,10 @@ namespace BusinessLayer
 
                     foreach (Food value in foodList)
                     {
-                        value.generateFood(mazeLength, mazeWidth);
                         bool isValid = true;
                         do
                         {
+                            value.generateFood(mazeLength, mazeWidth);
                             isValid = validateNewFoodLocation(value);
                         } while (!isValid);
                         mazeArray[value.getXLocation(), value.getyLocation()] = FOOD;
@@ -106,6 +107,57 @@ namespace BusinessLayer
 
         public int[,] updateGame(int snakeDirection)
         {
+            Point newSnakeHead = getNewHead(snakeDirection);
+
+            switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
+            {
+
+                case MAZEBODY:  // snake hits the maze
+                    if(Score.getScore() > Score.getHighScore())
+                    {
+                        Score.setHighScore(Score.getScore());
+                    }
+                    //mazeArray = [SNAKEHITSMAZE];
+                    return mazeArray;
+
+
+                case FOOD:  // snake hits the food
+                    gameSnake1.snakeMove(snakeDirection, true);
+                    foreach (Food value in foodList)
+                    {
+                       if((newSnakeHead.returnX() == value.getXLocation()) && (newSnakeHead.returnY() == value.getyLocation()))
+                        {
+                            Score.incrementScore(value.getFoodType());
+                            foodList.Remove(value);
+                        }
+                    }
+
+
+                    Food newFood = new Food();
+                    bool isValid = true;
+                    do
+                    {
+                        newFood.generateFood(mazeLength, mazeWidth);
+                        isValid = validateNewFoodLocation(newFood);
+                        if(isValid)
+                        {
+                            foodList.Add(newFood);
+                            mazeArray[newFood.getXLocation(), newFood.getyLocation()] = FOOD;
+                        }
+                    } while (!isValid);
+                    
+
+                    break;
+
+                default:   // snake moves
+                    gameSnake1.snakeMove(snakeDirection, false);
+                    break;
+            }
+            return mazeArray;
+        }
+
+        private Point getNewHead(int snakeDirection)
+        {
             List<Point> snakeBody = gameSnake1.createFirstSnake(mazeLength, mazeWidth, SNAKEINITIALLENGTH);
 
             // Check current snake head location.
@@ -118,56 +170,27 @@ namespace BusinessLayer
             switch (snakeDirection)
             {
 
-                case (int) direction.right:
+                case (int)direction.right:
                     newSnakeHead = new Point(x + STEP, y);
                     break;
 
-                case (int) direction.left:
+                case (int)direction.left:
                     newSnakeHead = new Point(x - STEP, y);
                     break;
 
-                case (int) direction.up:
+                case (int)direction.up:
                     newSnakeHead = new Point(x, y - STEP);
                     break;
 
-                case (int) direction.down:
+                case (int)direction.down:
                     newSnakeHead = new Point(x, y + STEP);
                     break;
 
                 default:
                     throw new System.Exception("Invalid direction.");
             }
-
-            switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
-            {
-
-                case MAZEBODY:  // snake hits the maze
-                    return [SNAKEHITSMAZE];
-
-
-                case FOOD:  // snake hits the maze
-                    gameSnake1.snakeMove(snakeDirection, true);
-
-
-                    break;
-
-                default:   // snake moves
-                    gameSnake1.snakeMove(snakeDirection, true);
-                    break;
-            }
-
-            //if eaten
-
-            //increment score
-            //move snake
-            //generate new food
-
-            //else
-            //move the snake
-
-            return mazeArray;
+            return newSnakeHead;
         }
-
     public bool validateNewFoodLocation(Food newFood)
         {
             int x = newFood.getXLocation();

@@ -13,7 +13,7 @@ namespace BusinessLayer
         private int xLocation;
         public enum foodType
         {
-            basic
+            basic = 1
         }
         foodType type = foodType.basic;
 
@@ -42,11 +42,15 @@ namespace BusinessLayer
             return randomNumber.Next(numberLimit);
         }
 
+        public int getFoodType()
+        {
+            return (int) type;
+        }
+
         public int getXLocation()
         {
             return xLocation;
         }
-
         public int getyLocation()
         {
             return yLocation;
