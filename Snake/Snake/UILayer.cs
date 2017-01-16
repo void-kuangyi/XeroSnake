@@ -93,12 +93,14 @@ namespace Snake
         {
             System.Console.WriteLine("Your final score is " + Score.getScore());
             System.Console.WriteLine("The high score is " + Score.getHighScore());
-            System.Console.WriteLine("Enter r to replay.");
+            System.Console.WriteLine("Enter r to replay. Press any other key to quit.");
 
             UserExitRequest = Console.ReadLine().ToString();
             if (UserExitRequest == "R" || UserExitRequest == "r")
             {
                 // replay
+                Console.Clear();
+                Main(null);
             }
         } 
     }
