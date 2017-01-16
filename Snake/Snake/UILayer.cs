@@ -13,7 +13,7 @@ namespace Snake
 
         static bool ExitGame = false;
         static string UserReplay;
-
+        enum Direction { right, down, left, up };
 
         static void Main(string[] args)
         {
@@ -35,16 +35,16 @@ namespace Snake
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        UpdateMaze = gameEngine.updateGame(2);
+                        UpdateMaze = gameEngine.updateGame(direction.up);
                         break;
                     case ConsoleKey.DownArrow:
-                        UpdateMaze = gameEngine.updateGame(0);
+                        UpdateMaze = gameEngine.updateGame(direction.down);
                         break;
                     case ConsoleKey.RightArrow:
-                        UpdateMaze = gameEngine.updateGame(3);
+                        UpdateMaze = gameEngine.updateGame(direction.right);
                         break;
                     case ConsoleKey.LeftArrow:
-                        UpdateMaze = gameEngine.updateGame(1);
+                        UpdateMaze = gameEngine.updateGame(direction.left);
                         break;
                     case ConsoleKey.Q:
                         ExitGame = true;

@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
+    public enum direction
+    {
+        right, down, left, up
+    }
+
     public class Engine
     {
         private const int SNAKEINITIALLENGTH = 4;
@@ -37,13 +42,7 @@ namespace BusinessLayer
             die,
             move
         }
-        public enum direction
-        {
-            right,
-            left,
-            up,
-            down
-        }
+        
 
         gameMode currentMode = gameMode.basic;
 
@@ -105,7 +104,7 @@ namespace BusinessLayer
             return mazeArray;
         }
 
-        public int[,] updateGame(int snakeDirection)
+        public int[,] updateGame(direction snakeDirection)
         {
             Point newSnakeHead = getNewHead(snakeDirection);
             List<Point> snakesNewLocation;
@@ -182,7 +181,7 @@ namespace BusinessLayer
             return mazeArray;
         }
 
-        private Point getNewHead(int snakeDirection)
+        private Point getNewHead(direction snakeDirection)
         {
             List<Point> snakeBody = gameSnake1.returnCurrentSnakePosition();
 
@@ -196,20 +195,20 @@ namespace BusinessLayer
             switch (snakeDirection)
             {
 
-                case (int)direction.right:
-                    newSnakeHead = new Point(x + STEP, y);
+                case direction.right:
+                    newSnakeHead = new Point(x, y + STEP);
                     break;
 
-                case (int)direction.left:
-                    newSnakeHead = new Point(x - STEP, y);
-                    break;
-
-                case (int)direction.up:
+                case direction.left:
                     newSnakeHead = new Point(x, y - STEP);
                     break;
 
-                case (int)direction.down:
-                    newSnakeHead = new Point(x, y + STEP);
+                case direction.up:
+                    newSnakeHead = new Point(x - STEP, y);
+                    break;
+
+                case direction.down:
+                    newSnakeHead = new Point(x + STEP, y);
                     break;
 
                 default:
