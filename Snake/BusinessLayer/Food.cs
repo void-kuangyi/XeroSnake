@@ -13,7 +13,7 @@ namespace BusinessLayer
         private int xLocation;
         public enum foodType
         {
-            basic
+            basic = 1
         }
         foodType type = foodType.basic;
 
@@ -26,7 +26,7 @@ namespace BusinessLayer
 
         public bool generateFood(int xBorder, int yBorder)
         {
-            if(xBorder < 0 || yBorder < 0)
+            if (xBorder < 0 || yBorder < 0)
             {
                 return false; // Negative number input
             }
@@ -42,11 +42,15 @@ namespace BusinessLayer
             return randomNumber.Next(numberLimit);
         }
 
+        public int getFoodType()
+        {
+            return (int)type;
+        }
+
         public int getXLocation()
         {
             return xLocation;
         }
-
         public int getyLocation()
         {
             return yLocation;

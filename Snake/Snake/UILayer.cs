@@ -13,6 +13,7 @@ namespace Snake
         
         static bool ExitGame = false;
         static string UserReplay;
+      
         
         static void Main(string[] args)
         {
@@ -20,31 +21,30 @@ namespace Snake
             // Game engine = new game engine
             Engine gameEngine = new Engine(20, 70, 1);
             int[,] Maze = gameEngine.initializeGame();
-            // Pass scoreObj to game engine
+            int[,] UpdateMaze = Maze;
+         
+            Draw(Maze);
 
             do
             {                           
-                //Draw method for creating a new instance of the maze and its contents
-                Draw(Maze);
-
                 int score = Score.getScore(); // Get score from business layer
                 drawScore(score);
 
-                //
-                //add code to flag if the game should end then use this code to exit the game
-                //
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-
+                        UpdateMaze = gameEngine.updateGame(2);
                         break;
                     case ConsoleKey.DownArrow:
+                        UpdateMaze = gameEngine.updateGame(0);
                         break;
                     case ConsoleKey.RightArrow:
+                        UpdateMaze = gameEngine.updateGame(3);
                         break;
-                    case ConsoleKey.LeftArrow:                        
+                    case ConsoleKey.LeftArrow:
+                        UpdateMaze = gameEngine.updateGame(1);
                         break;
                     case ConsoleKey.Q:
                         ExitGame = true;
@@ -52,9 +52,10 @@ namespace Snake
                     default:
                         break;
                 }
-    
+                                
                 System.Console.Clear();
-               // System.Threading.Thread.Sleep(5);
+                Draw(UpdateMaze);
+                System.Threading.Thread.Sleep(1);
             }
             while (ExitGame == false);
 
