@@ -8,10 +8,11 @@ namespace BusinessLayer
 {
      public class maze
     {
-        private const int border = 1;
-        private const int no_border = 0;
+        private const int BORDER = 1;
+        private const int NO_BORDER = 0;
         private int width, height;
-
+        private int[,] Maze;
+        Random random_number;
 
 
 
@@ -19,16 +20,17 @@ namespace BusinessLayer
         {
             width = w;
             height = h;
+            Maze = new int[height, width];
+            random_number = new Random();
         }
 
         public int[,] CreateMaze()
         {
-            int[,] maze = new int[height,width];
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
-                    maze[i,j] = no_border;   
+                    Maze[i,j] = NO_BORDER;   
                 }
 
             }
@@ -40,20 +42,69 @@ namespace BusinessLayer
                 {
                     for (int j = 0; j < width; j++)
                     {
-                        maze[i, j] = border;
+                        Maze[i, j] = BORDER;
                     } 
                 }
 
                 //first and last colum of other rows should be marked as border
                 else
                 {
-                    maze[i, 0] = border;
-                    maze[i, width - 1] = border;
+                    Maze[i, 0] = BORDER;
+                    Maze[i, width - 1] = BORDER;
                 }
             }
 
-            return maze;
+
+            Generate_Horizon_Line_In_Maze(random_number.Next(0,height),random_number.Next(0,width),2);
+
+            Generate_Vertical_Line_In_Maze(random_number.Next(0, height), random_number.Next(0, width), 2);
+
+            Generate_Rectangle_In_Maze(random_number.Next(0,height),2,3,5);
+
+            return Maze;
         }
 
+
+
+        public void Generate_Horizon_Line_In_Maze(int PointX, int PointY, int LineLength)
+        {
+            for (int i = 0; i < LineLength; i++)
+            {
+                Maze[PointX, PointY + i] = BORDER;
+
+            }
+
+        }
+
+
+
+        public void Generate_Vertical_Line_In_Maze(int PointX, int PointY, int LineLength)
+        {
+
+            for (int i = 0; i < LineLength; i++)
+            {
+                Maze[PointX + i, PointY] = BORDER;
+
+            }
+        }
+
+
+
+        public void Generate_Rectangle_In_Maze(int PointX,int PointY,int rectangle_width, int rectangle_height)
+        {
+            for (int i = 0; i < rectangle_height; i++)
+            {
+                for (int j = 0; j < rectangle_width; j++)
+                {
+                    Maze[PointX + i, PointY + j] = BORDER;
+
+                }
+
+            }
+
+
+
+
+        }
     }
 }
