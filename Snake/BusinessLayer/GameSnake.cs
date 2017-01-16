@@ -8,7 +8,7 @@ namespace BusinessLayer
 {
     public class GameSnake
     {
-        enum Direction {right, down, left, up};
+        public enum Direction {right, down, left, up};
         Direction directionFacing;
         private int snakeLength;
         private List<Point> currentPosition;
@@ -38,6 +38,10 @@ namespace BusinessLayer
             return snakePoints;
         }
 
+        public Direction getDirectionFacing()
+        {
+            return directionFacing;
+        }
 
         //right = 0, down = 1, left = 2, up = 3
         public List<Point> snakeMove(int direction, Boolean hasEaten)
@@ -45,27 +49,30 @@ namespace BusinessLayer
             //make new list equal to position to previous state of snake
             List<Point> snakeMoveList = currentPosition;
             Point snakeTurn = new Point(0, 0);
-            //.directionFacing = direction;
-
+            
+            
             switch(direction)
             {
                  case (int)Direction.right:
                      snakeTurn.setX(snakeMoveList[0].returnX()+1);
                      snakeTurn.setY(snakeMoveList[0].returnY());
+                     this.directionFacing = Direction.right;
                      break;  
                  case (int)Direction.down:
                      snakeTurn.setX(snakeMoveList[0].returnX());
                      snakeTurn.setY(snakeMoveList[0].returnY()-1);
-                     break;
+                     this.directionFacing = Direction.down;
+                    break;
                  case (int)Direction.left:
                      snakeTurn.setX(snakeMoveList[0].returnX()-1);
                      snakeTurn.setY(snakeMoveList[0].returnY());
+                     this.directionFacing = Direction.left;
                     break;
                  case (int)Direction.up:
                      snakeTurn.setX(snakeMoveList[0].returnX());
                      snakeTurn.setY(snakeMoveList[0].returnY()+1);
+                     this.directionFacing = Direction.up;
                      break;
-
             }
 
             if (hasEaten == true)

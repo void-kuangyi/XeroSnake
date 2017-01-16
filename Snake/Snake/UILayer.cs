@@ -50,6 +50,7 @@ namespace Snake
                         ExitGame = true;
                         break;
                     default:
+                        UpdateMaze = gameEngine.updateGame(-1);
                         break;
                 }
 
