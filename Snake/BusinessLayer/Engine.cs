@@ -132,14 +132,16 @@ namespace BusinessLayer
                     Point head = snakesNewLocation[0];
                     mazeArray[head.returnX(), head.returnY()] = SNAKEHEAD;
 
+                    int foodToRemove = 0;
                     foreach (Food value in foodList)
                     {
                        if((newSnakeHead.returnX() == value.getXLocation()) && (newSnakeHead.returnY() == value.getyLocation()))
                         {
                             Score.incrementScore(value.getFoodType());
-                            foodList.Remove(value);
+                            foodToRemove = foodList.IndexOf(value);
                         }
                     }
+                    foodList.RemoveAt(foodToRemove);
                     
 
                     Food newFood = new Food();
