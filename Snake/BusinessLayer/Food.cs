@@ -26,7 +26,7 @@ namespace BusinessLayer
 
         public bool generateFood(int xBorder, int yBorder)
         {
-            if (xBorder < 0 || yBorder < 0)
+            if(xBorder < 0 || yBorder < 0)
             {
                 return false; // Negative number input
             }
@@ -44,7 +44,7 @@ namespace BusinessLayer
 
         public int getFoodType()
         {
-            return (int)type;
+            return (int) type;
         }
 
         public int getXLocation()

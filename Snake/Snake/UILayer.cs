@@ -10,23 +10,23 @@ namespace Snake
 {
     class Program
     {
-        
+
         static bool ExitGame = false;
         static string UserReplay;
-      
-        
+
+
         static void Main(string[] args)
         {
-            
+
             // Game engine = new game engine
             Engine gameEngine = new Engine(20, 70, 1);
             int[,] Maze = gameEngine.initializeGame();
             int[,] UpdateMaze = Maze;
-         
+
             Draw(Maze);
 
             do
-            {                           
+            {
                 int score = Score.getScore(); // Get score from business layer
                 drawScore(score);
 
@@ -52,7 +52,11 @@ namespace Snake
                     default:
                         break;
                 }
-                                
+
+                if (UpdateMaze[0,0] == 5)
+                {
+                    ExitGame = true;
+                }
                 System.Console.Clear();
                 Draw(UpdateMaze);
                 System.Threading.Thread.Sleep(1);
@@ -116,8 +120,10 @@ namespace Snake
             UserReplay = Console.ReadLine().ToString();
             if (UserReplay == "R" || UserReplay == "r")
             {
-                // replay
+                ExitGame = false;
+                Console.Clear();
+                Main(null);
             }
-        } 
+        }
     }
 }

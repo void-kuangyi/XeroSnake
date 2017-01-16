@@ -62,7 +62,7 @@ namespace BusinessLayer
             {
                 case gameMode.basic:
 
-                    
+
                     // Create a New Maze and initialize it
                     gameMaze = new maze(mazeWidth, mazeLength);
                     mazeArray = gameMaze.CreateMaze();
@@ -113,11 +113,11 @@ namespace BusinessLayer
             {
 
                 case MAZEBODY:  // snake hits the maze
-                    if(Score.getScore() > Score.getHighScore())
+                    if (Score.getScore() > Score.getHighScore())
                     {
                         Score.setHighScore(Score.getScore());
                     }
-                    mazeArray[0,0] = SNAKEHITSMAZE;
+                    mazeArray[0, 0] = SNAKEHITSMAZE;
                     return mazeArray;
 
 
@@ -151,13 +151,13 @@ namespace BusinessLayer
                     {
                         newFood.generateFood(mazeLength, mazeWidth);
                         isValid = validateNewFoodLocation(newFood);
-                        if(isValid)
+                        if (isValid)
                         {
                             foodList.Add(newFood);
                             mazeArray[newFood.getXLocation(), newFood.getyLocation()] = FOOD;
                         }
                     } while (!isValid);
-                    
+
 
                     break;
 
@@ -217,7 +217,7 @@ namespace BusinessLayer
             }
             return newSnakeHead;
         }
-    public bool validateNewFoodLocation(Food newFood)
+        public bool validateNewFoodLocation(Food newFood)
         {
             int x = newFood.getXLocation();
             int y = newFood.getyLocation();
@@ -226,7 +226,7 @@ namespace BusinessLayer
             {
                 return false;
             }
-            if (mazeArray[x,y] == MAZEBODY)
+            if (mazeArray[x, y] == MAZEBODY)
             {
                 return false;
             }
