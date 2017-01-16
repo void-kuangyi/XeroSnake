@@ -8,3 +8,5 @@ Snake/DatabaseLayer/obj/*
 Snake/SnakeTest/bin/*
 Snake/SnakeTest/obj/*
 Snake/TestResults/*
+*.user
+*.cache
