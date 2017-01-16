@@ -72,7 +72,10 @@ namespace SnakeTest
             BusinessLayer.Engine engine = new BusinessLayer.Engine(width, height, 1);
             engine.initializeGame();
             BusinessLayer.Food food = new BusinessLayer.Food();
-            bool isFoodGenerated = food.generateFood(3, 5);
+
+            // set valid food X and Y location
+            food.setXLocation(3);
+            food.setYLocation(14);
 
             bool iResult = engine.validateNewFoodLocation(food);
 
