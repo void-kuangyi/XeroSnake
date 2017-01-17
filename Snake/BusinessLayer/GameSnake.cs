@@ -8,15 +8,15 @@ namespace BusinessLayer
 {
     public class GameSnake
     {
-        Direction DirectionFacing;
+        public Direction directionFacing { get; private set; }
         private int snakeLength;
         private List<Point> currentPosition;
 
         //Method to create new snake
         public List<Point> createFirstSnake(int width, int height, int newLength)
         {
-            this.DirectionFacing = Direction.Right;
-            this.snakeLength = newLength;   
+            directionFacing = Direction.Right;
+            snakeLength = newLength;   
             //create head node (head of snake)
             Point head = new BusinessLayer.Point(width / 2, height / 2);
             List<Point> snakePoints = new List<Point>();
@@ -33,7 +33,7 @@ namespace BusinessLayer
                 headX--;
             }
 
-            this.currentPosition = snakePoints;
+            currentPosition = snakePoints;
             return snakePoints;
         }
 
@@ -44,7 +44,7 @@ namespace BusinessLayer
             //make new list equal to position to previous state of snake
             List<Point> snakeMoveList = currentPosition;
             Point snakeTurn = new Point(0, 0);
-            //.directionFacing = direction;
+            directionFacing = SnakeDirection;
 
             switch(SnakeDirection)
             {
@@ -77,7 +77,7 @@ namespace BusinessLayer
             }
   
             //update current position
-            this.currentPosition = snakeMoveList;
+            currentPosition = snakeMoveList;
 
             return snakeMoveList;
         }
@@ -85,7 +85,7 @@ namespace BusinessLayer
         //return current snake position
         public List<Point> returnCurrentSnakePosition()
         {
-            return this.currentPosition;
+            return currentPosition;
         }
 
      }
