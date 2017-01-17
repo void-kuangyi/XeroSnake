@@ -103,7 +103,7 @@ namespace BusinessLayer
         {
             if (snakeDirection == Direction.Unchanged)
             {
-                snakeDirection = gameSnake1.getDirectionFacing();
+                snakeDirection = gameSnake1.directionFacing;
             }
 
             Point newSnakeHead = getNewHead(snakeDirection);

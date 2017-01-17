@@ -7,34 +7,35 @@ namespace Snake
     // Advantages of using this class: No busy waiting.
 
     // Modified version of: http://stackoverflow.com/questions/57615/how-to-add-a-timeout-to-console-readline
-    class Reader
+    internal class KeyListner
     {
-        private static AutoResetEvent getInput, gotInput;
+        private AutoResetEvent waitForInputEvent;
+        private AutoResetEvent gotInputEvent;
         private static ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
 
-        static Reader()
+        public KeyListner()
         {
-            getInput = new AutoResetEvent(false);
-            gotInput = new AutoResetEvent(false);
+            waitForInputEvent = new AutoResetEvent(false);
+            gotInputEvent = new AutoResetEvent(false);
             Thread inputThread = new Thread(reader);
             inputThread.IsBackground = true;
             inputThread.Start();
         }
 
-        private static void reader()
+        private void reader()
         {
             while (true)
             {
-                getInput.WaitOne();
+                waitForInputEvent.WaitOne();
                 keyInfo = Console.ReadKey();
-                gotInput.Set();
+                gotInputEvent.Set();
             }
         }
 
-        public static ConsoleKeyInfo ReadKey(int timeOutMillisecs)
+        public ConsoleKeyInfo ReadKey(int timeOutMillisecs)
         {
-            getInput.Set();
-            gotInput.WaitOne(timeOutMillisecs);
+            waitForInputEvent.Set(); // Set() is a method in the EventWaitHandle library. Sets the state of the event to signaled, allowing one or more waiting threads to proceed.
+            gotInputEvent.WaitOne(timeOutMillisecs);
             return keyInfo;
         }
     }

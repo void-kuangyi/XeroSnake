@@ -8,14 +8,9 @@ namespace BusinessLayer
 {
     public class GameSnake
     {
-        Direction directionFacing;
+        public Direction directionFacing { get; private set; }
         private int snakeLength;
         private List<Point> currentPosition;
-
-        public Direction getDirectionFacing()
-        {
-            return directionFacing;
-        }
 
         //Method to create new snake
         public List<Point> createFirstSnake(int width, int height, int newLength)
