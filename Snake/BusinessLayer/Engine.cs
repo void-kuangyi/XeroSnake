@@ -9,6 +9,7 @@ namespace BusinessLayer
     public class Engine
     {
         private const int snakeInitialLength = 4;
+        private const int blank = 0;
         private const int mazeBody = 1;
         private const int snakeBody = 3;
         private const int snakeHead = 2;
@@ -116,8 +117,16 @@ namespace BusinessLayer
 
 
                 case food:  // snake hits the food
+                    foreach (Point value in gameSnake1.returnCurrentSnakePosition())
+                    {
+                        mazeArray[value.returnX(), value.returnY()] = blank;
+                    }
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, true);
                     mazeArray = gameMaze.CreateMaze();
+                                        foreach (Point value in snakesNewLocation)
+                    {
+                        mazeArray[value.returnX(), value.returnY()] = snakeBody;
+                    }
                     foreach (Point value in snakesNewLocation)
                     {
                         mazeArray[value.returnX(), value.returnY()] = snakeBody;
