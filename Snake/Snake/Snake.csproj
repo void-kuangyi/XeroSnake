@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Reader.cs" />
     <Compile Include="UILayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

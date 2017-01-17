@@ -29,9 +29,9 @@ namespace Snake
                 int score = Score.getScore(); // Get score from business layer
                 drawScore(score);
 
-                // Check if array keys/q key pressed. If not, continue game.  
-                ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
-                Task.Factory.StartNew(() => keyInfo = Console.ReadKey()).Wait(TimeSpan.FromSeconds(0.2));
+                // Check if arrow keys/q key pressed. If not, continue game. 
+                // Game step is 300 milliseconds 
+                ConsoleKeyInfo keyInfo = Reader.ReadKey(300);
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
@@ -63,8 +63,6 @@ namespace Snake
                 System.Threading.Thread.Sleep(1);
             }
             while (ExitGame == false);
-
-            // GameSnake temp = new GameSnake(3);
 
             endGame();
         }
