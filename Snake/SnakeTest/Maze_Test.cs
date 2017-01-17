@@ -54,5 +54,25 @@ namespace SnakeTest
         }
 
 
+        [TestMethod]
+
+
+        public void IsMistake_Generate_Obstacles_In_Maze()
+        {
+            maze maze = new maze(40,40);
+
+            for (int i = 0; i < 1000; i++)
+            {
+                int[,] Maze = maze.CreateMaze();
+                Assert.IsInstanceOfType(Maze,typeof(int[,]));
+
+            }
+
+
+
+
+        }
+
+
     }
 }
