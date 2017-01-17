@@ -17,12 +17,12 @@ namespace Snake
         {
             waitForInputEvent = new AutoResetEvent(false);
             gotInputEvent = new AutoResetEvent(false);
-            Thread inputThread = new Thread(reader);
+            Thread inputThread = new Thread(KeyReader);
             inputThread.IsBackground = true;
             inputThread.Start();
         }
 
-        private void reader()
+        private void KeyReader()
         {
             while (true)
             {
