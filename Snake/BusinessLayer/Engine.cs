@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public enum direction
-    {
-        right, down, left, up
-    }
-
     public class Engine
     {
         private const int SNAKEINITIALLENGTH = 4;
@@ -104,9 +99,9 @@ namespace BusinessLayer
             return mazeArray;
         }
 
-        public int[,] updateGame(direction snakeDirection)
+        public int[,] updateGame(Direction SnakeDirection)
         {
-            Point newSnakeHead = getNewHead(snakeDirection);
+            Point newSnakeHead = getNewHead(SnakeDirection);
             List<Point> snakesNewLocation;
             switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
             {
@@ -121,7 +116,7 @@ namespace BusinessLayer
 
 
                 case FOOD:  // snake hits the food
-                    snakesNewLocation = gameSnake1.snakeMove(snakeDirection, true);
+                    snakesNewLocation = gameSnake1.snakeMove(SnakeDirection, true);
                     mazeArray = gameMaze.CreateMaze();
                     foreach (Point value in snakesNewLocation)
                     {
@@ -161,7 +156,7 @@ namespace BusinessLayer
                     break;
 
                 default:   // snake moves
-                    snakesNewLocation = gameSnake1.snakeMove(snakeDirection, false);
+                    snakesNewLocation = gameSnake1.snakeMove(SnakeDirection, false);
                     mazeArray = gameMaze.CreateMaze();
                     foreach (Point value in snakesNewLocation)
                     {
@@ -181,7 +176,7 @@ namespace BusinessLayer
             return mazeArray;
         }
 
-        private Point getNewHead(direction snakeDirection)
+        private Point getNewHead(Direction snakeDirection)
         {
             List<Point> snakeBody = gameSnake1.returnCurrentSnakePosition();
 
@@ -195,19 +190,19 @@ namespace BusinessLayer
             switch (snakeDirection)
             {
 
-                case direction.right:
+                case Direction.Right:
                     newSnakeHead = new Point(x, y + STEP);
                     break;
 
-                case direction.left:
+                case Direction.Left:
                     newSnakeHead = new Point(x, y - STEP);
                     break;
 
-                case direction.up:
+                case Direction.Up:
                     newSnakeHead = new Point(x - STEP, y);
                     break;
 
-                case direction.down:
+                case Direction.Down:
                     newSnakeHead = new Point(x + STEP, y);
                     break;
 

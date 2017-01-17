@@ -8,14 +8,14 @@ namespace BusinessLayer
 {
     public class GameSnake
     {
-        direction directionFacing;
+        Direction DirectionFacing;
         private int snakeLength;
         private List<Point> currentPosition;
 
         //Method to create new snake
         public List<Point> createFirstSnake(int width, int height, int newLength)
         {
-            this.directionFacing = direction.right;
+            this.DirectionFacing = Direction.Right;
             this.snakeLength = newLength;   
             //create head node (head of snake)
             Point head = new BusinessLayer.Point(width / 2, height / 2);
@@ -39,28 +39,28 @@ namespace BusinessLayer
 
 
         //right = 0, down = 1, left = 2, up = 3
-        public List<Point> snakeMove(direction snakedirection, Boolean hasEaten)
+        public List<Point> snakeMove(Direction SnakeDirection, Boolean hasEaten)
         {
             //make new list equal to position to previous state of snake
             List<Point> snakeMoveList = currentPosition;
             Point snakeTurn = new Point(0, 0);
             //.directionFacing = direction;
 
-            switch(snakedirection)
+            switch(SnakeDirection)
             {
-                 case direction.right:
+                 case Direction.Right:
                      snakeTurn.setX(snakeMoveList[0].returnX());
                      snakeTurn.setY(snakeMoveList[0].returnY() + 1);
                      break;  
-                 case direction.down:
+                 case Direction.Down:
                      snakeTurn.setX(snakeMoveList[0].returnX() + 1);
                      snakeTurn.setY(snakeMoveList[0].returnY());
                      break;
-                 case direction.left:
+                 case Direction.Left:
                      snakeTurn.setX(snakeMoveList[0].returnX());
                      snakeTurn.setY(snakeMoveList[0].returnY() - 1);
                     break;
-                 case direction.up:
+                 case Direction.Up:
                      snakeTurn.setX(snakeMoveList[0].returnX() - 1);
                      snakeTurn.setY(snakeMoveList[0].returnY());
                      break;

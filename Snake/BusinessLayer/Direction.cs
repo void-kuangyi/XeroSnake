@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    class Direction
+    public enum Direction
     {
+        Right,
+        Left,
+        Up,
+        Down
     }
 }
