@@ -8,13 +8,13 @@ namespace BusinessLayer
 {
     public class Engine
     {
-        private const int SNAKEINITIALLENGTH = 4;
-        private const int MAZEBODY = 1;
-        private const int SNAKEBODY = 3;
-        private const int SNAKEHEAD = 2;
-        private const int FOOD = 4;
-        private const int STEP = 1;
-        private const int SNAKEHITSMAZE = 5;
+        private const int snakeInitialLength = 4;
+        private const int mazeBody = 1;
+        private const int snakeBody = 3;
+        private const int snakeHead = 2;
+        private const int food = 4;
+        private const int step = 1;
+        private const int snakeHitsMaze = 5;
         private int mazeLength { get; set; }
         private int mazeWidth { get; set; }
         private int[,] mazeArray { get; set; }
@@ -37,13 +37,7 @@ namespace BusinessLayer
             die,
             move
         }
-        public enum direction
-        {
-            right,
-            left,
-            up,
-            down
-        }
+        
 
         gameMode currentMode = gameMode.basic;
 
@@ -70,16 +64,16 @@ namespace BusinessLayer
                     // Add the Snake
                     gameSnake1 = new GameSnake();
                     //List<Point> snakeBody = new List<Point>();
-                    List<Point> snakeBody = gameSnake1.createFirstSnake(mazeLength, mazeWidth, SNAKEINITIALLENGTH);
+                    List<Point> snakeCurrentBody = gameSnake1.createFirstSnake(mazeLength, mazeWidth, snakeInitialLength);
 
                     // Make the whole snake as body first
-                    foreach (Point value in snakeBody)
+                    foreach (Point value in snakeCurrentBody)
                     {
-                        mazeArray[value.returnX(), value.returnY()] = SNAKEBODY;
+                        mazeArray[value.returnX(), value.returnY()] = snakeBody;
                     }
                     // Identify snake head
-                    Point head = snakeBody[0];
-                    mazeArray[head.returnX(), head.returnY()] = SNAKEHEAD;
+                    Point head = snakeCurrentBody[0];
+                    mazeArray[head.returnX(), head.returnY()] = snakeHead;
 
                     // Add the Food
                     foodList.Add(new Food());
@@ -92,7 +86,7 @@ namespace BusinessLayer
                             value.generateFood(mazeLength, mazeWidth);
                             isValid = validateNewFoodLocation(value);
                         } while (!isValid);
-                        mazeArray[value.getXLocation(), value.getyLocation()] = FOOD;
+                        mazeArray[value.getXLocation(), value.getyLocation()] = food;
                     }
 
                     break;
@@ -105,32 +99,32 @@ namespace BusinessLayer
             return mazeArray;
         }
 
-        public int[,] updateGame(int snakeDirection)
+        public int[,] updateGame(Direction snakeDirection)
         {
             Point newSnakeHead = getNewHead(snakeDirection);
             List<Point> snakesNewLocation;
             switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
             {
 
-                case MAZEBODY:  // snake hits the maze
+                case mazeBody:  // snake hits the maze
                     if (Score.getScore() > Score.getHighScore())
                     {
                         Score.setHighScore(Score.getScore());
                     }
-                    mazeArray[0, 0] = SNAKEHITSMAZE;
+                    mazeArray[0, 0] = snakeHitsMaze;
                     return mazeArray;
 
 
-                case FOOD:  // snake hits the food
+                case food:  // snake hits the food
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, true);
                     mazeArray = gameMaze.CreateMaze();
                     foreach (Point value in snakesNewLocation)
                     {
-                        mazeArray[value.returnX(), value.returnY()] = SNAKEBODY;
+                        mazeArray[value.returnX(), value.returnY()] = snakeBody;
                     }
                     // Identify snake head
                     Point head = snakesNewLocation[0];
-                    mazeArray[head.returnX(), head.returnY()] = SNAKEHEAD;
+                    mazeArray[head.returnX(), head.returnY()] = snakeHead;
 
                     int foodToRemove = 0;
                     foreach (Food value in foodList)
@@ -154,7 +148,7 @@ namespace BusinessLayer
                         if (isValid)
                         {
                             foodList.Add(newFood);
-                            mazeArray[newFood.getXLocation(), newFood.getyLocation()] = FOOD;
+                            mazeArray[newFood.getXLocation(), newFood.getyLocation()] = food;
                         }
                     } while (!isValid);
 
@@ -166,14 +160,14 @@ namespace BusinessLayer
                     mazeArray = gameMaze.CreateMaze();
                     foreach (Point value in snakesNewLocation)
                     {
-                        mazeArray[value.returnX(), value.returnY()] = SNAKEBODY;
+                        mazeArray[value.returnX(), value.returnY()] = snakeBody;
                     }
                     Point newhead = snakesNewLocation[0];
-                    mazeArray[newhead.returnX(), newhead.returnY()] = SNAKEHEAD;
+                    mazeArray[newhead.returnX(), newhead.returnY()] = snakeHead;
 
                     foreach (Food value in foodList)
                     {
-                        mazeArray[value.getXLocation(), value.getyLocation()] = FOOD;
+                        mazeArray[value.getXLocation(), value.getyLocation()] = food;
                     }
 
 
@@ -182,7 +176,7 @@ namespace BusinessLayer
             return mazeArray;
         }
 
-        private Point getNewHead(int snakeDirection)
+        private Point getNewHead(Direction snakeDirection)
         {
             List<Point> snakeBody = gameSnake1.returnCurrentSnakePosition();
 
@@ -196,20 +190,20 @@ namespace BusinessLayer
             switch (snakeDirection)
             {
 
-                case (int)direction.right:
-                    newSnakeHead = new Point(x + STEP, y);
+                case Direction.Right:
+                    newSnakeHead = new Point(x, y + step);
                     break;
 
-                case (int)direction.left:
-                    newSnakeHead = new Point(x - STEP, y);
+                case Direction.Left:
+                    newSnakeHead = new Point(x, y - step);
                     break;
 
-                case (int)direction.up:
-                    newSnakeHead = new Point(x, y - STEP);
+                case Direction.Up:
+                    newSnakeHead = new Point(x - step, y);
                     break;
 
-                case (int)direction.down:
-                    newSnakeHead = new Point(x, y + STEP);
+                case Direction.Down:
+                    newSnakeHead = new Point(x + step, y);
                     break;
 
                 default:
@@ -226,15 +220,15 @@ namespace BusinessLayer
             {
                 return false;
             }
-            if (mazeArray[x, y] == MAZEBODY)
+            if (mazeArray[x, y] == mazeBody)
             {
                 return false;
             }
-            if (mazeArray[x, y] == SNAKEBODY)
+            if (mazeArray[x, y] == snakeBody)
             {
                 return false;
             }
-            if (mazeArray[x, y] == SNAKEHEAD)
+            if (mazeArray[x, y] == snakeHead)
             {
                 return false;
             }
