@@ -17,6 +17,10 @@ namespace Snake
 
         static void Main(string[] args)
         {
+            GameMenu.MenuImage();
+
+
+            Console.ReadKey();
 
             // Game engine = new game engine
             Engine gameEngine = new Engine(20, 70, 1);
