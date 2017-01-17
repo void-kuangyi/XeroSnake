@@ -8,15 +8,14 @@ namespace BusinessLayer
 {
     public class GameSnake
     {
-        enum Direction {right, down, left, up};
-        Direction directionFacing;
+        Direction DirectionFacing;
         private int snakeLength;
         private List<Point> currentPosition;
 
         //Method to create new snake
         public List<Point> createFirstSnake(int width, int height, int newLength)
         {
-            this.directionFacing = Direction.right;
+            this.DirectionFacing = Direction.Right;
             this.snakeLength = newLength;   
             //create head node (head of snake)
             Point head = new BusinessLayer.Point(width / 2, height / 2);
@@ -40,30 +39,30 @@ namespace BusinessLayer
 
 
         //right = 0, down = 1, left = 2, up = 3
-        public List<Point> snakeMove(int direction, Boolean hasEaten)
+        public List<Point> snakeMove(Direction SnakeDirection, Boolean hasEaten)
         {
             //make new list equal to position to previous state of snake
             List<Point> snakeMoveList = currentPosition;
             Point snakeTurn = new Point(0, 0);
             //.directionFacing = direction;
 
-            switch(direction)
+            switch(SnakeDirection)
             {
-                 case (int)Direction.right:
-                     snakeTurn.setX(snakeMoveList[0].returnX()+1);
-                     snakeTurn.setY(snakeMoveList[0].returnY());
-                     break;  
-                 case (int)Direction.down:
-                     snakeTurn.setX(snakeMoveList[0].returnX());
-                     snakeTurn.setY(snakeMoveList[0].returnY()-1);
-                     break;
-                 case (int)Direction.left:
-                     snakeTurn.setX(snakeMoveList[0].returnX()-1);
-                     snakeTurn.setY(snakeMoveList[0].returnY());
-                    break;
-                 case (int)Direction.up:
+                 case Direction.Right:
                      snakeTurn.setX(snakeMoveList[0].returnX());
                      snakeTurn.setY(snakeMoveList[0].returnY()+1);
+                     break;  
+                 case Direction.Down:
+                     snakeTurn.setX(snakeMoveList[0].returnX()+1);
+                     snakeTurn.setY(snakeMoveList[0].returnY());
+                     break;
+                 case Direction.Left:
+                     snakeTurn.setX(snakeMoveList[0].returnX());
+                     snakeTurn.setY(snakeMoveList[0].returnY()-1);
+                    break;
+                 case Direction.Up:
+                     snakeTurn.setX(snakeMoveList[0].returnX()-1);
+                     snakeTurn.setY(snakeMoveList[0].returnY());
                      break;
 
             }
@@ -74,7 +73,7 @@ namespace BusinessLayer
             } else
             {
                 snakeMoveList.Insert(0, snakeTurn); //add new head with new direction to snake
-                snakeMoveList.RemoveAt(snakeMoveList.Count() - 1); //remove last element of snake
+                snakeMoveList.RemoveAt(snakeMoveList.Count()-1); //remove last element of snake
             }
   
             //update current position
