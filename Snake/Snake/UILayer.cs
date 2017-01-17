@@ -29,8 +29,9 @@ namespace Snake
                 int score = Score.getScore(); // Get score from business layer
                 drawScore(score);
 
-
-                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                // Check if array keys/q key pressed. If not, continue game.  
+                ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
+                Task.Factory.StartNew(() => keyInfo = Console.ReadKey()).Wait(TimeSpan.FromSeconds(0.2));
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
@@ -49,7 +50,7 @@ namespace Snake
                         ExitGame = true;
                         break;
                     default:
-                        UpdateMaze = gameEngine.updateGame(-1);
+                        UpdateMaze = gameEngine.updateGame(Direction.Unchanged);
                         break;
                 }
 

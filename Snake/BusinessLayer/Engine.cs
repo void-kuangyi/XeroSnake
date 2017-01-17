@@ -101,6 +101,11 @@ namespace BusinessLayer
 
         public int[,] updateGame(Direction snakeDirection)
         {
+            if (snakeDirection == Direction.Unchanged)
+            {
+                snakeDirection = gameSnake1.getDirectionFacing();
+            }
+
             Point newSnakeHead = getNewHead(snakeDirection);
             List<Point> snakesNewLocation;
             switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
