@@ -30,8 +30,8 @@ namespace Snake
                 drawScore(score);
 
                 // Check if arrow keys/q key pressed. If not, continue game. 
-                // Game step is 300 milliseconds 
-                ConsoleKeyInfo keyInfo = Reader.ReadKey(300);
+                // Game step is 100 milliseconds 
+                ConsoleKeyInfo keyInfo = Reader.ReadKey(100);
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
