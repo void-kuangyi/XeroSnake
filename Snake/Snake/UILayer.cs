@@ -14,7 +14,6 @@ namespace Snake
         static bool ExitGame = false;
         static string UserReplay;
 
-
         static void Main(string[] args)
         {
 
@@ -35,16 +34,16 @@ namespace Snake
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        UpdateMaze = gameEngine.updateGame(2);
+                        UpdateMaze = gameEngine.updateGame(Direction.Up);
                         break;
                     case ConsoleKey.DownArrow:
-                        UpdateMaze = gameEngine.updateGame(0);
+                        UpdateMaze = gameEngine.updateGame(Direction.Down);
                         break;
                     case ConsoleKey.RightArrow:
-                        UpdateMaze = gameEngine.updateGame(3);
+                        UpdateMaze = gameEngine.updateGame(Direction.Right);
                         break;
                     case ConsoleKey.LeftArrow:
-                        UpdateMaze = gameEngine.updateGame(1);
+                        UpdateMaze = gameEngine.updateGame(Direction.Left);
                         break;
                     case ConsoleKey.Q:
                         ExitGame = true;
