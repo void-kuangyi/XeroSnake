@@ -65,7 +65,6 @@ namespace SnakeTest
             {
                 int[,] Maze = maze.CreateMaze();
                 Assert.IsInstanceOfType(Maze,typeof(int[,]));
-
             }
 
 

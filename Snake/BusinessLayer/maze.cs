@@ -81,11 +81,11 @@ namespace BusinessLayer
             Generate_Horizon_Line_Obstacle(Horizon_Line_Head_X,Horizon_Line_Head_Y,random_number.Next(0,Horizon_Line_Head_Y));
 
 
-            int Rectangle_Head_X = random_number.Next(0, height);
-            int Rectangle_Head_Y = random_number.Next(0, width);
+            int Rectangle_Head_X = random_number.Next(0, height/2);
+            int Rectangle_Head_Y = random_number.Next(0, width/2);
 
-            int Rectangle_width = random_number.Next(0,width - Rectangle_Head_Y);
-            int Rectangle_height = random_number.Next(0, height - Rectangle_Head_X);
+            int Rectangle_width = random_number.Next(0,width/2 - Rectangle_Head_Y);
+            int Rectangle_height = random_number.Next(0, height/2 - Rectangle_Head_X);
 
             Generate_Rectangle_Obstacle(Rectangle_Head_X, Rectangle_Head_Y, Rectangle_width, Rectangle_height);
 

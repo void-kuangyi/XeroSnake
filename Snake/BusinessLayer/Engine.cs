@@ -14,6 +14,7 @@ namespace BusinessLayer
         private const int SNAKEHEAD = 2;
         private const int FOOD = 4;
         private const int STEP = 1;
+        private const int blank = 0;
         private const int SNAKEHITSMAZE = 5;
         private int mazeLength { get; set; }
         private int mazeWidth { get; set; }
@@ -122,8 +123,12 @@ namespace BusinessLayer
 
 
                 case FOOD:  // snake hits the food
+                    foreach (Point value in gameSnake1.returnCurrentSnakePosition())
+                    {
+                        mazeArray[value.returnX(), value.returnY()] = blank;
+                    }
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, true);
-                    mazeArray = gameMaze.CreateMaze();
+                    //mazeArray = gameMaze.CreateMaze();
                     foreach (Point value in snakesNewLocation)
                     {
                         mazeArray[value.returnX(), value.returnY()] = SNAKEBODY;
@@ -162,8 +167,12 @@ namespace BusinessLayer
                     break;
 
                 default:   // snake moves
+                    foreach (Point value in gameSnake1.returnCurrentSnakePosition())
+                    {
+                        mazeArray[value.returnX(), value.returnY()] = blank;
+                    }
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, false);
-                    mazeArray = gameMaze.CreateMaze();
+                    //mazeArray = gameMaze.CreateMaze();
                     foreach (Point value in snakesNewLocation)
                     {
                         mazeArray[value.returnX(), value.returnY()] = SNAKEBODY;
