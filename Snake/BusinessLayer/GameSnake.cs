@@ -15,8 +15,8 @@ namespace BusinessLayer
         //Method to create new snake
         public List<Point> createFirstSnake(int width, int height, int newLength)
         {
-            this.directionFacing = Direction.Right;
-            this.snakeLength = newLength;   
+            directionFacing = Direction.Right;
+            snakeLength = newLength;   
             //create head node (head of snake)
             Point head = new BusinessLayer.Point(width / 2, height / 2);
             List<Point> snakePoints = new List<Point>();
@@ -33,7 +33,7 @@ namespace BusinessLayer
                 headX--;
             }
 
-            this.currentPosition = snakePoints;
+            currentPosition = snakePoints;
             return snakePoints;
         }
 
@@ -77,7 +77,7 @@ namespace BusinessLayer
             }
   
             //update current position
-            this.currentPosition = snakeMoveList;
+            currentPosition = snakeMoveList;
 
             return snakeMoveList;
         }
@@ -85,7 +85,7 @@ namespace BusinessLayer
         //return current snake position
         public List<Point> returnCurrentSnakePosition()
         {
-            return this.currentPosition;
+            return currentPosition;
         }
 
      }
