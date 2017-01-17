@@ -64,15 +64,15 @@ namespace BusinessLayer
                     // Add the Snake
                     gameSnake1 = new GameSnake();
                     //List<Point> snakeBody = new List<Point>();
-                    List<Point> snakeBody = gameSnake1.createFirstSnake(mazeLength, mazeWidth, snakeInitialLength);
+                    List<Point> snakeCurrentBody = gameSnake1.createFirstSnake(mazeLength, mazeWidth, snakeInitialLength);
 
                     // Make the whole snake as body first
-                    foreach (Point value in snakeBody)
+                    foreach (Point value in snakeCurrentBody)
                     {
-                        mazeArray[value.returnX(), value.returnY()] = Engine.snakeBody;
+                        mazeArray[value.returnX(), value.returnY()] = snakeBody;
                     }
                     // Identify snake head
-                    Point head = snakeBody[0];
+                    Point head = snakeCurrentBody[0];
                     mazeArray[head.returnX(), head.returnY()] = snakeHead;
 
                     // Add the Food
@@ -99,9 +99,9 @@ namespace BusinessLayer
             return mazeArray;
         }
 
-        public int[,] updateGame(Direction SnakeDirection)
+        public int[,] updateGame(Direction snakeDirection)
         {
-            Point newSnakeHead = getNewHead(SnakeDirection);
+            Point newSnakeHead = getNewHead(snakeDirection);
             List<Point> snakesNewLocation;
             switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
             {
@@ -116,7 +116,7 @@ namespace BusinessLayer
 
 
                 case food:  // snake hits the food
-                    snakesNewLocation = gameSnake1.snakeMove(SnakeDirection, true);
+                    snakesNewLocation = gameSnake1.snakeMove(snakeDirection, true);
                     mazeArray = gameMaze.CreateMaze();
                     foreach (Point value in snakesNewLocation)
                     {
@@ -156,7 +156,7 @@ namespace BusinessLayer
                     break;
 
                 default:   // snake moves
-                    snakesNewLocation = gameSnake1.snakeMove(SnakeDirection, false);
+                    snakesNewLocation = gameSnake1.snakeMove(snakeDirection, false);
                     mazeArray = gameMaze.CreateMaze();
                     foreach (Point value in snakesNewLocation)
                     {
