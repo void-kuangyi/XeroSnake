@@ -19,7 +19,7 @@ namespace BusinessLayer
         private int mazeLength { get; set; }
         private int mazeWidth { get; set; }
         private int[,] mazeArray { get; set; }
-
+        private GameSound gameSound;
         private Maze gameMaze;
 
         private GameSnake gameSnake1;
@@ -105,9 +105,11 @@ namespace BusinessLayer
             switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
             {
 
-                case (int)Elements.mazeBody: 
+                case (int)Elements.mazeBody:
+                    gameSound.SnakeDiesSound();
                     if (Score.getScore() > Score.getHighScore())
                     {
+                        gameSound.SnakeGetsHighScore();
                         Score.setHighScore(Score.getScore());
                     }
                     mazeArray[0, 0] = snakeHitsMaze;
@@ -117,6 +119,7 @@ namespace BusinessLayer
                 case Food:  // snake hits the food
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, true);
                     mazeArray = gameMaze.CreateMaze();
+                    gameSound.SnakeEatsSound();
                     foreach (Point value in snakesNewLocation)
                     {
                         mazeArray[value.returnX(), value.returnY()] = snakeBody;
