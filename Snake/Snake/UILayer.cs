@@ -1,23 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BusinessLayer;
-
 
 namespace Snake
 {
     class Program
     {
+        private const int GameStepMilliseconds = 100;
 
-        static bool ExitGame = false;
-        static string UserReplay;
+        private static bool ExitGame = false;
+        private static string UserReplay;
 
         static void Main(string[] args)
         {
-
-            // Game engine = new game engine
+            int score;
             Engine gameEngine = new Engine(20, 70, 1);
             int[,] Maze = gameEngine.initializeGame();
             int[,] UpdateMaze = Maze;
@@ -26,11 +21,11 @@ namespace Snake
 
             do
             {
-                int score = Score.getScore(); // Get score from business layer
+                score = Score.getScore();
                 drawScore(score);
 
-
-                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                KeyListner keyListner = new KeyListner(); 
+                ConsoleKeyInfo keyInfo = keyListner.ReadKey(GameStepMilliseconds);
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
@@ -49,6 +44,7 @@ namespace Snake
                         ExitGame = true;
                         break;
                     default:
+                        UpdateMaze = gameEngine.updateGame(Direction.Unchanged);
                         break;
                 }
 
@@ -61,8 +57,6 @@ namespace Snake
                 System.Threading.Thread.Sleep(1);
             }
             while (ExitGame == false);
-
-            // GameSnake temp = new GameSnake(3);
 
             endGame();
         }

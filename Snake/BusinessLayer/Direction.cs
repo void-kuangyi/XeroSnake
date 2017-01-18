@@ -11,6 +11,7 @@ namespace BusinessLayer
         Right,
         Left,
         Up,
-        Down
+        Down,
+        Unchanged
     }
 }
