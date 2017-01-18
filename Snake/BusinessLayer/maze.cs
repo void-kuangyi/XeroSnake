@@ -3,21 +3,22 @@
 
 namespace BusinessLayer
 {
-    public class maze
+    public class Maze
     {
         private const int border = 1;
         private const int noBorder = 0;
+        private enum direction{ horizon,vertical};
         private int width, height;
-        private int[,] Maze;
+        private int[,] maze;
         private Random randomNumber;
 
 
 
-        public maze(int w, int h)
+        public Maze(int w, int h)
         {
             width = w;
             height = h;
-            Maze = new int[height, width];
+            maze = new int[height, width];
             randomNumber = new Random();
         }
 
@@ -50,7 +51,7 @@ namespace BusinessLayer
             }
 
 
-            return Maze;
+            return maze;
         }
 
 
@@ -60,7 +61,7 @@ namespace BusinessLayer
             {
                 for (int j = 0; j < width; j++)
                 {
-                    Maze[i, j] = noBorder;
+                    maze[i, j] = noBorder;
                 }
 
             }
@@ -71,14 +72,14 @@ namespace BusinessLayer
                 {
                     for (int j = 0; j < width; j++)
                     {
-                        Maze[i, j] = border;
+                        maze[i, j] = border;
                     }
                 }
 
                 else
                 {
-                    Maze[i, 0] = border;
-                    Maze[i, width - 1] = border;
+                    maze[i, 0] = border;
+                    maze[i, width - 1] = border;
                 }
             }
 
@@ -147,7 +148,7 @@ namespace BusinessLayer
         {
             for (int i = 0; i < lineLength; i++)
             {
-                Maze[pointX, pointY + i] = border;
+                maze[pointX, pointY + i] = border;
 
             }
 
@@ -160,7 +161,7 @@ namespace BusinessLayer
 
             for (int i = 0; i < lineLength; i++)
             {
-                Maze[pointX + i, pointY] = border;
+                maze[pointX + i, pointY] = border;
 
             }
         }
@@ -173,7 +174,7 @@ namespace BusinessLayer
             {
                 for (int j = 0; j < rectangleWidth; j++)
                 {
-                    Maze[pointX + i, pointY + j] = border;
+                    maze[pointX + i, pointY + j] = border;
 
                 }
 
@@ -183,11 +184,11 @@ namespace BusinessLayer
 
         public void GenerateCrossObstacle(int pointX, int pointY)
         {
-            Maze[pointX, pointY] = border;
-            Maze[pointX - 1, pointY] = border;
-            Maze[pointX + 1, pointY] = border;
-            Maze[pointX, pointY - 1] = border;
-            Maze[pointX, pointY + 1] = border;
+            maze[pointX, pointY] = border;
+            maze[pointX - 1, pointY] = border;
+            maze[pointX + 1, pointY] = border;
+            maze[pointX, pointY - 1] = border;
+            maze[pointX, pointY + 1] = border;
 
         }
     }

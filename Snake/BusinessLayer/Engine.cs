@@ -15,7 +15,7 @@ namespace BusinessLayer
         private int mazeWidth { get; set; }
         private int[,] mazeArray { get; set; }
 
-        private maze gameMaze;
+        private Maze gameMaze;
 
         private GameSnake gameSnake1;
         // For future use, 2 player game mode
@@ -54,7 +54,7 @@ namespace BusinessLayer
 
 
                     // Create a New Maze and initialize it
-                    gameMaze = new maze(mazeWidth, mazeLength);
+                    gameMaze = new Maze(mazeWidth, mazeLength);
                     mazeArray = gameMaze.CreateMaze();
 
                     // Add the Snake
