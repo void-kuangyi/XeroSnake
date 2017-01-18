@@ -17,9 +17,18 @@ namespace BusinessLayer
        
         public GameSound()
         {
-            soundOfDeath = new SoundPlayer(path + "\\GameSounds\\die.wav");
-            soundOfEatingFood = new SoundPlayer(path + "\\GameSounds\\eatFood.wav"); ;
-            soundOfGettingHighScore = new SoundPlayer(path + "\\GameSounds\\highScore.wav"); ;
+            soundOfDeath = new SoundPlayer(checkSoundFile(path + "\\GameSounds\\die.wav"));
+            soundOfEatingFood = new SoundPlayer(checkSoundFile(path + "\\GameSounds\\eatFood.wav")); ;
+            soundOfGettingHighScore = new SoundPlayer(checkSoundFile(path + "\\GameSounds\\highScore.wav")); ;
+        }
+
+        private string checkSoundFile(string filePath)
+        {
+            if(File.Exists(filePath))
+            {
+                return filePath;
+            }
+            throw new System.Exception(filePath + " cannot be found!");
         }
 
         public void SnakeEatsSound()
