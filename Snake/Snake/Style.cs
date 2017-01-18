@@ -23,8 +23,6 @@ namespace Snake
                     designedMaze += StyleMazeElement(maze[i,j]);
                 }
                 designedMaze += "\n";
-                
-                //Console.Write(Environment.NewLine);
             }
             Console.Write(designedMaze);
 
