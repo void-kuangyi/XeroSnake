@@ -118,7 +118,7 @@ namespace BusinessLayer
 
                 case Food:  // snake hits the food
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, true);
-                    mazeArray = gameMaze.CreateMaze();
+                    
                     gameSound.SnakeEatsSound();
                     foreach (Point value in snakesNewLocation)
                     {
