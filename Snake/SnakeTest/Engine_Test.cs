@@ -9,78 +9,7 @@ namespace SnakeTest
         private const int FOOD = 4;
         private const int SNAKEBODY = 3;
         private const int SNAKEHEAD = 2;
-
-        [TestMethod]
-        public void validateNewFoodLocationTestInvalidXYLocation()
-        {
-            const int width = 10;
-            const int height = 10;
-            BusinessLayer.Engine engine = new BusinessLayer.Engine(width, height, 1);
-            engine.initializeGame();
-            BusinessLayer.Food food = new BusinessLayer.Food();
-
-            // set invalid food X and Y location
-            food.setXLocation(20);
-            food.setYLocation(40);
-
-            bool iResult = engine.validateNewFoodLocation(food);
-
-            Assert.IsFalse(iResult, "Invalid food location");
-        }
-
-        [TestMethod]
-        public void validateNewFoodLocationTestInvalidXLocation()
-        {
-            const int width = 10;
-            const int height = 20;
-            BusinessLayer.Engine engine = new BusinessLayer.Engine(width, height, 1);
-            engine.initializeGame();
-            BusinessLayer.Food food = new BusinessLayer.Food();
-
-            // set invalid food X location
-            food.setXLocation(12);
-            food.setYLocation(8);
-
-            bool iResult = engine.validateNewFoodLocation(food);
-
-            Assert.IsFalse(iResult, "Invalid food location");
-        }
-
-        [TestMethod]
-        public void validateNewFoodLocationTestInvalidYLocation()
-        {
-            const int width = 10;
-            const int height = 20;
-            BusinessLayer.Engine engine = new BusinessLayer.Engine(width, height, 1);
-            engine.initializeGame();
-            BusinessLayer.Food food = new BusinessLayer.Food();
-
-            // set invalid food Y location
-            food.setXLocation(3);
-            food.setYLocation(28);
-
-            bool iResult = engine.validateNewFoodLocation(food);
-
-            Assert.IsFalse(iResult, "Invalid food location");
-        }
-
-        [TestMethod]
-        public void validateNewFoodLocationTestValidLocation()
-        {
-            const int width = 10;
-            const int height = 20;
-            BusinessLayer.Engine engine = new BusinessLayer.Engine(width, height, 1);
-            engine.initializeGame();
-            BusinessLayer.Food food = new BusinessLayer.Food();
-
-            // set valid food X and Y location
-            food.setXLocation(3);
-            food.setYLocation(14);
-
-            bool iResult = engine.validateNewFoodLocation(food);
-
-            Assert.IsTrue(iResult, "Valid food location");
-        }
+     
         [TestMethod]
         public void initializeGameTestBorder()
         {
