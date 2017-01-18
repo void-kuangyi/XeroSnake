@@ -7,7 +7,7 @@ namespace BusinessLayer
     {
         private const int border = 1;
         private const int noBorder = 0;
-        private enum direction{ horizon,vertical};
+        private enum direction { horizon, vertical };
         private int width, height;
         private int[,] maze;
         private Random randomNumber;
@@ -107,8 +107,8 @@ namespace BusinessLayer
 
             for (int i = 0; i < height; i = i + gapBetweenTwoLine)
             {
-                GenerateHorizonLineObstacle(i, 0, width / 3);
-                GenerateHorizonLineObstacle(i, (width / 3) * 2, width / 3);
+                GenerateLineObstacle(i, 0, width / 3,(int)direction.horizon);
+                GenerateLineObstacle(i, (width / 3) * 2, width / 3,(int)direction.horizon);
 
             }
 
@@ -121,8 +121,8 @@ namespace BusinessLayer
             int gapBetweenTwoLine = randomNumber.Next(4, 7);
             for (int i = 0; i < width; i = i + gapBetweenTwoLine)
             {
-                GenerateVerticalLineObstacle(0, i, height / 3);
-                GenerateVerticalLineObstacle((height / 3) * 2, i, height / 3);
+                GenerateLineObstacle(0, i, height / 3,(int)direction.vertical);
+                GenerateLineObstacle((height / 3) * 2, i, height / 3,(int)direction.vertical);
 
             }
 
@@ -144,29 +144,34 @@ namespace BusinessLayer
 
         }
 
-        public void GenerateHorizonLineObstacle(int pointX, int pointY, int lineLength)
+        public void GenerateLineObstacle(int pointX, int pointY, int lineLength, int lineDirection)
         {
-            for (int i = 0; i < lineLength; i++)
+            switch (lineDirection)
             {
-                maze[pointX, pointY + i] = border;
+                case (int)direction.horizon:
+
+                    for (int i = 0; i < lineLength; i++)
+                    {
+                        maze[pointX, pointY + i] = border;
+
+                    }
+                    break;
+                case (int)direction.vertical:
+
+                    for (int i = 0; i < lineLength; i++)
+                    {
+                        maze[pointX + i, pointY] = border;
+
+                    }
+
+                    break;
+
+
 
             }
 
+
         }
-
-
-
-        public void GenerateVerticalLineObstacle(int pointX, int pointY, int lineLength)
-        {
-
-            for (int i = 0; i < lineLength; i++)
-            {
-                maze[pointX + i, pointY] = border;
-
-            }
-        }
-
-
 
         public void GenerateRectangleObstacle(int pointX, int pointY, int rectangleWidth, int rectangleHeight)
         {
