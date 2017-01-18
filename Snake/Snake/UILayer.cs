@@ -52,7 +52,7 @@ namespace Snake
                         break;
                 }
 
-                if (UpdateMaze[0, 0] == 5)
+                if (updateMaze[0, 0] == 5)
                 {
                     ExitGame = true;
                 }
@@ -95,7 +95,7 @@ namespace Snake
             System.Console.WriteLine("Enter r to replay.");
 
             UserReplay = Console.ReadLine().ToString();
-            if (UserReplay.Equals ("r", StringComparison.))
+            if (UserReplay.Equals("r", StringComparison.CurrentCultureIgnoreCase)) 
             {
                 ExitGame = false;
                 Console.Clear();
@@ -107,8 +107,16 @@ namespace Snake
         {
             do
             {
-                GameMenu.menuImage();
-                gameMode = Convert.ToInt32(Console.ReadLine());
+                
+                Style.menuImage();
+                try
+                {
+                    gameMode = Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine();
+                }
 
                 if (gameMode == 1)
                 {
