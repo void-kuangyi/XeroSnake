@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BusinessLayer
 {
-    class AI
+    public class AI
     {
         private int X;
         private int Y;
@@ -52,10 +52,9 @@ namespace BusinessLayer
 
         public void MoveAI()
         {
-            Random rnd = new Random();
-            int randomMove = rnd.Next(3);
+            int rnd = RandomPoint(3);
 
-            switch (randomMove)
+            switch (rnd)
             {
                 case (int)Direction.Right:
                     Y = Y - 1;
