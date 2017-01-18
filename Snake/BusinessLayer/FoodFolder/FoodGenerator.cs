@@ -2,7 +2,7 @@
 
 namespace BusinessLayer.FoodFolder
 {
-    class FoodGenerator
+    public class FoodGenerator
     {
         private const int NoOfFoodTypes = 2;
 

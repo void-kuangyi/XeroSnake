@@ -1,6 +1,6 @@
 ﻿namespace BusinessLayer.FoodFolder
 {
-    class BasicFood : Food
+    public class BasicFood : Food
     {
         public BasicFood()
         {

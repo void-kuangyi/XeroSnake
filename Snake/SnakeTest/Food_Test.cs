@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLayer.FoodFolder;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SnakeTest
@@ -7,37 +8,25 @@ namespace SnakeTest
     public class Food_Test
     {
         [TestMethod]
-        public void generateFoodTestOutsideBoundaryXAxis()
+        public void generateFoodTypeIsDeterministic()
         {
-            BusinessLayer.Food food = new BusinessLayer.FoodFolder();
+            Food food;
+            FoodGenerator foodGenerator = new FoodGenerator();
 
-            bool result = food.generateFood(-1, 40);
+            food = foodGenerator.generateFood(1,1);
 
-            Assert.IsFalse(result, "Accepted Invalid X input");
-
+            Assert.IsTrue(food is BasicFood || food is AdvancedFood, "Food type not determined");
         }
 
         [TestMethod]
-        public void generateFoodTestOutsideBoundaryYAxis()
+        [ExpectedException(typeof(SystemException),
+    "Invalid coordinates passed to generateFood function.")]
+        public void generateFoodOutsideBoundaryThrowsException()
         {
-            BusinessLayer.Food food = new BusinessLayer.FoodFolder();
-
-            bool result = food.generateFood(26, -3);
-
-
-            Assert.IsFalse(result, "Accepted Invalid Y input");
-
-        }
-
-        [TestMethod]
-        public void generateFoodTestInsideBoundaryYAxis()
-        {
-            BusinessLayer.Food food = new BusinessLayer.FoodFolder();
-
-            bool result = food.generateFood(26, 22);
-
-            Assert.IsTrue(result, "Wrong Return");
-
+            Food food;
+            FoodGenerator foodGenerator = new FoodGenerator();
+         
+            food = foodGenerator.generateFood(-1, -1);
         }
     }
 }
