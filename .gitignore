@@ -2,11 +2,7 @@ Snake/.vs/*
 Snake/Snake/obj/*
 Snake/Snake/bin/*
 Snake/BusinessLayer/obj/*
-Snake/BusinessLayer/bin/Debug/*.dll
-Snake/BusinessLayer/bin/Debug/*.exe
-Snake/BusinessLayer/bin/Debug/*.txt
-Snake/BusinessLayer/bin/Debug/*.pdb
-Snake/BusinessLayer/bin/Debug/*.config
+Snake/BusinessLayer/bin/Debug/*
 Snake/DatabaseLayer/bin/*
 Snake/DatabaseLayer/obj/*
 Snake/SnakeTest/bin/*

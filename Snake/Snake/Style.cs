@@ -7,22 +7,23 @@ using System.Threading.Tasks;
 namespace Snake
 {
     
-    class Style
+    public class Style
     {
         public void StyleMaze(int[,] maze)
         {
             System.Console.Clear();
 
-            string designedMaze = "";
+            StringBuilder designedMaze = new StringBuilder();
+            //string designedMaze = string.Empty;
             int rowLength = maze.GetLength(0);
-            int colLength = maze.GetLength(1);
+            int coloumnLength = maze.GetLength(1);
             for (int i = 0; i < rowLength; i++)
             {
-                for (int j = 0; j < colLength; j++)
+                for (int j = 0; j < coloumnLength; j++)
                 {
-                    designedMaze += StyleMazeElement(maze[i,j]);
+                    designedMaze.Append(StyleMazeElement(maze[i, j]));
                 }
-                designedMaze += "\n";
+                designedMaze.Append(Environment.NewLine);
             }
             Console.Write(designedMaze);
 
@@ -44,7 +45,7 @@ namespace Snake
                     return "▓";
 
                 case 4:
-                    return "☻";
+                    return "\u058D";
 
                 case 5:
                     return "ô";
