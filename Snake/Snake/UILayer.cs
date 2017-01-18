@@ -13,18 +13,17 @@ namespace Snake
 
         static bool ExitGame = false;
         static string UserReplay;
+        static int gameMode;
+        static bool gameSelected = false;
 
         static void Main(string[] args)
         {
-            GameMenu.MenuImage();
-
-
-            Console.ReadKey();
+            initialMenuLoad();
 
             // Game engine = new game engine
-            Engine gameEngine = new Engine(20, 70, 1);
+            Engine gameEngine = new Engine(20, 70, gameMode);
             int[,] Maze = gameEngine.initializeGame();
-            int[,] UpdateMaze = Maze;
+            int[,] updateMaze = Maze;
 
             Draw(Maze);
 
@@ -38,16 +37,16 @@ namespace Snake
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        UpdateMaze = gameEngine.updateGame(Direction.Up);
+                        updateMaze = gameEngine.updateGame(Direction.Up);
                         break;
                     case ConsoleKey.DownArrow:
-                        UpdateMaze = gameEngine.updateGame(Direction.Down);
+                        updateMaze = gameEngine.updateGame(Direction.Down);
                         break;
                     case ConsoleKey.RightArrow:
-                        UpdateMaze = gameEngine.updateGame(Direction.Right);
+                        updateMaze = gameEngine.updateGame(Direction.Right);
                         break;
                     case ConsoleKey.LeftArrow:
-                        UpdateMaze = gameEngine.updateGame(Direction.Left);
+                        updateMaze = gameEngine.updateGame(Direction.Left);
                         break;
                     case ConsoleKey.Q:
                         ExitGame = true;
@@ -56,12 +55,12 @@ namespace Snake
                         break;
                 }
 
-                if (UpdateMaze[0,0] == 5)
+                if (updateMaze[0,0] == 5)
                 {
                     ExitGame = true;
                 }
                 System.Console.Clear();
-                Draw(UpdateMaze);
+                Draw(updateMaze);
                 System.Threading.Thread.Sleep(1);
             }
             while (ExitGame == false);
@@ -121,12 +120,28 @@ namespace Snake
             System.Console.WriteLine("Enter r to replay.");
 
             UserReplay = Console.ReadLine().ToString();
-            if (UserReplay == "R" || UserReplay == "r")
+            if (UserReplay.Equals ("r", StringComparison.CurrentCultureIgnoreCase))
             {
                 ExitGame = false;
                 Console.Clear();
                 Main(null);
             }
+        }
+
+        static void initialMenuLoad()
+        {
+            do
+            {
+                GameMenu.menuImage();
+                gameMode = Convert.ToInt32(Console.ReadLine());
+
+                if (gameMode == 1)
+                {
+                    gameSelected = true;
+                }
+                Console.Clear();
+            }
+            while (gameSelected == false);
         }
     }
 }

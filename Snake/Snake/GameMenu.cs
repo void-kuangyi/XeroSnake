@@ -9,7 +9,7 @@ namespace Snake
     class GameMenu
     {
       
-        public static void MenuImage()
+        public static void menuImage()
         {
             Console.WriteLine("");
             Console.WriteLine("         uB@@@B@B@Bu  M@L       8@u    :B@B@B@B.    S@P       F@B  UBMB@B@B@B@@@");
