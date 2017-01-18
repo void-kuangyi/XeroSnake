@@ -1,137 +1,202 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BusinessLayer
 {
-     public class maze
+    public class Maze
     {
-        private const int BORDER = 1;
-        private const int NO_BORDER = 0;
+        private const int border = 1;
+        private const int noBorder = 0;
+        private enum direction { horizon, vertical };
         private int width, height;
-        private int[,] Maze;
-        Random random_number;
+        private int[,] maze;
+        private Random randomNumber;
 
 
 
-        public maze(int w,int h)
+        public Maze(int w, int h)
         {
             width = w;
             height = h;
-            Maze = new int[height, width];
-            random_number = new Random();
+            maze = new int[height, width];
+            randomNumber = new Random();
         }
 
         public int[,] CreateMaze()
         {
-            Generate_Basic_Maze();
+            GenerateBorder();
 
-            Generate_All_Obstacles();
-            
-            return Maze;
+            int mazeMode = randomNumber.Next(1, 5);
+
+            switch (mazeMode)
+            {
+                case 1:
+                    GenerateGridMaze();
+                    break;
+
+                case 2:
+                    GenerateCrossMaze();
+                    break;
+
+                case 3:
+                    GenerateVerticalJungleMaze();
+                    break;
+
+                case 4:
+                    GenerateHorizonJungleMaze();
+                    break;
+
+                default:
+                    break;
+            }
+
+
+            return maze;
         }
 
 
-        public void Generate_Basic_Maze()
+        public void GenerateBorder()
         {
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
-                    Maze[i, j] = NO_BORDER;
+                    maze[i, j] = noBorder;
                 }
 
             }
 
             for (int i = 0; i < height; i++)
             {
-                //every colum of first row and last row should be marked as border 
                 if (i == 0 || i == height - 1)
                 {
                     for (int j = 0; j < width; j++)
                     {
-                        Maze[i, j] = BORDER;
+                        maze[i, j] = border;
                     }
                 }
 
-                //first and last colum of other rows should be marked as border
                 else
                 {
-                    Maze[i, 0] = BORDER;
-                    Maze[i, width - 1] = BORDER;
+                    maze[i, 0] = border;
+                    maze[i, width - 1] = border;
                 }
             }
 
         }
 
 
-
-        public void Generate_All_Obstacles()
+        public void GenerateGridMaze()
         {
-            int Vertical_Line_Head_X = random_number.Next(0,height);
-            int Vertical_Line_Head_Y = random_number.Next(width/2,width);
-
-            Generate_Vertical_Line_Obstacle(Vertical_Line_Head_X,Vertical_Line_Head_Y,random_number.Next(0,height - Vertical_Line_Head_X));
-
-            int Horizon_Line_Head_X = random_number.Next(0,height);
-            int Horizon_Line_Head_Y = random_number.Next(0,width/2 - 1);
-
-            Generate_Horizon_Line_Obstacle(Horizon_Line_Head_X,Horizon_Line_Head_Y,random_number.Next(0,Horizon_Line_Head_Y));
-
-
-            int Rectangle_Head_X = random_number.Next(0, height/2);
-            int Rectangle_Head_Y = random_number.Next(0, width/2);
-
-            int Rectangle_width = random_number.Next(0,width/2 - Rectangle_Head_Y);
-            int Rectangle_height = random_number.Next(0, height/2 - Rectangle_Head_X);
-
-            Generate_Rectangle_Obstacle(Rectangle_Head_X, Rectangle_Head_Y, Rectangle_width, Rectangle_height);
-
-
-
-        }
-
-
-        public void Generate_Horizon_Line_Obstacle(int PointX, int PointY, int LineLength)
-        {
-            for (int i = 0; i < LineLength; i++)
+            const int gapBetweenTwoRectangle = 4;
+            const int rectangleWidth = 2;
+            const int rectangleHeight = 2;
+            for (int i = 0; i < height - 2; i = i + gapBetweenTwoRectangle)
             {
-                Maze[PointX, PointY  - i] = BORDER;
-
-            }
-
-        }
-
-
-
-        public void Generate_Vertical_Line_Obstacle(int PointX, int PointY, int LineLength)
-        {
-
-            for (int i = 0; i < LineLength; i++)
-            {
-                Maze[PointX + i, PointY] = BORDER;
-
-            }
-        }
-
-
-
-        public void Generate_Rectangle_Obstacle(int PointX,int PointY,int rectangle_width, int rectangle_height)
-        {
-            for (int i = 0; i < rectangle_height; i++)
-            {
-                for (int j = 0; j < rectangle_width; j++)
+                for (int j = 0; j < width - 2; j = j + gapBetweenTwoRectangle)
                 {
-                    Maze[PointX + i, PointY + j] = BORDER;
+
+                    GenerateRectangleObstacle(i, j, rectangleWidth, rectangleHeight);
 
                 }
 
             }
 
+        }
+
+        public void GenerateHorizonJungleMaze()
+        {
+            int gapBetweenTwoLine = randomNumber.Next(2, 5);
+
+            for (int i = 0; i < height; i = i + gapBetweenTwoLine)
+            {
+                GenerateLineObstacle(i, 0, width / 3,(int)direction.horizon);
+                GenerateLineObstacle(i, (width / 3) * 2, width / 3,(int)direction.horizon);
+
+            }
 
 
+
+        }
+
+        public void GenerateVerticalJungleMaze()
+        {
+            int gapBetweenTwoLine = randomNumber.Next(4, 7);
+            for (int i = 0; i < width; i = i + gapBetweenTwoLine)
+            {
+                GenerateLineObstacle(0, i, height / 3,(int)direction.vertical);
+                GenerateLineObstacle((height / 3) * 2, i, height / 3,(int)direction.vertical);
+
+            }
+
+
+        }
+
+
+        public void GenerateCrossMaze()
+        {
+            for (int i = 1; i < height - 1; i = i + height / 5)
+            {
+                for (int j = 1; j < width - 1; j = j + width / 5)
+                {
+                    GenerateCrossObstacle(i, j);
+
+                }
+
+            }
+
+        }
+
+        public void GenerateLineObstacle(int pointX, int pointY, int lineLength, int lineDirection)
+        {
+            switch (lineDirection)
+            {
+                case (int)direction.horizon:
+
+                    for (int i = 0; i < lineLength; i++)
+                    {
+                        maze[pointX, pointY + i] = border;
+
+                    }
+                    break;
+                case (int)direction.vertical:
+
+                    for (int i = 0; i < lineLength; i++)
+                    {
+                        maze[pointX + i, pointY] = border;
+
+                    }
+
+                    break;
+
+
+
+            }
+
+
+        }
+
+        public void GenerateRectangleObstacle(int pointX, int pointY, int rectangleWidth, int rectangleHeight)
+        {
+            for (int i = 0; i < rectangleHeight; i++)
+            {
+                for (int j = 0; j < rectangleWidth; j++)
+                {
+                    maze[pointX + i, pointY + j] = border;
+
+                }
+
+            }
+        }
+
+
+        public void GenerateCrossObstacle(int pointX, int pointY)
+        {
+            maze[pointX, pointY] = border;
+            maze[pointX - 1, pointY] = border;
+            maze[pointX + 1, pointY] = border;
+            maze[pointX, pointY - 1] = border;
+            maze[pointX, pointY + 1] = border;
 
         }
     }
