@@ -42,7 +42,7 @@ namespace BusinessLayer
         gameMode currentMode = gameMode.basic;
 
 
-        public Engine(int length,  int width,  int mode = 1)
+        public Engine(int length = 20,  int width = 70,  int mode = 1)
         {
             mazeLength = length;
             mazeWidth = width;

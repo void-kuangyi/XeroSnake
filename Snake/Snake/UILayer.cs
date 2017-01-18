@@ -21,7 +21,7 @@ namespace Snake
             initialMenuLoad();
 
             // Game engine = new game engine
-            Engine gameEngine = new Engine(20, 70, gameMode);
+            Engine gameEngine = new Engine(mode: gameMode);
             int[,] Maze = gameEngine.initializeGame();
             int[,] updateMaze = Maze;
 
@@ -120,7 +120,7 @@ namespace Snake
             System.Console.WriteLine("Enter r to replay.");
 
             UserReplay = Console.ReadLine().ToString();
-            if (UserReplay.Equals ("r", StringComparison.CurrentCultureIgnoreCase))
+            if (UserReplay.Equals ("r", StringComparison.))
             {
                 ExitGame = false;
                 Console.Clear();
