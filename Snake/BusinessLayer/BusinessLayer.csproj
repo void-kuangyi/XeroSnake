@@ -45,6 +45,7 @@
     <Compile Include="Engine.cs" />
     <Compile Include="Food.cs" />
     <Compile Include="GameSnake.cs" />
+    <Compile Include="GameSound.cs" />
     <Compile Include="maze.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
