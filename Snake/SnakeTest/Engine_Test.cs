@@ -17,7 +17,7 @@ namespace SnakeTest
             const int height = 10;
             BusinessLayer.Engine engine = new BusinessLayer.Engine(width, height, 1);
             engine.initializeGame();
-            BusinessLayer.Food food = new BusinessLayer.Food();
+            BusinessLayer.Food food = new BusinessLayer.FoodFolder();
 
             // set invalid food X and Y location
             food.setXLocation(20);
@@ -35,7 +35,7 @@ namespace SnakeTest
             const int height = 20;
             BusinessLayer.Engine engine = new BusinessLayer.Engine(width, height, 1);
             engine.initializeGame();
-            BusinessLayer.Food food = new BusinessLayer.Food();
+            BusinessLayer.Food food = new BusinessLayer.FoodFolder();
 
             // set invalid food X location
             food.setXLocation(12);
@@ -53,7 +53,7 @@ namespace SnakeTest
             const int height = 20;
             BusinessLayer.Engine engine = new BusinessLayer.Engine(width, height, 1);
             engine.initializeGame();
-            BusinessLayer.Food food = new BusinessLayer.Food();
+            BusinessLayer.Food food = new BusinessLayer.FoodFolder();
 
             // set invalid food Y location
             food.setXLocation(3);
@@ -71,7 +71,7 @@ namespace SnakeTest
             const int height = 20;
             BusinessLayer.Engine engine = new BusinessLayer.Engine(width, height, 1);
             engine.initializeGame();
-            BusinessLayer.Food food = new BusinessLayer.Food();
+            BusinessLayer.Food food = new BusinessLayer.FoodFolder();
 
             // set valid food X and Y location
             food.setXLocation(3);

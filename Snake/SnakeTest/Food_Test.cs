@@ -9,7 +9,7 @@ namespace SnakeTest
         [TestMethod]
         public void generateFoodTestOutsideBoundaryXAxis()
         {
-            BusinessLayer.Food food = new BusinessLayer.Food();
+            BusinessLayer.Food food = new BusinessLayer.FoodFolder();
 
             bool result = food.generateFood(-1, 40);
 
@@ -20,7 +20,7 @@ namespace SnakeTest
         [TestMethod]
         public void generateFoodTestOutsideBoundaryYAxis()
         {
-            BusinessLayer.Food food = new BusinessLayer.Food();
+            BusinessLayer.Food food = new BusinessLayer.FoodFolder();
 
             bool result = food.generateFood(26, -3);
 
@@ -32,7 +32,7 @@ namespace SnakeTest
         [TestMethod]
         public void generateFoodTestInsideBoundaryYAxis()
         {
-            BusinessLayer.Food food = new BusinessLayer.Food();
+            BusinessLayer.Food food = new BusinessLayer.FoodFolder();
 
             bool result = food.generateFood(26, 22);
 

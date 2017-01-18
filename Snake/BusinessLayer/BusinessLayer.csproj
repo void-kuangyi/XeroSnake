@@ -42,7 +42,10 @@
   <ItemGroup>
     <Compile Include="Direction.cs" />
     <Compile Include="Engine.cs" />
-    <Compile Include="Food.cs" />
+    <Compile Include="FoodFolder\AdvancedFood.cs" />
+    <Compile Include="FoodFolder\BasicFood.cs" />
+    <Compile Include="FoodFolder\Food.cs" />
+    <Compile Include="FoodFolder\FoodGenerator.cs" />
     <Compile Include="GameSnake.cs" />
     <Compile Include="maze.cs" />
     <Compile Include="Point.cs" />
