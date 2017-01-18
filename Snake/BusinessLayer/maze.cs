@@ -88,12 +88,15 @@ namespace BusinessLayer
 
         public void GenerateGridMaze()
         {
-            for (int i = 0; i < height - 2; i = i + 4)
+            const int gapBetweenTwoRectangle = 4;
+            const int rectangleWidth = 2;
+            const int rectangleHeight = 2;
+            for (int i = 0; i < height - 2; i = i + gapBetweenTwoRectangle)
             {
-                for (int j = 0; j < width - 2; j = j + 4)
+                for (int j = 0; j < width - 2; j = j + gapBetweenTwoRectangle)
                 {
 
-                    GenerateRectangleObstacle(i, j, 2, 2);
+                    GenerateRectangleObstacle(i, j, rectangleWidth, rectangleHeight);
 
                 }
 
