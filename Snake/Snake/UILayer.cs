@@ -25,7 +25,7 @@ namespace Snake
 
             do
             {
-                score = Score.getScore();
+                int score = Score.getScore();
                 drawScore(score);
 
                 KeyListner keyListner = new KeyListner(); 
@@ -48,7 +48,7 @@ namespace Snake
                         ExitGame = true;
                         break;
                     default:
-                        UpdateMaze = gameEngine.updateGame(Direction.Unchanged);
+                        updateMaze = gameEngine.updateGame(Direction.Unchanged);
                         break;
                 }
 

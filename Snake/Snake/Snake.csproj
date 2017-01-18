@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameMenu.cs" />
     <Compile Include="KeyListner.cs" />
     <Compile Include="UILayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
