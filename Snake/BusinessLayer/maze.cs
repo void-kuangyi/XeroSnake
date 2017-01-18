@@ -24,27 +24,31 @@ namespace BusinessLayer
         public int[,] CreateMaze()
         {
             GenerateBorder();
-        
-            int mazeMode = randomNumber.Next(1,3);
 
-            /*  switch (mazeMode)
-              {
-                  case 1:
-                      GenerateGridMaze();
-                      break;
+            int mazeMode = randomNumber.Next(1, 5);
 
+            switch (mazeMode)
+            {
+                case 1:
+                    GenerateGridMaze();
+                    break;
 
-                  case 2:
-                      GenerateCrossMaze();
-                      break;
+                case 2:
+                    GenerateCrossMaze();
+                    break;
 
+                case 3:
+                    GenerateVerticalJungleMaze();
+                    break;
 
-                  default:
-                      break;
-              } */
+                case 4:
+                    GenerateHorizonJungleMaze();
+                    break;
 
-            // GenerateCrossMaze();
-            GenerateGridMaze();
+                default:
+                    break;
+            }
+
 
             return Maze;
         }
@@ -83,13 +87,12 @@ namespace BusinessLayer
 
         public void GenerateGridMaze()
         {
-            for (int i = 0; i < height; i = i + 4)
+            for (int i = 0; i < height - 2; i = i + 4)
             {
-                for (int j = 0; j < width; j = j + 4)
+                for (int j = 0; j < width - 2; j = j + 4)
                 {
 
-                        GenerateRectangleObstacle(i, j, 2, 2);
-
+                    GenerateRectangleObstacle(i, j, 2, 2);
 
                 }
 
@@ -97,13 +100,30 @@ namespace BusinessLayer
 
         }
 
-        public void GenerateJungleMaze()
+        public void GenerateHorizonJungleMaze()
         {
+            int gapBetweenTwoLine = randomNumber.Next(2, 5);
+
+            for (int i = 0; i < height; i = i + gapBetweenTwoLine)
+            {
+                GenerateHorizonLineObstacle(i, 0, width / 3);
+                GenerateHorizonLineObstacle(i, (width / 3) * 2, width / 3);
+
+            }
 
 
 
+        }
 
+        public void GenerateVerticalJungleMaze()
+        {
+            int gapBetweenTwoLine = randomNumber.Next(4, 7);
+            for (int i = 0; i < width; i = i + gapBetweenTwoLine)
+            {
+                GenerateVerticalLineObstacle(0, i, height / 3);
+                GenerateVerticalLineObstacle((height / 3) * 2, i, height / 3);
 
+            }
 
 
         }
@@ -111,47 +131,23 @@ namespace BusinessLayer
 
         public void GenerateCrossMaze()
         {
-            for (int i = 1; i < height - 1; i = i + height/5)
+            for (int i = 1; i < height - 1; i = i + height / 5)
             {
-                for (int j = 1; j < width - 1; j = j + width/5)
+                for (int j = 1; j < width - 1; j = j + width / 5)
                 {
-                    GenerateCrossObstacle(i,j);
+                    GenerateCrossObstacle(i, j);
 
                 }
 
-            }   
+            }
 
         }
 
-        /*     public void Generate_All_Obstacles()
-             {
-                 int Vertical_Line_Head_X = random_number.Next(0, height);
-                 int Vertical_Line_Head_Y = random_number.Next(width / 2, width);
-
-                 Generate_Vertical_Line_Obstacle(Vertical_Line_Head_X, Vertical_Line_Head_Y, random_number.Next(0, height - Vertical_Line_Head_X));
-
-                 int Horizon_Line_Head_X = random_number.Next(0, height);
-                 int Horizon_Line_Head_Y = random_number.Next(0, width / 2 - 1);
-
-                 Generate_Horizon_Line_Obstacle(Horizon_Line_Head_X, Horizon_Line_Head_Y, random_number.Next(0, Horizon_Line_Head_Y));
-
-
-                 int Rectangle_Head_X = random_number.Next(0, height / 2);
-                 int Rectangle_Head_Y = random_number.Next(0, width / 2);
-
-                 int Rectangle_width = random_number.Next(0, width / 2 - Rectangle_Head_Y);
-                 int Rectangle_height = random_number.Next(0, height / 2 - Rectangle_Head_X);
-
-                 Generate_Rectangle_Obstacle(Rectangle_Head_X, Rectangle_Head_Y, Rectangle_width, Rectangle_height);
-
-             }
-             */
-
-        public void GenerateHorizonLineObstacle(int PointX, int PointY, int LineLength)
+        public void GenerateHorizonLineObstacle(int pointX, int pointY, int lineLength)
         {
-            for (int i = 0; i < LineLength; i++)
+            for (int i = 0; i < lineLength; i++)
             {
-                Maze[PointX, PointY + i] = border;
+                Maze[pointX, pointY + i] = border;
 
             }
 
@@ -159,25 +155,25 @@ namespace BusinessLayer
 
 
 
-        public void GenerateVerticalLineObstacle(int PointX, int PointY, int LineLength)
+        public void GenerateVerticalLineObstacle(int pointX, int pointY, int lineLength)
         {
 
-            for (int i = 0; i < LineLength; i++)
+            for (int i = 0; i < lineLength; i++)
             {
-                Maze[PointX + i, PointY] = border;
+                Maze[pointX + i, pointY] = border;
 
             }
         }
 
 
 
-        public void GenerateRectangleObstacle(int PointX, int PointY, int rectangle_width, int rectangle_height)
+        public void GenerateRectangleObstacle(int pointX, int pointY, int rectangleWidth, int rectangleHeight)
         {
-            for (int i = 0; i < rectangle_height; i++)
+            for (int i = 0; i < rectangleHeight; i++)
             {
-                for (int j = 0; j < rectangle_width; j++)
+                for (int j = 0; j < rectangleWidth; j++)
                 {
-                    Maze[PointX + i, PointY + j] = border;
+                    Maze[pointX + i, pointY + j] = border;
 
                 }
 
@@ -187,7 +183,7 @@ namespace BusinessLayer
 
         public void GenerateCrossObstacle(int pointX, int pointY)
         {
-            Maze[pointX,pointY] = border;
+            Maze[pointX, pointY] = border;
             Maze[pointX - 1, pointY] = border;
             Maze[pointX + 1, pointY] = border;
             Maze[pointX, pointY - 1] = border;
