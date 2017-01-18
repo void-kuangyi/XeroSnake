@@ -69,11 +69,11 @@ namespace BusinessLayer
                     // Make the whole snake as body first
                     foreach (Point value in snakeCurrentBody)
                     {
-                        mazeArray[value.returnX(), value.returnY()] = snakeBody;
+                        mazeArray[value.returnX(), value.returnY()] = (int)Elements.snakeBody;
                     }
                     // Identify snake head
                     Point head = snakeCurrentBody[0];
-                    mazeArray[head.returnX(), head.returnY()] = snakeHead;
+                    mazeArray[head.returnX(), head.returnY()] = (int)Elements.snakeHead;
 
                     // Add the Food
                     bool isValid = true;
@@ -105,7 +105,7 @@ namespace BusinessLayer
             switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
             {
 
-                case mazeBody:  // snake hits the maze
+                case (int)Elements.mazeBody: 
                     if (Score.getScore() > Score.getHighScore())
                     {
                         Score.setHighScore(Score.getScore());
@@ -143,14 +143,11 @@ namespace BusinessLayer
                     break;
 
                 default:   // snake moves
+                    List<Point> SnakeCurrentPosition = gameSnake1.returnCurrentSnakePosition();
+                    mazeArray[SnakeCurrentPosition.Last().returnX(), SnakeCurrentPosition.Last().returnY()] = (int)Elements.blank;
+                    mazeArray[SnakeCurrentPosition.First().returnX(), SnakeCurrentPosition.First().returnY()] = (int)Elements.snakeBody;
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, false);
-                    mazeArray = gameMaze.CreateMaze();
-                    foreach (Point value in snakesNewLocation)
-                    {
-                        mazeArray[value.returnX(), value.returnY()] = snakeBody;
-                    }
-                    Point newhead = snakesNewLocation[0];
-                    mazeArray[newhead.returnX(), newhead.returnY()] = snakeHead;
+                    mazeArray[snakesNewLocation.First().returnX(), snakesNewLocation.First().returnY()] = (int)Elements.snakeHead;
 
                     mazeArray[food.xLocation, food.yLocation] = Food;
                     break;
@@ -202,15 +199,15 @@ namespace BusinessLayer
             {
                 return false;
             }
-            if (mazeArray[x, y] == mazeBody)
+            if (mazeArray[x, y] == (int)Elements.mazeBody)
             {
                 return false;
             }
-            if (mazeArray[x, y] == snakeBody)
+            if (mazeArray[x, y] == (int)Elements.snakeBody)
             {
                 return false;
             }
-            if (mazeArray[x, y] == snakeHead)
+            if (mazeArray[x, y] == (int)Elements.snakeHead)
             {
                 return false;
             }
