@@ -46,9 +46,12 @@ namespace Snake
                     return "▓";
 
                 case 4:
-                    return "■";
+                    return "☻";
 
                 case 5:
+                    return "ô";
+
+                case 6:
                     return "G";
 
                 default:
