@@ -52,7 +52,7 @@ namespace Snake
                         break;
                 }
 
-                if (updateMaze[0,0] == 5)
+                if (UpdateMaze[0, 0] == 5)
                 {
                     ExitGame = true;
                 }
@@ -69,36 +69,16 @@ namespace Snake
         {
             int rowLength = DynamicMaze.GetLength(0);
             int colLength = DynamicMaze.GetLength(1);
-
+            Style style = new Style();
             for (int i = 0; i < rowLength; i++)
             {
+                string row = "";
                 for (int j = 0; j < colLength; j++)
                 {
-                    switch (DynamicMaze[i, j])
-                    {
-                        case 0:
-                            Console.Write(" "); //Empty cell
-                            break;
-                        case 1:
-                            Console.Write("*"); //border  
-                            break;
-                        case 2:
-                            Console.Write("0"); //snake head
-                            break;
-                        case 3:
-                            Console.Write("o"); //snake body
-                            break;
-                        case 4:
-                            Console.Write("@"); //food
-                            break;
-                        case 5:
-                            Console.Write("Game Over"); //food
-                            break;
-                        default:
-                            Console.Write("Should not reach here. Unexpected error!"); //Error 
-                            break;
-                    }
+                    row += style.StyleMazeElement(DynamicMaze[i, j]);
+                       
                 }
+                Console.Write(row);
                 Console.Write(Environment.NewLine);
             }
         }
