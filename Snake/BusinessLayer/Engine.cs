@@ -114,7 +114,8 @@ namespace BusinessLayer
 
                 case (int)Elements.food:
                     SnakeCurrentPosition = gameSnake1.returnCurrentSnakePosition();
-                    mazeArray[SnakeCurrentPosition.Last().returnX(), SnakeCurrentPosition.Last().returnY()] = (int)Elements.blank;                  
+                    //mazeArray[SnakeCurrentPosition.Last().returnX(), SnakeCurrentPosition.Last().returnY()] = (int)Elements.blank;                  
+                    mazeArray[SnakeCurrentPosition.First().returnX(), SnakeCurrentPosition.First().returnY()] = (int)Elements.snakeBody;
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, true);        
                     mazeArray[snakesNewLocation.First().returnX(), snakesNewLocation.First().returnY()] = (int)Elements.snakeHead;
 
@@ -150,7 +151,8 @@ namespace BusinessLayer
                 default:   // snake moves
                     SnakeCurrentPosition = gameSnake1.returnCurrentSnakePosition();
                     mazeArray[SnakeCurrentPosition.Last().returnX(), SnakeCurrentPosition.Last().returnY()] = (int)Elements.blank;
-                    snakesNewLocation = gameSnake1.snakeMove(snakeDirection, true);
+                    mazeArray[SnakeCurrentPosition.First().returnX(), SnakeCurrentPosition.First().returnY()] = (int)Elements.snakeBody;
+                    snakesNewLocation = gameSnake1.snakeMove(snakeDirection, false);
                     mazeArray[snakesNewLocation.First().returnX(), snakesNewLocation.First().returnY()] = (int)Elements.snakeHead;
 
                     foreach (Food value in foodList)
