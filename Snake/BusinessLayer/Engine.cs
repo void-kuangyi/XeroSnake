@@ -60,7 +60,7 @@ namespace BusinessLayer
                     // Create a New Maze and initialize it
                     gameMaze = new Maze(mazeWidth, mazeLength);
                     mazeArray = gameMaze.CreateMaze();
-
+                    gameSound = new GameSound();
                     // Add the Snake
                     gameSnake1 = new GameSnake();
                     //List<Point> snakeBody = new List<Point>();
