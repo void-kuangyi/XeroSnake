@@ -97,6 +97,11 @@ namespace BusinessLayer
 
         public int[,] updateGame(Direction snakeDirection)
         {
+            if (snakeDirection == Direction.Unchanged)
+            {
+                snakeDirection = gameSnake1.directionFacing;
+            }
+
             Point newSnakeHead = getNewHead(snakeDirection);
             List<Point> snakesNewLocation;
             List<Point> SnakeCurrentPosition;
