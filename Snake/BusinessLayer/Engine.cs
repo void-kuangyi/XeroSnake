@@ -18,6 +18,7 @@ namespace BusinessLayer
         private const int snakeHitsMaze = 5;
         private const int mazeRenderWidth = 70;
         private const int mazeRenderLength = 20;
+        private const int AINumber = 7;
         private int mazeLength { get; set; }
         private int mazeWidth { get; set; }
         private int[,] mazeArray { get; set; }
@@ -25,7 +26,7 @@ namespace BusinessLayer
         private Maze gameMaze;
 
         AI newAI = new AI();
-        private maze gameMaze;
+       // private maze gameMaze;
 
        
 

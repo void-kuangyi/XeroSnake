@@ -24,7 +24,8 @@ namespace SnakeTest
         public void RandomPoint_generates_true()
         {
             BusinessLayer.AI testAI = new BusinessLayer.AI();
-            int rnd = testAI.RandomPoint(4);
+            Random randomNUmber = new Random();
+            int rnd = randomNUmber.Next(4);
             Assert.IsTrue(rnd <= 4);
         } 
     }
