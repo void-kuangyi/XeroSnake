@@ -10,7 +10,6 @@ namespace BusinessLayer
         private Elements[,] maze;
         private Random randomNumber;
         private int mazeMode;
-        private enum mazeLevel { easy = 1, medium, hard };
 
 
         public Maze(int w, int h, int mazeMode)
@@ -28,7 +27,7 @@ namespace BusinessLayer
 
             switch (mazeMode)
             {
-                case (int)mazeLevel.easy:
+                case (int)MazeLevel.Easy:
                     if (randomNumber.Next(0, 1) < 0.5)
                     {
                         GenerateHorizonJungleMaze();
@@ -39,11 +38,11 @@ namespace BusinessLayer
                     }
                     break;
 
-                case (int)mazeLevel.medium:
+                case (int)MazeLevel.Medium:
                     GenerateCrossMaze();
                     break;
 
-                case (int)mazeLevel.hard:
+                case (int)MazeLevel.Hard:
                     GenerateGridMaze();
                     break;
 
@@ -136,9 +135,9 @@ namespace BusinessLayer
 
         public void GenerateCrossMaze()
         {
-            for (int i = 1; i < height - 1; i = i + height / 5)
+            for (int i = 4; i < height - 1; i = i + height / 5)
             {
-                for (int j = 1; j < width - 1; j = j + width / 5)
+                for (int j = 4; j < width - 1; j = j + width / 5)
                 {
                     GenerateCrossObstacle(i, j);
 

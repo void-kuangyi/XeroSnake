@@ -13,8 +13,6 @@ namespace Snake
         private static BusinessLayer.gameMode currentGameMode;
         static bool gameSelected = false;
 
-        enum mazeLevel{ easy = 1, medium, hard}
-
         static void Main(string[] args)
         {
             initialMenuLoad();
@@ -141,7 +139,7 @@ namespace Snake
 
         public static int ChooseMazeMode()
         {
-            mazeLevel mazeMode;
+            MazeLevel mazeMode;
 
             Console.WriteLine("1. Easy Mode : Line Maze");
             Console.WriteLine("2. Medium Mode : Cross Maze");
@@ -153,7 +151,7 @@ namespace Snake
             {
                 Console.Write("Please enter 1,2 or 3 : ");
             }
-            while (!Enum.TryParse(Console.ReadLine(), out mazeMode) || !Enum.IsDefined(typeof(mazeLevel),mazeMode));
+            while (!Enum.TryParse(Console.ReadLine(), out mazeMode) || !Enum.IsDefined(typeof(MazeLevel),mazeMode));
 
 
             Console.Clear();

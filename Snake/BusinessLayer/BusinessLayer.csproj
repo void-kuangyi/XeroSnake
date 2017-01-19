@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MazeLevel.cs" />
     <Compile Include="gameMode.cs" />
+    <Compile Include="Life.cs" />
     <Compile Include="SnakeAction.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Elements.cs" />
