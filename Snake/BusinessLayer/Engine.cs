@@ -16,11 +16,13 @@ namespace BusinessLayer
         private const int Food = 4;
         private const int step = 1;
         private const int snakeHitsMaze = 5;
-        private const int AINumber = 7;
-        private int previousSquare;
+        private const int mazeRenderWidth = 70;
+        private const int mazeRenderLength = 20;
         private int mazeLength { get; set; }
         private int mazeWidth { get; set; }
         private int[,] mazeArray { get; set; }
+        private GameSound gameSound;
+        private Maze gameMaze;
 
         AI newAI = new AI();
         private maze gameMaze;
@@ -46,7 +48,7 @@ namespace BusinessLayer
 
         gameMode currentMode = gameMode.basic;
 
-        public Engine(int length, int width, int mode)
+        public Engine(int length = mazeRenderLength, int width = mazeRenderWidth, int mode = 1)
         {
             mazeLength = length;
             mazeWidth = width;
@@ -63,9 +65,9 @@ namespace BusinessLayer
 
 
                     // Create a New Maze and initialize it
-                    gameMaze = new maze(mazeWidth, mazeLength);
+                    gameMaze = new Maze(mazeWidth, mazeLength);
                     mazeArray = gameMaze.CreateMaze();
-
+                    gameSound = new GameSound();
                     // Add the Snake
                     gameSnake1 = new GameSnake();
                     //List<Point> snakeBody = new List<Point>();
@@ -122,8 +124,10 @@ namespace BusinessLayer
             {
 
                 case (int)Elements.mazeBody:
+                    gameSound.SnakeDiesSound();
                     if (Score.getScore() > Score.getHighScore())
                     {
+                        gameSound.SnakeGetsHighScore();
                         Score.setHighScore(Score.getScore());
                     }
                     mazeArray[0, 0] = snakeHitsMaze;
@@ -132,7 +136,8 @@ namespace BusinessLayer
 
                 case Food:  // snake hits the food
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, true);
-                    //mazeArray = gameMaze.CreateMaze();
+                    
+                    gameSound.SnakeEatsSound();
                     foreach (Point value in snakesNewLocation)
                     {
                         mazeArray[value.returnX(), value.returnY()] = snakeBody;

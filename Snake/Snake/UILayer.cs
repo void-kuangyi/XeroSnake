@@ -6,55 +6,56 @@ namespace Snake
     class Program
     {
         private const int GameStepMilliseconds = 100;
+        private static KeyListner keyListner = new KeyListner();
 
         private static bool ExitGame = false;
-        private static string UserReplay;
+        static int gameMode;
+        static bool gameSelected = false;
 
         static void Main(string[] args)
         {
-            int score;
-            Engine gameEngine = new Engine(20, 70, 1);
+            initialMenuLoad();
+
+            Engine gameEngine = new Engine(mode: gameMode);
             int[,] Maze = gameEngine.initializeGame();
-            int[,] UpdateMaze = Maze;
+            int[,] updateMaze = Maze;
 
             Draw(Maze);
 
             do
             {
-                score = Score.getScore();
+                int score = Score.getScore();
                 drawScore(score);
 
-                KeyListner keyListner = new KeyListner(); 
                 ConsoleKeyInfo keyInfo = keyListner.ReadKey(GameStepMilliseconds);
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        UpdateMaze = gameEngine.updateGame(Direction.Up);
+                        updateMaze = gameEngine.updateGame(Direction.Up);
                         break;
                     case ConsoleKey.DownArrow:
-                        UpdateMaze = gameEngine.updateGame(Direction.Down);
+                        updateMaze = gameEngine.updateGame(Direction.Down);
                         break;
                     case ConsoleKey.RightArrow:
-                        UpdateMaze = gameEngine.updateGame(Direction.Right);
+                        updateMaze = gameEngine.updateGame(Direction.Right);
                         break;
                     case ConsoleKey.LeftArrow:
-                        UpdateMaze = gameEngine.updateGame(Direction.Left);
+                        updateMaze = gameEngine.updateGame(Direction.Left);
                         break;
                     case ConsoleKey.Q:
                         ExitGame = true;
                         break;
                     default:
-                        UpdateMaze = gameEngine.updateGame(Direction.Unchanged);
+                        updateMaze = gameEngine.updateGame(Direction.Unchanged);
                         break;
                 }
 
-                if (UpdateMaze[0, 0] == 5)
+                if (updateMaze[0, 0] == 5)
                 {
                     ExitGame = true;
                 }
                 System.Console.Clear();
-                Draw(UpdateMaze);
-                System.Threading.Thread.Sleep(1);
+                Draw(updateMaze);
             }
             while (ExitGame == false);
 
@@ -74,6 +75,14 @@ namespace Snake
                     row += style.StyleMazeElement(DynamicMaze[i, j]);
                        
                 }
+                if (row.Contains(" "))
+                {
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
                 Console.Write(row);
                 Console.Write(Environment.NewLine);
             }
@@ -86,17 +95,41 @@ namespace Snake
 
         static void endGame()
         {
-            System.Console.WriteLine("Your final score is " + Score.getScore());
-            System.Console.WriteLine("The high score is " + Score.getHighScore());
-            System.Console.WriteLine("Enter r to replay.");
+            Console.WriteLine("Your final score is " + Score.getScore());
+            Console.WriteLine("The high score is " + Score.getHighScore());
+            Console.WriteLine("Enter r to replay. Any other key to quit.");
 
-            UserReplay = Console.ReadLine().ToString();
-            if (UserReplay == "R" || UserReplay == "r")
+            ConsoleKeyInfo keyInfo = keyListner.ReadKey(Int32.MaxValue);
+            if (keyInfo.KeyChar.ToString().Equals("r", StringComparison.OrdinalIgnoreCase)) 
             {
                 ExitGame = false;
                 Console.Clear();
                 Main(null);
             }
+        }
+
+        static void initialMenuLoad()
+        {
+            do
+            {
+                
+                Style.menuImage();
+                try
+                {
+                    gameMode = Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine();
+                }
+
+                if (gameMode == 1)
+                {
+                    gameSelected = true;
+                }
+                Console.Clear();
+            }
+            while (gameSelected == false);
         }
     }
 }
