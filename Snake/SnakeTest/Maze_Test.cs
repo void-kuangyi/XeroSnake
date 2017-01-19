@@ -12,7 +12,7 @@ namespace SnakeTest
             const int width = 10;
             const int height = 10;
             BusinessLayer.Maze maze = new BusinessLayer.Maze(width, height);
-            int[,] newMaze = maze.CreateMaze();
+            Elements[,] newMaze = maze.CreateMaze();
 
             Assert.IsInstanceOfType(newMaze, typeof(int[,]), "this is an instance of type int 2D array");
 
@@ -28,7 +28,7 @@ namespace SnakeTest
 
             BusinessLayer.Maze maze = new BusinessLayer.Maze(width, height);
 
-            int[,] newMaze = maze.CreateMaze();
+            Elements[,] newMaze = maze.CreateMaze();
 
             for (int i = 0; i < height; i++)
             {
@@ -36,13 +36,13 @@ namespace SnakeTest
                 {
                     for (int j = 0; j < width; j++)
                     {
-                        Assert.AreEqual(newMaze[i, j], 1);
+                        Assert.AreEqual(newMaze[i, j], Elements.mazeBody);
                     }
                 }
                 else
                 {
-                    Assert.AreEqual(newMaze[i, 0], 1);
-                    Assert.AreEqual(newMaze[i, width - 1], 1);
+                    Assert.AreEqual(newMaze[i, 0], Elements.mazeBody);
+                    Assert.AreEqual(newMaze[i, width - 1], Elements.mazeBody);
                 }
 
             }

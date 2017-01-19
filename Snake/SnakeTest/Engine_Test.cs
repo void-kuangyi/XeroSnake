@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BusinessLayer;
 
 namespace SnakeTest
 {
@@ -19,24 +20,24 @@ namespace SnakeTest
 
             const int width = 20;
             const int height = 40;
-            int[,] expectedResult = createMaze(width, height);
+            Elements[,] expectedResult = createMaze(width, height);
 
             BusinessLayer.Engine engine = new BusinessLayer.Engine(width, height, 1);
-            int[,] resultingMaze = engine.initializeGame();
+            Elements[,] resultingMaze = engine.initializeGame();
 
-            bool result = validateMaze(resultingMaze, expectedResult, width, height);
+            bool result = validateMazeBorder(resultingMaze, expectedResult, width, height);
             Assert.IsTrue(result, "Valid maze generated");
         }
 
-        public bool validateMaze(int[,] resultingMaze, int[,] expectedResult, int width, int height)
+        public bool validateMazeBorder(Elements[,] resultingMaze, Elements[,] expectedResult, int width, int height)
         {
             bool result = true;
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    if ((resultingMaze[x, y] != FOOD) && (resultingMaze[x, y] != SNAKEBODY) && (resultingMaze[x, y] != SNAKEHEAD))
-                    {
+                    if((x == 0) || (y == 0) || (x == (width -1)) || (x == (height - 1)))
+                    { 
                         if (resultingMaze[x, y] != expectedResult[x, y])
                         {
                             result = false;
@@ -47,26 +48,26 @@ namespace SnakeTest
             return result;
         }
 
-        private int[,] createMaze(int width, int height)
+        private Elements[,] createMaze(int width, int height)
         {
-            int[,] maze = new int[width, height];
+            Elements[,] maze = new Elements[width, height];
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    maze[x, y] = 0;
+                    maze[x, y] = Elements.blank;
                 }
             }
 
             for (int y = 0; y < height; y++)
             {
-                maze[0, y] = 1;
-                maze[width - 1, y] = 1;
+                maze[0, y] = Elements.mazeBody;
+                maze[width - 1, y] = Elements.mazeBody;
             }
             for (int x = 0; x < width; x++)
             {
-                maze[x, 0] = 1;
-                maze[x, height -1] = 1;
+                maze[x, 0] = Elements.mazeBody;
+                maze[x, height -1] = Elements.mazeBody;
             }
 
             return maze;

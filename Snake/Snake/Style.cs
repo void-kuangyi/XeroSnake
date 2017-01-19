@@ -14,7 +14,6 @@ namespace Snake
             System.Console.Clear();
 
             StringBuilder designedMaze = new StringBuilder();
-            //string designedMaze = string.Empty;
             int rowLength = maze.GetLength(0);
             int coloumnLength = maze.GetLength(1);
             for (int i = 0; i < rowLength; i++)

@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public enum Elements
+    public enum snakeAction
     {
-        blank = 0,
-        mazeBody,
-        snakeHead,
-        snakeBody,
-        foodBasic,
-        foodAdvanced,
-        snakeDeath
+        eat,
+        die,
+        move
     }
 }

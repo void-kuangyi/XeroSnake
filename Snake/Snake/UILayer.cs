@@ -14,8 +14,8 @@ namespace Snake
         {
             int score;
             Engine gameEngine = new Engine(20, 70, 1);
-            int[,] Maze = gameEngine.initializeGame();
-            int[,] UpdateMaze = Maze;
+            Elements[,] Maze = gameEngine.initializeGame();
+            Elements[,] UpdateMaze = Maze;
 
             Draw(Maze);
 
@@ -48,7 +48,7 @@ namespace Snake
                         break;
                 }
 
-                if (UpdateMaze[0, 0] == 5)
+                if (UpdateMaze[0, 0] == Elements.snakeDeath)
                 {
                     ExitGame = true;
                 }
@@ -61,7 +61,7 @@ namespace Snake
             endGame();
         }
 
-        public static void Draw(int[,] DynamicMaze)
+        public static void Draw(Elements [,] DynamicMaze)
         {
             int rowLength = DynamicMaze.GetLength(0);
             int colLength = DynamicMaze.GetLength(1);
@@ -71,7 +71,7 @@ namespace Snake
                 string row = "";
                 for (int j = 0; j < colLength; j++)
                 {
-                    row += style.StyleMazeElement(DynamicMaze[i, j]);
+                    row += style.StyleMazeElement((int)DynamicMaze[i, j]);
                        
                 }
                 if (row.Contains(" "))
