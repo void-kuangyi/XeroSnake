@@ -95,7 +95,7 @@ namespace Snake
             System.Console.WriteLine("Enter r to replay.");
 
             UserReplay = Console.ReadLine().ToString();
-            if (UserReplay.Equals("r", StringComparison.CurrentCultureIgnoreCase)) 
+            if (UserReplay.Equals("r", StringComparison.OrdinalIgnoreCase)) 
             {
                 ExitGame = false;
                 Console.Clear();
