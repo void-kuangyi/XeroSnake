@@ -130,9 +130,7 @@ namespace BusinessLayer
                     int previousY = newAI.YCoordinate;
                     do
                     {
-                        newAI.XCoordinate = previousX;
-                        newAI.YCoordinate = previousY;
-                        newAI.MoveAI();
+                        newAI.MoveAI(previousX, previousY);
                         isAIValid = validateNewAILocation(newAI);
                     } while (!isAIValid);
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;

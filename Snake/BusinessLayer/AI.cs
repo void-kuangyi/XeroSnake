@@ -18,10 +18,6 @@ namespace BusinessLayer
             {
                 return X;
             }
-            set
-            {
-                X = value;
-            }
         }
 
         public int YCoordinate
@@ -29,10 +25,6 @@ namespace BusinessLayer
             get
             {
                 return Y;
-            }
-            set
-            {
-                Y = value;
             }
         }
 
@@ -55,9 +47,10 @@ namespace BusinessLayer
             return true;
         }
 
-        public void MoveAI()
+        public void MoveAI(int previousX, int previousY)
         {
-
+            X = previousX;
+            Y = previousY;
             bool Opposite = true;
             Direction newDirection = Direction.Right;
 
