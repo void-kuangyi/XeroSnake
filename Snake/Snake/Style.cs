@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using BusinessLayer;
 namespace Snake
 {
     
     public class Style
     {
-        public void StyleMaze(int[,] maze)
+        public void StyleMaze(Elements[,] maze)
         {
             System.Console.Clear();
 
@@ -27,29 +27,24 @@ namespace Snake
             Console.Write(designedMaze);
 
         }
-        public string StyleMazeElement(int mazeElement)
+        public string StyleMazeElement(Elements mazeElement)
         {
             
             switch (mazeElement)
             {
-                case 0:
+                case Elements.blank:
                     return " ";
-                case 1:
+                case Elements.mazeBody:
                     return "█";
-
-                case 2:
+                case Elements.snakeHead:
                     return "Ö";
-
-                case 3:
+                case Elements.snakeBody:
                     return "▓";
-
-                case 4:
-                    return "\u058D";
-
-                case 5:
+                case Elements.foodBasic:
+                    return "æ";
+                case Elements.foodAdvanced:
                     return "ô";
-
-                case 6:
+                case Elements.snakeDeath:
                     return "G";
 
                 default:

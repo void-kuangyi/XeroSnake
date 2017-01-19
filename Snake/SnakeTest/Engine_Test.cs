@@ -22,7 +22,7 @@ namespace SnakeTest
             const int height = 40;
             Elements[,] expectedResult = createMaze(width, height);
 
-            BusinessLayer.Engine engine = new BusinessLayer.Engine(width, height, 1);
+            BusinessLayer.Engine engine = new BusinessLayer.Engine(gameMode.basic, width, height);
             Elements[,] resultingMaze = engine.initializeGame();
 
             bool result = validateMazeBorder(resultingMaze, expectedResult, width, height);

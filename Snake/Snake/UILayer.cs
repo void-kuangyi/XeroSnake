@@ -9,7 +9,7 @@ namespace Snake
 
         private static bool ExitGame = false;
         private static string UserReplay;
-        static int gameMode;
+        private static BusinessLayer.gameMode currentGameMode;
         static bool gameSelected = false;
 
         static void Main(string[] args)
@@ -17,7 +17,8 @@ namespace Snake
             initialMenuLoad();
 
             // Game engine = new game engine
-            Engine gameEngine = new Engine(mode: gameMode);
+            currentGameMode = gameMode.basic;
+            Engine gameEngine = new Engine(currentGameMode);
             Elements[,] Maze = gameEngine.initializeGame();
             Elements[,] updateMaze = Maze;
 
@@ -75,7 +76,7 @@ namespace Snake
                 string row = "";
                 for (int j = 0; j < colLength; j++)
                 {
-                    row += style.StyleMazeElement((int)DynamicMaze[i, j]);
+                    row += style.StyleMazeElement(DynamicMaze[i, j]);
                        
                 }
                 if (row.Contains(" "))
@@ -119,14 +120,14 @@ namespace Snake
                 Style.menuImage();
                 try
                 {
-                    gameMode = Convert.ToInt32(Console.ReadLine());
+                    currentGameMode = (gameMode)Convert.ToInt32(Console.ReadLine());
                 }
                 catch
                 {
                     Console.WriteLine();
                 }
 
-                if (gameMode == 1)
+                if (currentGameMode == gameMode.basic)
                 {
                     gameSelected = true;
                 }

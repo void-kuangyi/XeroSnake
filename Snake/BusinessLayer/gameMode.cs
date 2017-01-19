@@ -8,7 +8,7 @@ namespace BusinessLayer
 {
     public enum gameMode
     {
-        basic,
+        basic = 1,
         advanced
     }
 }

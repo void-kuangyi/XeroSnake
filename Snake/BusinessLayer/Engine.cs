@@ -25,13 +25,12 @@ namespace BusinessLayer
         //private GameSnake gameSnake2;
         private Food food;
         private FoodGenerator foodGenerator;
-
-        gameMode currentMode = gameMode.basic;
-
-        public Engine(int length = mazeRenderLength, int width = mazeRenderWidth, int mode = 1)
+        private gameMode currentGameMode;
+        public Engine(gameMode mode, int length = mazeRenderLength, int width = mazeRenderWidth)
         {
             mazeLength = length;
             mazeWidth = width;
+            currentGameMode = mode;
             Score.resetScore();
             foodGenerator = new FoodGenerator();
         }
@@ -39,7 +38,7 @@ namespace BusinessLayer
         public Elements[,] initializeGame()
         {
 
-            switch (currentMode)
+            switch (currentGameMode)
             {
                 case gameMode.basic:
 

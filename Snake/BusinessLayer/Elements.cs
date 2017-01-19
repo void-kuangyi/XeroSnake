@@ -9,11 +9,11 @@ namespace BusinessLayer
     public enum Elements
     {
         blank = 0,
-        mazeBody,
-        snakeHead,
-        snakeBody,
-        foodBasic,
-        foodAdvanced,
-        snakeDeath
+        mazeBody = 1,
+        snakeHead = 2,
+        snakeBody = 3,
+        foodBasic = 4,
+        foodAdvanced = 5,
+        snakeDeath = 6
     }
 }
