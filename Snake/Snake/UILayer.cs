@@ -7,10 +7,10 @@ namespace Snake
     class Program
     {
         private const int GameStepMilliseconds = 100;
+        private static KeyListner keyListner = new KeyListner();
 
         private static bool ExitGame = false;
-        private static string UserReplay;
-        static int gameMode;
+        private static BusinessLayer.gameMode currentGameMode;
         static bool gameSelected = false;
 
         enum mazeLevel{ easy = 1, medium, hard}
@@ -19,12 +19,9 @@ namespace Snake
         {
             initialMenuLoad();
 
-            int mazeMode = ChooseMazeMode();
-
-            // Game engine = new game engine
-            Engine gameEngine = new Engine(gameMode,mazeMode);
-            int[,] Maze = gameEngine.initializeGame();
-            int[,] updateMaze = Maze;
+            currentGameMode = gameMode.basic;
+int mazeMode = ChooseMazeMode();
+Engine gameEngine = new Engine(gameMode,mazeMode);Elements[,] Maze = gameEngine.initializeGame();Elements[,] updateMaze = Maze;
 
             Draw(Maze);
 
@@ -33,7 +30,6 @@ namespace Snake
                 int score = Score.getScore();
                 drawScore(score);
 
-                KeyListner keyListner = new KeyListner();
                 ConsoleKeyInfo keyInfo = keyListner.ReadKey(GameStepMilliseconds);
                 switch (keyInfo.Key)
                 {
@@ -57,20 +53,19 @@ namespace Snake
                         break;
                 }
 
-                if (updateMaze[0, 0] == 5)
+                if (updateMaze[0, 0] == Elements.snakeDeath)
                 {
                     ExitGame = true;
                 }
                 System.Console.Clear();
                 Draw(updateMaze);
-                System.Threading.Thread.Sleep(1);
             }
             while (ExitGame == false);
 
             endGame();
         }
 
-        public static void Draw(int[,] DynamicMaze)
+        public static void Draw(Elements [,] DynamicMaze)
         {
             int rowLength = DynamicMaze.GetLength(0);
             int colLength = DynamicMaze.GetLength(1);
@@ -103,12 +98,12 @@ namespace Snake
 
         static void endGame()
         {
-            System.Console.WriteLine("Your final score is " + Score.getScore());
-            System.Console.WriteLine("The high score is " + Score.getHighScore());
-            System.Console.WriteLine("Enter r to replay.");
+            Console.WriteLine("Your final score is " + Score.getScore());
+            Console.WriteLine("The high score is " + Score.getHighScore());
+            Console.WriteLine("Enter r to replay. Any other key to quit.");
 
-            UserReplay = Console.ReadLine().ToString();
-            if (UserReplay.Equals("r", StringComparison.OrdinalIgnoreCase))
+            ConsoleKeyInfo keyInfo = keyListner.ReadKey(Int32.MaxValue);
+            if (keyInfo.KeyChar.ToString().Equals("r", StringComparison.OrdinalIgnoreCase)) 
             {
                 ExitGame = false;
                 Console.Clear();
@@ -124,14 +119,14 @@ namespace Snake
                 Style.menuImage();
                 try
                 {
-                    gameMode = Convert.ToInt32(Console.ReadLine());
+                    currentGameMode = (gameMode)Convert.ToInt32(Console.ReadLine());
                 }
                 catch
                 {
                     Console.WriteLine();
                 }
 
-                if (gameMode == 1)
+                if (currentGameMode == gameMode.basic)
                 {
                     gameSelected = true;
                 }
