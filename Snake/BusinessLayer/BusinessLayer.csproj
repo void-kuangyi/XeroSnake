@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AI.cs" />
+    <Compile Include="gameMode.cs" />
+    <Compile Include="SnakeAction.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Elements.cs" />
     <Compile Include="Engine.cs" />

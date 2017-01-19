@@ -9,16 +9,17 @@ namespace Snake
         private static KeyListner keyListner = new KeyListner();
 
         private static bool ExitGame = false;
-        static int gameMode;
+        private static BusinessLayer.gameMode currentGameMode;
         static bool gameSelected = false;
 
         static void Main(string[] args)
         {
             initialMenuLoad();
 
-            Engine gameEngine = new Engine(mode: gameMode);
-            int[,] Maze = gameEngine.initializeGame();
-            int[,] updateMaze = Maze;
+            currentGameMode = gameMode.basic;
+            Engine gameEngine = new Engine(currentGameMode);
+            Elements[,] Maze = gameEngine.initializeGame();
+            Elements[,] updateMaze = Maze;
 
             Draw(Maze);
 
@@ -50,7 +51,7 @@ namespace Snake
                         break;
                 }
 
-                if (updateMaze[0, 0] == 5)
+                if (updateMaze[0, 0] == Elements.snakeDeath)
                 {
                     ExitGame = true;
                 }
@@ -62,7 +63,7 @@ namespace Snake
             endGame();
         }
 
-        public static void Draw(int[,] DynamicMaze)
+        public static void Draw(Elements [,] DynamicMaze)
         {
             int rowLength = DynamicMaze.GetLength(0);
             int colLength = DynamicMaze.GetLength(1);
@@ -116,14 +117,14 @@ namespace Snake
                 Style.menuImage();
                 try
                 {
-                    gameMode = Convert.ToInt32(Console.ReadLine());
+                    currentGameMode = (gameMode)Convert.ToInt32(Console.ReadLine());
                 }
                 catch
                 {
                     Console.WriteLine();
                 }
 
-                if (gameMode == 1)
+                if (currentGameMode == gameMode.basic)
                 {
                     gameSelected = true;
                 }
