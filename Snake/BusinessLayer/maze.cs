@@ -19,7 +19,8 @@ namespace BusinessLayer
         {
             width = w;
             height = h;
-this.mazeMode = mazeMode;maze = new Elements[height, width];            randomNumber = new Random();
+            this.mazeMode = mazeMode;maze = new Elements[height, width];
+            randomNumber = new Random();
         }
 
         public Elements[,] CreateMaze()

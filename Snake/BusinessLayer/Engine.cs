@@ -19,6 +19,7 @@ namespace BusinessLayer
         private Elements [,] mazeArray { get; set; }
         private GameSound gameSound;
         private Maze gameMaze;
+        private int mazeMode;
 
         private GameSnake gameSnake1;
         // For future use, 2 player game mode
@@ -26,11 +27,12 @@ namespace BusinessLayer
         private Food food;
         private FoodGenerator foodGenerator;
         private gameMode currentGameMode;
-        public Engine(gameMode mode, int length = mazeRenderLength, int width = mazeRenderWidth)
+        public Engine(gameMode mode,int mazeMode, int length = mazeRenderLength, int width = mazeRenderWidth)
         {
             mazeLength = length;
             mazeWidth = width;
             currentGameMode = mode;
+            this.mazeMode = mazeMode;
             Score.resetScore();
             foodGenerator = new FoodGenerator();
         }
@@ -42,7 +44,7 @@ namespace BusinessLayer
             {
                 case gameMode.basic:
 
-                    gameMaze = new Maze(mazeWidth, mazeLength);
+                    gameMaze = new Maze(mazeWidth, mazeLength,mazeMode );
                     mazeArray = gameMaze.CreateMaze();
                     gameSound = new GameSound();
                     gameSnake1 = new GameSnake();
