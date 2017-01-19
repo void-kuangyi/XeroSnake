@@ -78,6 +78,14 @@ namespace Snake
                     row += style.StyleMazeElement(DynamicMaze[i, j]);
                        
                 }
+                if (row.Contains(" "))
+                {
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
                 Console.Write(row);
                 Console.Write(Environment.NewLine);
             }
