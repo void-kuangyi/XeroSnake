@@ -10,16 +10,15 @@ namespace BusinessLayer
         private Elements[,] maze;
         private Random randomNumber;
         private int mazeMode;
-        private enum mazeLevel { easy = 1, medium, hard};
-        
-
+        private enum mazeLevel { easy = 1, medium, hard };
 
 
         public Maze(int w, int h, int mazeMode)
         {
             width = w;
             height = h;
-            this.mazeMode = mazeMode;maze = new Elements[height, width];
+            this.mazeMode = mazeMode;
+            maze = new Elements[height, width];
             randomNumber = new Random();
         }
 
@@ -29,11 +28,11 @@ namespace BusinessLayer
 
             switch (mazeMode)
             {
-                case (int)mazeLevel.easy :
+                case (int)mazeLevel.easy:
                     if (randomNumber.Next(0, 1) < 0.5)
                     {
                         GenerateHorizonJungleMaze();
-                    } 
+                    }
                     else
                     {
                         GenerateVerticalJungleMaze();
@@ -112,8 +111,8 @@ namespace BusinessLayer
 
             for (int i = 0; i < height; i = i + gapBetweenTwoLine)
             {
-                GenerateLineObstacle(i, 0, width / 3,(int)direction.horizon);
-                GenerateLineObstacle(i, (width / 3) * 2, width / 3,(int)direction.horizon);
+                GenerateLineObstacle(i, 0, width / 3, (int)direction.horizon);
+                GenerateLineObstacle(i, (width / 3) * 2, width / 3, (int)direction.horizon);
 
             }
 
@@ -126,8 +125,8 @@ namespace BusinessLayer
             int gapBetweenTwoLine = randomNumber.Next(4, 7);
             for (int i = 0; i < width; i = i + gapBetweenTwoLine)
             {
-                GenerateLineObstacle(0, i, height / 3,(int)direction.vertical);
-                GenerateLineObstacle((height / 3) * 2, i, height / 3,(int)direction.vertical);
+                GenerateLineObstacle(0, i, height / 3, (int)direction.vertical);
+                GenerateLineObstacle((height / 3) * 2, i, height / 3, (int)direction.vertical);
 
             }
 
