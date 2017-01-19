@@ -11,19 +11,15 @@ namespace BusinessLayer
     {
         private const int snakeInitialLength = 4;
         private const int step = 1;
+
         private const int mazeRenderWidth = 70;
         private const int mazeRenderLength = 20;
-        private const int AINumber = 7;
         private int mazeLength { get; set; }
         private int mazeWidth { get; set; }
-        private int[,] mazeArray { get; set; }
+        private Elements[,] mazeArray { get; set; }
         private GameSound gameSound;
         private Maze gameMaze;
-
-        AI newAI = new AI();
-       
-
-       
+        AI newAI;
 
         private GameSnake gameSnake1;
         // For future use, 2 player game mode
@@ -31,11 +27,6 @@ namespace BusinessLayer
         private Food food;
         private FoodGenerator foodGenerator;
         private gameMode currentGameMode;
-
-      
-
-        gameMode currentMode = gameMode.basic;
-
         public Engine(gameMode mode, int length = mazeRenderLength, int width = mazeRenderWidth)
         {
             mazeLength = length;
@@ -43,53 +34,37 @@ namespace BusinessLayer
             currentGameMode = mode;
             Score.resetScore();
             foodGenerator = new FoodGenerator();
+            newAI = new AI();
         }
 
         public Elements[,] initializeGame()
         {
 
-            switch (currentMode)
+            switch (currentGameMode)
             {
                 case gameMode.basic:
 
-
-                    // Create a New Maze and initialize it
                     gameMaze = new Maze(mazeWidth, mazeLength);
                     mazeArray = gameMaze.CreateMaze();
                     gameSound = new GameSound();
-                    // Add the Snake
                     gameSnake1 = new GameSnake();
-                    //List<Point> snakeBody = new List<Point>();
+
                     List<Point> snakeCurrentBody = gameSnake1.createFirstSnake(mazeLength, mazeWidth, snakeInitialLength);
+                    AddSnakeToTheMaze(snakeCurrentBody);
 
-                    // Make the whole snake as body first
-                    foreach (Point value in snakeCurrentBody)
-                    {
-                        mazeArray[value.returnX(), value.returnY()] = (int)Elements.snakeBody;
-                    }
-                    // Identify snake head
-                    Point head = snakeCurrentBody[0];
-                    mazeArray[head.returnX(), head.returnY()] = (int)Elements.snakeHead;
-
-
+                   // mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.blank;
                     bool isAIValid = true;
                     do
                     {
-                        
+
                         newAI.SpawnAI(mazeWidth, mazeLength);
                         isAIValid = validateNewAILocation(newAI);
                     } while (!isAIValid);
-                    mazeArray[newAI.XCoordinate, newAI.YCoordinate] = AINumber;
-                    
+                    mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
 
-                    // Add the Food
-                    bool isValid = true;
-                    do
-                    {
-                        food = foodGenerator.generateFood(mazeLength, mazeWidth);
-                        isValid = validateNewFoodLocation(food);
-                    } while (!isValid);
-                    mazeArray[food.xLocation, food.yLocation] = Food;
+
+                    AddFoodToTheMaze();
+
                     break;
 
                 default:
@@ -99,7 +74,7 @@ namespace BusinessLayer
             return mazeArray;
         }
 
-        public int[,] updateGame(Direction snakeDirection)
+        public Elements[,] updateGame(Direction snakeDirection)
         {
             if (snakeDirection == Direction.Unchanged)
             {
@@ -112,54 +87,41 @@ namespace BusinessLayer
             switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
             {
 
-                case (int)Elements.mazeBody:
+                case Elements.mazeBody:
+                case Elements.AI:
                     gameSound.SnakeDiesSound();
                     if (Score.getScore() > Score.getHighScore())
                     {
                         gameSound.SnakeGetsHighScore();
                         Score.setHighScore(Score.getScore());
                     }
-                    mazeArray[0, 0] = snakeHitsMaze;
+                    mazeArray[0, 0] = Elements.snakeDeath;
                     return mazeArray;
 
 
-                case Food:  // snake hits the food
+                case Elements.foodBasic:
+                case Elements.foodAdvanced:
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, true);
-                    
+
                     gameSound.SnakeEatsSound();
-                    foreach (Point value in snakesNewLocation)
-                    {
-                        mazeArray[value.returnX(), value.returnY()] = snakeBody;
-                    }
-                    // Identify snake head
-                    Point head = snakesNewLocation[0];
-                    mazeArray[head.returnX(), head.returnY()] = snakeHead;
+                    AddSnakeToTheMaze(snakesNewLocation);
 
                     if ((newSnakeHead.returnX() == food.xLocation) && (newSnakeHead.returnY() == food.yLocation))
                     {
                         Score.incrementScore(food.pointsWorth);
-
                     }
 
                     food = null;
-                    bool isValid = true;
-                    do
-                    {
-                        food = foodGenerator.generateFood(mazeLength, mazeWidth);
-                        isValid = validateNewFoodLocation(food);
-                    } while (!isValid);
-
-                    mazeArray[food.xLocation, food.yLocation] = Food;
+                    AddFoodToTheMaze();
                     break;
 
                 default:   // snake moves
                     List<Point> SnakeCurrentPosition = gameSnake1.returnCurrentSnakePosition();
-                    mazeArray[SnakeCurrentPosition.Last().returnX(), SnakeCurrentPosition.Last().returnY()] = (int)Elements.blank;
-                    mazeArray[SnakeCurrentPosition.First().returnX(), SnakeCurrentPosition.First().returnY()] = (int)Elements.snakeBody;
+                    mazeArray[SnakeCurrentPosition.Last().returnX(), SnakeCurrentPosition.Last().returnY()] = Elements.blank;
+                    mazeArray[SnakeCurrentPosition.First().returnX(), SnakeCurrentPosition.First().returnY()] = Elements.snakeBody;
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, false);
-                    mazeArray[snakesNewLocation.First().returnX(), snakesNewLocation.First().returnY()] = (int)Elements.snakeHead;
+                    mazeArray[snakesNewLocation.First().returnX(), snakesNewLocation.First().returnY()] = Elements.snakeHead;
 
-                    mazeArray[food.xLocation, food.yLocation] = Food;
 
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = 0;
 
@@ -173,10 +135,41 @@ namespace BusinessLayer
                         newAI.MoveAI();
                         isAIValid = validateNewAILocation(newAI);
                     } while (!isAIValid);
-                    mazeArray[newAI.XCoordinate, newAI.YCoordinate] = AINumber;
+                    mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
+
                     break;
             }
             return mazeArray;
+        }
+
+        private void AddFoodToTheMaze()
+        {
+            bool isValid = true;
+            do
+            {
+                food = foodGenerator.generateFood(mazeLength, mazeWidth);
+                isValid = validateNewFoodLocation(food);
+            } while (!isValid);
+            if (food is BasicFood)
+            {
+                mazeArray[food.xLocation, food.yLocation] = Elements.foodBasic;
+            }
+            else
+            {
+                mazeArray[food.xLocation, food.yLocation] = Elements.foodAdvanced;
+            }
+
+        }
+
+        private void AddSnakeToTheMaze(List<Point> snakesNewLocation)
+        {
+            foreach (Point value in snakesNewLocation)
+            {
+                mazeArray[value.returnX(), value.returnY()] = Elements.snakeBody;
+            }
+            // Identify snake head
+            Point head = snakesNewLocation[0];
+            mazeArray[head.returnX(), head.returnY()] = Elements.snakeHead;
         }
 
         private Point getNewHead(Direction snakeDirection)
@@ -219,31 +212,30 @@ namespace BusinessLayer
             int x = newFood.xLocation;
             int y = newFood.yLocation;
 
-            if ((x > mazeLength) || (y > mazeWidth))
+            if ((x >= mazeLength) || (y >= mazeWidth))
             {
                 return false;
             }
-            if (mazeArray[x, y] == (int)Elements.mazeBody)
+            if (mazeArray[x, y] == Elements.mazeBody)
             {
                 return false;
             }
-            if (mazeArray[x, y] == (int)Elements.snakeBody)
+            if (mazeArray[x, y] == Elements.snakeBody)
             {
                 return false;
             }
-            if (mazeArray[x, y] == (int)Elements.snakeHead)
+            if (mazeArray[x, y] == Elements.snakeHead)
             {
                 return false;
             }
             return true;
         }
-
         public bool validateNewAILocation(AI newAI)
         {
             int x = newAI.XCoordinate;
             int y = newAI.YCoordinate;
 
-            if ((x > mazeLength) || (y > mazeWidth))
+            if ((x >= mazeLength) || (y >= mazeWidth))
             {
                 return false;
             }
@@ -251,12 +243,16 @@ namespace BusinessLayer
             {
                 return false;
             }
-            if (mazeArray[x, y] == (int)Elements.mazeBody)
+
+            if (mazeArray[x, y] == Elements.mazeBody)
+            {
+                return false;
+            }
+            if (mazeArray[x, y] == Elements.foodBasic || mazeArray[x, y] == Elements.foodAdvanced)
             {
                 return false;
             }
             return true;
         }
     }
-
 }
