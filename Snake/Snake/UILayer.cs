@@ -63,7 +63,7 @@ namespace Snake
             endGame();
         }
 
-        public static void Draw(Elements [,] DynamicMaze)
+        public static void Draw(Elements[,] DynamicMaze)
         {
             int rowLength = DynamicMaze.GetLength(0);
             int colLength = DynamicMaze.GetLength(1);
@@ -74,7 +74,7 @@ namespace Snake
                 for (int j = 0; j < colLength; j++)
                 {
                     row += style.StyleMazeElement(DynamicMaze[i, j]);
-                       
+
                 }
                 if (row.Contains(" "))
                 {
@@ -98,22 +98,27 @@ namespace Snake
         {
             Console.WriteLine("Your final score is " + Score.getScore());
             Console.WriteLine("The high score is " + Score.getHighScore());
-            Console.WriteLine("Enter r to replay. Any other key to quit.");
+            Console.WriteLine("Enter r to replay. q key to quit.");
 
             ConsoleKeyInfo keyInfo = keyListner.ReadKey(Int32.MaxValue);
-            if (keyInfo.KeyChar.ToString().Equals("r", StringComparison.OrdinalIgnoreCase)) 
+            if (keyInfo.KeyChar.ToString().Equals("r", StringComparison.OrdinalIgnoreCase))
             {
                 ExitGame = false;
                 Console.Clear();
                 Main(null);
             }
+            else if (keyInfo.KeyChar.ToString().Equals("q", StringComparison.OrdinalIgnoreCase))
+            {
+                Environment.Exit(0);
+            }
+            endGame();
         }
 
         static void initialMenuLoad()
         {
             do
             {
-                
+
                 Style.menuImage();
                 try
                 {

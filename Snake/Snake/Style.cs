@@ -46,6 +46,8 @@ namespace Snake
                     return "ô";
                 case Elements.snakeDeath:
                     return "G";
+                case Elements.AI:
+                    return "E";
 
                 default:
                     throw new System.Exception("Invalid Game Element Processed!");
