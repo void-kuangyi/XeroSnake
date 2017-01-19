@@ -1,5 +1,6 @@
 ﻿using System;
 using BusinessLayer;
+using System.Collections.Generic;
 
 namespace Snake
 {
@@ -12,12 +13,16 @@ namespace Snake
         static int gameMode;
         static bool gameSelected = false;
 
+        enum mazeLevel{ easy = 1, medium, hard}
+
         static void Main(string[] args)
         {
             initialMenuLoad();
 
+            int mazeMode = ChooseMazeMode();
+
             // Game engine = new game engine
-            Engine gameEngine = new Engine(mode: gameMode);
+            Engine gameEngine = new Engine(gameMode,mazeMode);
             int[,] Maze = gameEngine.initializeGame();
             int[,] updateMaze = Maze;
 
@@ -28,7 +33,7 @@ namespace Snake
                 int score = Score.getScore();
                 drawScore(score);
 
-                KeyListner keyListner = new KeyListner(); 
+                KeyListner keyListner = new KeyListner();
                 ConsoleKeyInfo keyInfo = keyListner.ReadKey(GameStepMilliseconds);
                 switch (keyInfo.Key)
                 {
@@ -76,7 +81,7 @@ namespace Snake
                 for (int j = 0; j < colLength; j++)
                 {
                     row += style.StyleMazeElement(DynamicMaze[i, j]);
-                       
+
                 }
                 if (row.Contains(" "))
                 {
@@ -103,7 +108,7 @@ namespace Snake
             System.Console.WriteLine("Enter r to replay.");
 
             UserReplay = Console.ReadLine().ToString();
-            if (UserReplay.Equals("r", StringComparison.OrdinalIgnoreCase)) 
+            if (UserReplay.Equals("r", StringComparison.OrdinalIgnoreCase))
             {
                 ExitGame = false;
                 Console.Clear();
@@ -115,7 +120,7 @@ namespace Snake
         {
             do
             {
-                
+
                 Style.menuImage();
                 try
                 {
@@ -130,9 +135,37 @@ namespace Snake
                 {
                     gameSelected = true;
                 }
-                Console.Clear();
             }
             while (gameSelected == false);
+        }
+
+
+
+
+        public static int ChooseMazeMode()
+        {
+            int mazeMode;
+            int inputValue;
+
+            Console.WriteLine("1. Easy Mode : Line Maze");
+            Console.WriteLine("2. Medium Mode : Cross Maze");
+            Console.WriteLine("3. Hard Mode : Grid Maze");
+
+
+
+            do
+            {
+                Console.Write("Please enter 1,2 or 3 : ");
+            }
+            while (!(int.TryParse(Console.ReadLine(), out inputValue)) || ! (Enum.IsDefined(typeof(mazeLevel),inputValue)));
+
+
+            mazeMode = inputValue;
+
+
+            Console.Clear();
+            return mazeMode;
+
         }
     }
 }

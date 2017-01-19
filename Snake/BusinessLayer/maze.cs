@@ -11,13 +11,17 @@ namespace BusinessLayer
         private int width, height;
         private int[,] maze;
         private Random randomNumber;
+        private int mazeMode;
+        private enum mazeLevel { easy = 1, medium, hard};
+        
 
 
 
-        public Maze(int w, int h)
+        public Maze(int w, int h, int mazeMode)
         {
             width = w;
             height = h;
+            this.mazeMode = mazeMode;
             maze = new int[height, width];
             randomNumber = new Random();
         }
@@ -26,24 +30,25 @@ namespace BusinessLayer
         {
             GenerateBorder();
 
-            int mazeMode = randomNumber.Next(1, 5);
-
             switch (mazeMode)
             {
-                case 1:
-                    GenerateGridMaze();
+                case (int)mazeLevel.easy :
+                    if (randomNumber.Next(0, 1) < 0.5)
+                    {
+                        GenerateHorizonJungleMaze();
+                    } 
+                    else
+                    {
+                        GenerateVerticalJungleMaze();
+                    }
                     break;
 
-                case 2:
+                case (int)mazeLevel.medium:
                     GenerateCrossMaze();
                     break;
 
-                case 3:
-                    GenerateVerticalJungleMaze();
-                    break;
-
-                case 4:
-                    GenerateHorizonJungleMaze();
+                case (int)mazeLevel.hard:
+                    GenerateGridMaze();
                     break;
 
                 default:
