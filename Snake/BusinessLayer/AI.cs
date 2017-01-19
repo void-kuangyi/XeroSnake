@@ -29,7 +29,8 @@ namespace BusinessLayer
             get
             {
                 return Y;
-            } set
+            }
+            set
             {
                 Y = value;
             }
@@ -47,43 +48,32 @@ namespace BusinessLayer
             {
                 return false;
             }
+
             this.X = randomNumber.Next(XBorder - 1);
             this.Y = randomNumber.Next(YBorder - 1);
-           // currentDirection = Direction.Right;
 
             return true;
         }
-
-
 
         public void MoveAI()
         {
 
             bool Opposite = true;
-            int rnd = 0;
-            while (Opposite != false)
+            Direction newDirection = Direction.Right;
+
+            while (Opposite)
             {
-               // Console.Write("I AM HERE");
-                rnd = randomNumber.Next(0,4);
-                if (rnd == 0 && currentDirection == Direction.Left)
+                newDirection = (Direction)randomNumber.Next(0,4);
+
+                if (newDirection == Direction.Right && currentDirection == Direction.Left ||
+                    newDirection == Direction.Left && currentDirection == Direction.Right ||
+                    newDirection == Direction.Up && currentDirection == Direction.Down ||
+                    newDirection == Direction.Down && currentDirection == Direction.Up
+                    )
                 {
                     Opposite = true;
                     break;
-                } else if (rnd == 1 && currentDirection == Direction.Right)
-                {
-                    Opposite = true;
-                    break;
-                }
-                else if (rnd == 2 && currentDirection == Direction.Down)
-                {
-                    Opposite = true;
-                    break;
-                }
-                else if (rnd == 3 && currentDirection == Direction.Up)
-                {
-                    Opposite = true;
-                    break;
-                }
+                } 
                 else
                 {
                     Opposite = false;
@@ -92,25 +82,23 @@ namespace BusinessLayer
             }
            
 
-            switch (rnd)
+            switch (newDirection)
             {
-                case (int)Direction.Right:
+                case Direction.Right:
                     Y = Y + 1;
-                    currentDirection = Direction.Right;
                     break;
-                case (int)Direction.Left:
+                case Direction.Left:
                     Y = Y - 1;
-                    currentDirection = Direction.Left;
                     break;
-                case (int)Direction.Up:
+                case Direction.Up:
                     X = X - 1;
-                    currentDirection = Direction.Up;
                     break;
-                case (int)Direction.Down:
+                case Direction.Down:
                     X = X + 1;
-                    currentDirection = Direction.Down;
                     break;
             }
+
+            currentDirection = newDirection;
         }
     }
 }
