@@ -59,6 +59,8 @@ namespace Snake
 
                 case 5:
                     return "Game Over";
+                case 7:
+                    return "E";
 
                 default:
                     throw new System.Exception("Invalid Game Element Processed!");
