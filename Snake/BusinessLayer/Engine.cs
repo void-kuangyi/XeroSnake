@@ -41,12 +41,12 @@ namespace BusinessLayer
             switch (currentGameMode)
             {
                 case gameMode.basic:
-
+                    
                     gameMaze = new Maze(mazeWidth, mazeLength);
                     mazeArray = gameMaze.CreateMaze();
                     gameSound = new GameSound();
                     gameSnake1 = new GameSnake();
-
+                    gameSound.SoundWhilePlaying();
                     List<Point> snakeCurrentBody = gameSnake1.createFirstSnake(mazeLength, mazeWidth, snakeInitialLength);
                     AddSnakeToTheMaze(snakeCurrentBody);
                     AddFoodToTheMaze();
@@ -88,6 +88,7 @@ namespace BusinessLayer
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, true);
                     
                     gameSound.SnakeEatsSound();
+                    gameSound.SoundWhilePlaying();
                     AddSnakeToTheMaze(snakesNewLocation);
 
                     if ((newSnakeHead.returnX() == food.xLocation) && (newSnakeHead.returnY() == food.yLocation))
