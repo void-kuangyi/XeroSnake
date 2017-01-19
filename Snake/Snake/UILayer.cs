@@ -9,19 +9,23 @@ namespace Snake
 
         private static bool ExitGame = false;
         private static string UserReplay;
+        static int gameMode;
+        static bool gameSelected = false;
 
         static void Main(string[] args)
         {
-            int score;
-            Engine gameEngine = new Engine(20, 70, 1);
+            initialMenuLoad();
+
+            // Game engine = new game engine
+            Engine gameEngine = new Engine(mode: gameMode);
             Elements[,] Maze = gameEngine.initializeGame();
-            Elements[,] UpdateMaze = Maze;
+            Elements[,] updateMaze = Maze;
 
             Draw(Maze);
 
             do
             {
-                score = Score.getScore();
+                int score = Score.getScore();
                 drawScore(score);
 
                 KeyListner keyListner = new KeyListner(); 
@@ -29,31 +33,31 @@ namespace Snake
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        UpdateMaze = gameEngine.updateGame(Direction.Up);
+                        updateMaze = gameEngine.updateGame(Direction.Up);
                         break;
                     case ConsoleKey.DownArrow:
-                        UpdateMaze = gameEngine.updateGame(Direction.Down);
+                        updateMaze = gameEngine.updateGame(Direction.Down);
                         break;
                     case ConsoleKey.RightArrow:
-                        UpdateMaze = gameEngine.updateGame(Direction.Right);
+                        updateMaze = gameEngine.updateGame(Direction.Right);
                         break;
                     case ConsoleKey.LeftArrow:
-                        UpdateMaze = gameEngine.updateGame(Direction.Left);
+                        updateMaze = gameEngine.updateGame(Direction.Left);
                         break;
                     case ConsoleKey.Q:
                         ExitGame = true;
                         break;
                     default:
-                        UpdateMaze = gameEngine.updateGame(Direction.Unchanged);
+                        updateMaze = gameEngine.updateGame(Direction.Unchanged);
                         break;
                 }
 
-                if (UpdateMaze[0, 0] == Elements.snakeDeath)
+                if (updateMaze[0, 0] == Elements.snakeDeath)
                 {
                     ExitGame = true;
                 }
                 System.Console.Clear();
-                Draw(UpdateMaze);
+                Draw(updateMaze);
                 System.Threading.Thread.Sleep(1);
             }
             while (ExitGame == false);
@@ -99,12 +103,36 @@ namespace Snake
             System.Console.WriteLine("Enter r to replay.");
 
             UserReplay = Console.ReadLine().ToString();
-            if (UserReplay == "R" || UserReplay == "r")
+            if (UserReplay.Equals("r", StringComparison.OrdinalIgnoreCase)) 
             {
                 ExitGame = false;
                 Console.Clear();
                 Main(null);
             }
+        }
+
+        static void initialMenuLoad()
+        {
+            do
+            {
+                
+                Style.menuImage();
+                try
+                {
+                    gameMode = Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine();
+                }
+
+                if (gameMode == 1)
+                {
+                    gameSelected = true;
+                }
+                Console.Clear();
+            }
+            while (gameSelected == false);
         }
     }
 }

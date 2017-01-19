@@ -12,6 +12,8 @@ namespace BusinessLayer
         private const int snakeInitialLength = 4;
         private const int step = 1;
 
+        private const int mazeRenderWidth = 70;
+        private const int mazeRenderLength = 20;
         private int mazeLength { get; set; }
         private int mazeWidth { get; set; }
         private Elements [,] mazeArray { get; set; }
@@ -26,7 +28,7 @@ namespace BusinessLayer
 
         gameMode currentMode = gameMode.basic;
 
-        public Engine(int length, int width, int mode)
+        public Engine(int length = mazeRenderLength, int width = mazeRenderWidth, int mode = 1)
         {
             mazeLength = length;
             mazeWidth = width;
