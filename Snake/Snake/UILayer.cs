@@ -6,9 +6,9 @@ namespace Snake
     class Program
     {
         private const int GameStepMilliseconds = 100;
+        private static KeyListner keyListner = new KeyListner();
 
         private static bool ExitGame = false;
-        private static string UserReplay;
         static int gameMode;
         static bool gameSelected = false;
 
@@ -16,7 +16,6 @@ namespace Snake
         {
             initialMenuLoad();
 
-            // Game engine = new game engine
             Engine gameEngine = new Engine(mode: gameMode);
             int[,] Maze = gameEngine.initializeGame();
             int[,] updateMaze = Maze;
@@ -28,7 +27,6 @@ namespace Snake
                 int score = Score.getScore();
                 drawScore(score);
 
-                KeyListner keyListner = new KeyListner(); 
                 ConsoleKeyInfo keyInfo = keyListner.ReadKey(GameStepMilliseconds);
                 switch (keyInfo.Key)
                 {
@@ -58,7 +56,6 @@ namespace Snake
                 }
                 System.Console.Clear();
                 Draw(updateMaze);
-                System.Threading.Thread.Sleep(1);
             }
             while (ExitGame == false);
 
@@ -98,12 +95,12 @@ namespace Snake
 
         static void endGame()
         {
-            System.Console.WriteLine("Your final score is " + Score.getScore());
-            System.Console.WriteLine("The high score is " + Score.getHighScore());
-            System.Console.WriteLine("Enter r to replay.");
+            Console.WriteLine("Your final score is " + Score.getScore());
+            Console.WriteLine("The high score is " + Score.getHighScore());
+            Console.WriteLine("Enter r to replay. Any other key to quit.");
 
-            UserReplay = Console.ReadLine().ToString();
-            if (UserReplay.Equals("r", StringComparison.OrdinalIgnoreCase)) 
+            ConsoleKeyInfo keyInfo = keyListner.ReadKey(Int32.MaxValue);
+            if (keyInfo.KeyChar.ToString().Equals("r", StringComparison.OrdinalIgnoreCase)) 
             {
                 ExitGame = false;
                 Console.Clear();
