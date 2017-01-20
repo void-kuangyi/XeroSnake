@@ -14,12 +14,18 @@ namespace BusinessLayer
         SoundPlayer soundOfDeath;
         SoundPlayer soundOfEatingFood;
         SoundPlayer soundOfGettingHighScore;
-       
+        SoundPlayer soundWhilePlaying;
+
         public GameSound()
         {
             soundOfDeath = new SoundPlayer(Properties.Resources.die);
             soundOfEatingFood = new SoundPlayer(Properties.Resources.eatFood); ;
-            soundOfGettingHighScore = new SoundPlayer(Properties.Resources.highScore); ;
+            soundOfGettingHighScore = new SoundPlayer(Properties.Resources.highScore);
+            soundWhilePlaying = new SoundPlayer(Properties.Resources.gameAudio);
+        }
+        public void SoundWhilePlaying()
+        {
+            soundWhilePlaying.PlayLooping();
         }
 
         public void SnakeEatsSound()

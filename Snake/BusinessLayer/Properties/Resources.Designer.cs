@@ -81,6 +81,15 @@ namespace BusinessLayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream gameAudio {
+            get {
+                return ResourceManager.GetStream("gameAudio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream highScore {
             get {
                 return ResourceManager.GetStream("highScore", resourceCulture);
