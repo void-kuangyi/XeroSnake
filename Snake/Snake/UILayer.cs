@@ -15,55 +15,59 @@ namespace Snake
 
         static void Main(string[] args)
         {
-             initialMenuLoad();
+            initialMenuLoad();
 
-             currentGameMode = gameMode.basic;
+            currentGameMode = gameMode.basic;
 
-             int mazeMode = ChooseMazeMode();
+            int mazeMode = ChooseMazeMode();
 
-             Engine gameEngine = new Engine(gameMode.basic,mazeMode);
-             Elements[,] Maze = gameEngine.initializeGame();Elements[,] updateMaze = Maze;
-
-            Draw(Maze);
-
-            do
+            using (Engine gameEngine = new Engine(gameMode.basic, mazeMode))
             {
-                int score = Score.getScore();
-                drawScore(score);
+                Elements[,] Maze = gameEngine.initializeGame();
 
-                ConsoleKeyInfo keyInfo = keyListner.ReadKey(GameStepMilliseconds);
-                switch (keyInfo.Key)
+                Elements[,] updateMaze = Maze;
+
+                Draw(Maze);
+
+                do
                 {
-                    case ConsoleKey.UpArrow:
-                        updateMaze = gameEngine.updateGame(Direction.Up);
-                        break;
-                    case ConsoleKey.DownArrow:
-                        updateMaze = gameEngine.updateGame(Direction.Down);
-                        break;
-                    case ConsoleKey.RightArrow:
-                        updateMaze = gameEngine.updateGame(Direction.Right);
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        updateMaze = gameEngine.updateGame(Direction.Left);
-                        break;
-                    case ConsoleKey.Q:
+                    int score = Score.getScore();
+                    drawScore(score);
+
+                    ConsoleKeyInfo keyInfo = keyListner.ReadKey(GameStepMilliseconds);
+                    switch (keyInfo.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            updateMaze = gameEngine.updateGame(Direction.Up);
+                            break;
+                        case ConsoleKey.DownArrow:
+                            updateMaze = gameEngine.updateGame(Direction.Down);
+                            break;
+                        case ConsoleKey.RightArrow:
+                            updateMaze = gameEngine.updateGame(Direction.Right);
+                            break;
+                        case ConsoleKey.LeftArrow:
+                            updateMaze = gameEngine.updateGame(Direction.Left);
+                            break;
+                        case ConsoleKey.Q:
+                            ExitGame = true;
+                            break;
+                        default:
+                            updateMaze = gameEngine.updateGame(Direction.Unchanged);
+                            break;
+                    }
+
+                    if (updateMaze[0, 0] == Elements.snakeDeath)
+                    {
                         ExitGame = true;
-                        break;
-                    default:
-                        updateMaze = gameEngine.updateGame(Direction.Unchanged);
-                        break;
+                    }
+                    System.Console.Clear();
+                    Draw(updateMaze);
                 }
+                while (ExitGame == false);
 
-                if (updateMaze[0, 0] == Elements.snakeDeath)
-                {
-                    ExitGame = true;
-                }
-                System.Console.Clear();
-                Draw(updateMaze);
+                endGame();
             }
-            while (ExitGame == false);
-
-            endGame();
         }
 
         public static void Draw(Elements[,] DynamicMaze)

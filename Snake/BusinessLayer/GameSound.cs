@@ -28,6 +28,11 @@ namespace BusinessLayer
             soundWhilePlaying.PlayLooping();
         }
 
+        public void StopPlayingSound()
+        {
+            soundWhilePlaying.Stop();
+        }
+
         public void SnakeEatsSound()
         {
             soundOfEatingFood.Play();
