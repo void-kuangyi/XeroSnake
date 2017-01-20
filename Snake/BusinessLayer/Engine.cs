@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class Engine
+    public class Engine : IDisposable
     {
         private const int snakeInitialLength = 4;
         private const int step = 1;
@@ -29,12 +29,12 @@ namespace BusinessLayer
         private FoodGenerator foodGenerator;
         private gameMode currentGameMode;
 
-        public Engine(gameMode mode , GameSound Sound, int mazeMode, int length = mazeRenderLength, int width = mazeRenderWidth)
+        public Engine(gameMode mode , int mazeMode, int length = mazeRenderLength, int width = mazeRenderWidth)
         {
             mazeLength = length;
             mazeWidth = width;
             currentGameMode = mode;
-            gameSound = Sound;
+            gameSound = new GameSound();
             this.mazeMode = mazeMode;
 
             Score.resetScore();
@@ -44,7 +44,7 @@ namespace BusinessLayer
 
         public Elements[,] initializeGame()
         {
-
+            gameSound.SoundWhilePlaying();
             switch (currentGameMode)
             {
                 case gameMode.basic:
@@ -256,6 +256,14 @@ namespace BusinessLayer
                 return false;
             }
             return true;
+        }
+
+        public void Dispose()
+        {
+            if(gameSound != null)
+            {
+                gameSound.StopPlayingSound();
+            }
         }
     }
 }
