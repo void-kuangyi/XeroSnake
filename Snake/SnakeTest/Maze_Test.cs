@@ -11,8 +11,9 @@ namespace SnakeTest
         {
             const int width = 10;
             const int height = 10;
-            BusinessLayer.Maze maze = new BusinessLayer.Maze(width, height
-                ,1);
+
+            BusinessLayer.Maze maze = new BusinessLayer.Maze(width, height, 1);
+
             Elements[,] newMaze = maze.CreateMaze();
 
             Assert.IsInstanceOfType(newMaze, typeof(int[,]), "this is an instance of type int 2D array");

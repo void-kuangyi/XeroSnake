@@ -21,11 +21,12 @@ namespace SnakeTest
             const int width = 20;
             const int height = 40;
             Elements[,] expectedResult = createMaze(width, height);
-
-            BusinessLayer.Engine engine = new BusinessLayer.Engine(gameMode.basic, width, height);
+            GameSound gameSound = new GameSound();
+            BusinessLayer.Engine engine = new BusinessLayer.Engine(gameMode.basic, gameSound, width, height);
             Elements[,] resultingMaze = engine.initializeGame();
 
             bool result = validateMazeBorder(resultingMaze, expectedResult, width, height);
+
             Assert.IsTrue(result, "Valid maze generated");
         }
 

@@ -29,12 +29,12 @@ namespace BusinessLayer
         private FoodGenerator foodGenerator;
         private gameMode currentGameMode;
 
-        public Engine(gameMode mode,int mazeMode, int length = mazeRenderLength, int width = mazeRenderWidth)
+        public Engine(gameMode mode , GameSound Sound, int mazeMode, int length = mazeRenderLength, int width = mazeRenderWidth)
         {
             mazeLength = length;
             mazeWidth = width;
             currentGameMode = mode;
-
+            gameSound = Sound;
             this.mazeMode = mazeMode;
 
             Score.resetScore();
@@ -50,11 +50,8 @@ namespace BusinessLayer
                 case gameMode.basic:
                     gameMaze = new Maze(mazeWidth, mazeLength,mazeMode );
                     mazeArray = gameMaze.CreateMaze();
-                    gameSound = new GameSound();
                     gameSnake1 = new GameSnake();
-                    gameSound.SoundWhilePlaying();
-
-
+                    
                     List<Point> snakeCurrentBody = gameSnake1.createFirstSnake(mazeLength, mazeWidth, snakeInitialLength);
                     AddSnakeToTheMaze(snakeCurrentBody);
 
