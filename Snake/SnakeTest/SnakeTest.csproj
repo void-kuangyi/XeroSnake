@@ -52,6 +52,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AI_Test.cs" />
     <Compile Include="Database_Test.cs" />
     <Compile Include="GameSnake_Test.cs" />
     <Compile Include="Engine_Test.cs" />
