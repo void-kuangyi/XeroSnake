@@ -1,5 +1,6 @@
 ﻿using System;
 using BusinessLayer;
+using System.Collections.Generic;
 
 namespace Snake
 {
@@ -16,10 +17,11 @@ namespace Snake
         {
             initialMenuLoad();
 
-            currentGameMode = gameMode.basic;
-            Engine gameEngine = new Engine(currentGameMode);
-            Elements[,] Maze = gameEngine.initializeGame();
-            Elements[,] updateMaze = Maze;
+             currentGameMode = gameMode.basic;
+             int mazeMode = ChooseMazeMode();
+
+             Engine gameEngine = new Engine(gameMode.basic,mazeMode);
+             Elements[,] Maze = gameEngine.initializeGame();Elements[,] updateMaze = Maze;
 
             Draw(Maze);
 
@@ -133,9 +135,33 @@ namespace Snake
                 {
                     gameSelected = true;
                 }
-                Console.Clear();
             }
             while (gameSelected == false);
+        }
+
+
+
+
+        public static int ChooseMazeMode()
+        {
+            MazeLevel mazeMode;
+
+            Console.WriteLine("1. Easy Mode : Line Maze");
+            Console.WriteLine("2. Medium Mode : Cross Maze");
+            Console.WriteLine("3. Hard Mode : Grid Maze");
+
+
+
+            do
+            {
+                Console.Write("Please enter 1,2 or 3 : ");
+            }
+            while (!Enum.TryParse(Console.ReadLine(), out mazeMode) || !Enum.IsDefined(typeof(MazeLevel),mazeMode));
+
+
+            Console.Clear();
+            return (int)mazeMode;
+
         }
     }
 }

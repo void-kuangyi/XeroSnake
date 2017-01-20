@@ -9,13 +9,14 @@ namespace BusinessLayer
         private int width, height;
         private Elements[,] maze;
         private Random randomNumber;
+        private int mazeMode;
 
 
-
-        public Maze(int w, int h)
+        public Maze(int w, int h, int mazeMode)
         {
             width = w;
             height = h;
+            this.mazeMode = mazeMode;
             maze = new Elements[height, width];
             randomNumber = new Random();
         }
@@ -24,24 +25,25 @@ namespace BusinessLayer
         {
             GenerateBorder();
 
-            int mazeMode = randomNumber.Next(1, 5);
-
             switch (mazeMode)
             {
-                case 1:
-                    GenerateGridMaze();
+                case (int)MazeLevel.Easy:
+                    if (randomNumber.Next(0, 1) < 0.5)
+                    {
+                        GenerateHorizonJungleMaze();
+                    }
+                    else
+                    {
+                        GenerateVerticalJungleMaze();
+                    }
                     break;
 
-                case 2:
+                case (int)MazeLevel.Medium:
                     GenerateCrossMaze();
                     break;
 
-                case 3:
-                    GenerateVerticalJungleMaze();
-                    break;
-
-                case 4:
-                    GenerateHorizonJungleMaze();
+                case (int)MazeLevel.Hard:
+                    GenerateGridMaze();
                     break;
 
                 default:
@@ -108,8 +110,8 @@ namespace BusinessLayer
 
             for (int i = 0; i < height; i = i + gapBetweenTwoLine)
             {
-                GenerateLineObstacle(i, 0, width / 3,(int)direction.horizon);
-                GenerateLineObstacle(i, (width / 3) * 2, width / 3,(int)direction.horizon);
+                GenerateLineObstacle(i, 0, width / 3, (int)direction.horizon);
+                GenerateLineObstacle(i, (width / 3) * 2, width / 3, (int)direction.horizon);
 
             }
 
@@ -122,8 +124,8 @@ namespace BusinessLayer
             int gapBetweenTwoLine = randomNumber.Next(4, 7);
             for (int i = 0; i < width; i = i + gapBetweenTwoLine)
             {
-                GenerateLineObstacle(0, i, height / 3,(int)direction.vertical);
-                GenerateLineObstacle((height / 3) * 2, i, height / 3,(int)direction.vertical);
+                GenerateLineObstacle(0, i, height / 3, (int)direction.vertical);
+                GenerateLineObstacle((height / 3) * 2, i, height / 3, (int)direction.vertical);
 
             }
 
@@ -133,9 +135,9 @@ namespace BusinessLayer
 
         public void GenerateCrossMaze()
         {
-            for (int i = 1; i < height - 1; i = i + height / 5)
+            for (int i = 4; i < height - 1; i = i + height / 5)
             {
-                for (int j = 1; j < width - 1; j = j + width / 5)
+                for (int j = 4; j < width - 1; j = j + width / 5)
                 {
                     GenerateCrossObstacle(i, j);
 
