@@ -15,14 +15,17 @@ namespace Snake
 
         static void Main(string[] args)
         {
-             initialMenuLoad();
+            initialMenuLoad();
 
-             currentGameMode = gameMode.basic;
+            currentGameMode = gameMode.basic;
 
-             int mazeMode = ChooseMazeMode();
+            int mazeMode = ChooseMazeMode();
+            GameSound gameSound = new GameSound();
+            Engine gameEngine = new Engine(gameMode.basic, gameSound,mazeMode);
 
-             Engine gameEngine = new Engine(gameMode.basic,mazeMode);
-             Elements[,] Maze = gameEngine.initializeGame();Elements[,] updateMaze = Maze;
+            Elements[,] Maze = gameEngine.initializeGame();
+            gameSound.SoundWhilePlaying();
+            Elements[,] updateMaze = Maze;
 
             Draw(Maze);
 
