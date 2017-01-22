@@ -87,9 +87,12 @@ namespace BusinessLayer
             Point newSnakeHead = getNewHead(snakeDirection);
             List<Point> snakesNewLocation;
 
+           
+
+
             switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
             {
-
+                case Elements.snakeBody:
                 case Elements.mazeBody:
                 case Elements.AI:
                     gameSound.SnakeDiesSound();
