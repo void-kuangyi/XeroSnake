@@ -28,7 +28,7 @@ namespace BusinessLayer
             switch (mazeMode)
             {
                 case (int)MazeLevel.Easy:
-                    if (randomNumber.Next(0, 1) < 0.5)
+                    if (randomNumber.NextDouble() < 0.5)
                     {
                         GenerateHorizonJungleMaze();
                     }
@@ -88,12 +88,12 @@ namespace BusinessLayer
 
         public void GenerateGridMaze()
         {
-            const int gapBetweenTwoRectangle = 4;
-            const int rectangleWidth = 2;
-            const int rectangleHeight = 2;
-            for (int i = 0; i < height - 2; i = i + gapBetweenTwoRectangle)
+            const int gapBetweenTwoRectangle = 5;
+            const int rectangleWidth = 1;
+            const int rectangleHeight = 1;
+            for (int i = 1; i < height - 1; i = i + gapBetweenTwoRectangle)
             {
-                for (int j = 0; j < width - 2; j = j + gapBetweenTwoRectangle)
+                for (int j = 0; j < width - 1; j = j + gapBetweenTwoRectangle)
                 {
 
                     GenerateRectangleObstacle(i, j, rectangleWidth, rectangleHeight);
@@ -106,7 +106,7 @@ namespace BusinessLayer
 
         public void GenerateHorizonJungleMaze()
         {
-            int gapBetweenTwoLine = randomNumber.Next(2, 5);
+            int gapBetweenTwoLine = 5;
 
             for (int i = 0; i < height; i = i + gapBetweenTwoLine)
             {
@@ -121,11 +121,11 @@ namespace BusinessLayer
 
         public void GenerateVerticalJungleMaze()
         {
-            int gapBetweenTwoLine = randomNumber.Next(4, 7);
+            int gapBetweenTwoLine = 7;
             for (int i = 0; i < width; i = i + gapBetweenTwoLine)
             {
                 GenerateLineObstacle(0, i, height / 3, (int)direction.vertical);
-                GenerateLineObstacle((height / 3) * 2, i, height / 3, (int)direction.vertical);
+                GenerateLineObstacle((height / 3) * 2 + 1, i, height / 3, (int)direction.vertical);
 
             }
 
@@ -135,9 +135,10 @@ namespace BusinessLayer
 
         public void GenerateCrossMaze()
         {
-            for (int i = 4; i < height - 1; i = i + height / 5)
+            int gapBetweenTwoCross = 7;
+            for (int i = 5; i < height - 1; i = i + gapBetweenTwoCross)
             {
-                for (int j = 4; j < width - 1; j = j + width / 5)
+                for (int j = 6; j < width - 3; j = j + gapBetweenTwoCross)
                 {
                     GenerateCrossObstacle(i, j);
 
