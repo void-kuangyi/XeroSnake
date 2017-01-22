@@ -11,3 +11,5 @@ Snake/TestResults/*
 *.user
 *.cache
 *.txt
+Snake/Packages
+*.config

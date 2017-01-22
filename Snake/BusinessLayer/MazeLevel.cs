@@ -8,7 +8,7 @@ namespace BusinessLayer
 {
     public enum MazeLevel
     {
-        Easy = 1,
+        Easy,
         Medium,
         Hard
     }
