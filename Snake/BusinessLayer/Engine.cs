@@ -39,7 +39,7 @@ namespace BusinessLayer
 
             Score.resetScore();
             foodGenerator = new FoodGenerator();
-            newAI = new AI();
+            newAI = new AI(new Random());
         }
 
         public Elements[,] initializeGame()
@@ -133,11 +133,16 @@ namespace BusinessLayer
                     bool isAIValid = true;
                     int previousX = newAI.XCoordinate;
                     int previousY = newAI.YCoordinate;
+
                     do
                     {
-                        newAI.MoveAI(previousX, previousY);
+                        newAI.MoveAI
+                            ();
+
                         isAIValid = validateNewAILocation(newAI);
+
                     } while (!isAIValid);
+
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
 
                     break;

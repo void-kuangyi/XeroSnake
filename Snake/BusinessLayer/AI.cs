@@ -11,7 +11,7 @@ namespace BusinessLayer
         private Direction currentDirection;
         private int X;
         private int Y;
-        Random randomNumber = new Random();
+        Random randomNumber;
         public int XCoordinate
         {
             get
@@ -28,29 +28,26 @@ namespace BusinessLayer
             }
         }
 
-        public AI()
+        public AI(Random random)
         {
             X = -1;
             Y = -1;
+            randomNumber = random;
         }
 
-        public bool SpawnAI(int XBorder, int YBorder)
+        public void SpawnAI(int XBorder, int YBorder)
         {
             if (XBorder < 0 || YBorder < 0)
             {
-                return false;
+                throw new Exception("BAD");
             }
 
             this.X = randomNumber.Next(XBorder - 1);
             this.Y = randomNumber.Next(YBorder - 1);
-
-            return true;
         }
 
-        public void MoveAI(int previousX, int previousY)
+        public void MoveAI()
         {
-            X = previousX;
-            Y = previousY;
             bool Opposite = true;
             Direction newDirection = Direction.Right;
 
