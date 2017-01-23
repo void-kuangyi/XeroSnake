@@ -29,21 +29,22 @@ namespace BusinessLayer
             currentScore += increment;
         }
 
-        public void setHighScore(int highScore)
-        {
-            if (db.setHighScore(highScore) == false)
-            {
-                throw new System.Exception("Database fail");
-            }
-        }
-
-        internal void handleHighScore()
+        internal void handleHighScore(string currentName)
         {
             List<HighScore> highScoreList = new List<HighScore>();
             highScoreList = db.getHighSCore();
 
 
-            // Check if current score is larger than smallest score in list
+            highScoreList.Sort((a, b) => a.score.CompareTo(b.score));
+
+            if (currentScore > highScoreList[0].score)
+            {
+                highScoreList[0].score = currentScore;
+                highScoreList[0].name = currentName;
+
+                db.setHighScore(highScoreList);
+ 
+            }
             // If so, replace it and write to DB
 
             throw new Exception("Not fully implemented");

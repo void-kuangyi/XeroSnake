@@ -19,6 +19,7 @@ namespace BusinessLayer
         private Maze gameMaze;
         private MazeLevel mazeMode;
         AI newAI;
+        private string name;
 
         private GameSnake gameSnake1;
         // For future use, 2 player game mode
@@ -76,6 +77,11 @@ namespace BusinessLayer
             return mazeArray;
         }
 
+        public void setName(string highScoreName)
+        {
+            name = highScoreName;
+        }
+
         public List<string> getHighScoreList()
         {
             return score.getHighScoreList();
@@ -102,7 +108,7 @@ namespace BusinessLayer
                 case Elements.mazeBody:
                 case Elements.AI:
                     gameSound.SnakeDiesSound();
-                    score.handleHighScore();
+                    score.handleHighScore(name);
                     mazeArray[0, 0] = Elements.snakeDeath;
                     return mazeArray;
 
