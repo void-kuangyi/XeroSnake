@@ -9,19 +9,16 @@ namespace BusinessLayer
     public class AI
     {
         private Direction currentDirection;
+        private int previousX;
+        private int previousY;
         private int X;
         private int Y;
-        Random randomNumber = new Random();
+        Random randomNumber;
         public int XCoordinate
         {
             get
             {
                 return X;
-            }
-
-            set
-            {
-                X = value;
             }
         }
 
@@ -32,30 +29,24 @@ namespace BusinessLayer
             {
                 return Y;
             }
-            set
-            {
-                Y = value;
-            }
         }
 
-
-        public AI()
+        public AI(Random random)
         {
             X = -1;
             Y = -1;
+            randomNumber = random;
         }
 
-        public bool SpawnAI(int XBorder, int YBorder)
+        public void SpawnAI(int XBorder, int YBorder)
         {
             if (XBorder < 0 || YBorder < 0)
             {
-                return false;
+                throw new Exception("Invalid AI Location");
             }
 
             this.X = randomNumber.Next(XBorder - 1);
             this.Y = randomNumber.Next(YBorder - 1);
-
-            return true;
         }
 
         public void MoveAI(int previousX, int previousY)
@@ -104,5 +95,52 @@ namespace BusinessLayer
 
             currentDirection = newDirection;
         }
+
+        public void SmartMove(List<Point> snakePoints)
+        {
+            previousX = X;
+            previousY = Y;
+            int verticalOrHorizontal = randomNumber.Next(0, 2);
+
+            int middle = snakePoints.Count / 2;
+            Point middlePoint = snakePoints.ElementAt(middle);
+
+            int distanceFromX = middlePoint.returnX() - previousX;
+            //  - means move up
+            //  + means move down            
+            int distanceFromY = middlePoint.returnY() - previousY;
+            // - means move left
+            //  + means move right
+
+            if (verticalOrHorizontal == 0)
+            {
+                if (distanceFromX > 0)
+                {
+                    X = XCoordinate + 1;
+                }
+                else
+                {
+                    X = XCoordinate - 1;
+                }
+            }
+            else
+            {
+                if (distanceFromY > 0)
+                {
+                    Y = YCoordinate + 1;
+                }
+                else
+                {
+                    Y = YCoordinate - 1;
+                }
+            }
+        }
+
+         public void moveBack()
+        {
+            X = previousX;
+            Y = previousY;
+        }
+        
     }
 }

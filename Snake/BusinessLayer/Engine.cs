@@ -22,7 +22,7 @@ namespace BusinessLayer
         private int mazeMode;
         AI newAI;
         bool smartMove = false;
-        SmartAI newSmartAI;
+        AI newSmartAI;
         private GameSnake gameSnake1;
         // For future use, 2 player game mode
         //private GameSnake gameSnake2;
@@ -40,8 +40,8 @@ namespace BusinessLayer
 
             Score.resetScore();
             foodGenerator = new FoodGenerator();
-            newAI = new AI();
-            newSmartAI = new SmartAI();
+            newAI = new AI(new Random());
+            newSmartAI = new AI(new Random());
         }
 
         public Elements[,] initializeGame()
@@ -151,29 +151,31 @@ namespace BusinessLayer
                     bool isAIValid = true;
                     int previousX = newAI.XCoordinate;
                     int previousY = newAI.YCoordinate;
+
                     do
                     {
                         newAI.MoveAI(previousX, previousY);
+
                         isAIValid = validateNewAILocation(newAI);
+
                     } while (!isAIValid);
+
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
-
-                    previousX = newSmartAI.XCoordinate;
-                    previousY = newSmartAI.YCoordinate;
                     mazeArray[newSmartAI.XCoordinate, newSmartAI.YCoordinate] = 0;
-
-                    int temp = 0;
-                    Random rnd = new Random();
-                    temp = rnd.Next(2);
+    
                     do
                     {
                         if (smartMove)
                         {
-                            newSmartAI.SmartMove(temp, SnakeCurrentPosition, previousX, previousY);
+                            newSmartAI.SmartMove(SnakeCurrentPosition);
                             isAIValid = validateNewAILocation(newSmartAI);
                             if(isAIValid)
                             {
                                 smartMove = false;
+                            }
+                            else
+                            {
+                                newSmartAI.moveBack();
                             }
                         }
                         else
