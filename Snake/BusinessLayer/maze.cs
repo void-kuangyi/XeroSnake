@@ -9,10 +9,10 @@ namespace BusinessLayer
         private int width, height;
         private Elements[,] maze;
         private Random randomNumber;
-        private int mazeMode;
+        private MazeLevel mazeMode;
 
 
-        public Maze(int w, int h, int mazeMode)
+        public Maze(int w, int h, MazeLevel mazeMode)
         {
             width = w;
             height = h;
@@ -28,11 +28,11 @@ namespace BusinessLayer
             switch (mazeMode)
             {
 
-                case (int)MazeLevel.Beginner:
+                case MazeLevel.Beginner:
                     GenerateSuperEasyMaze();
                     break;
 
-                case (int)MazeLevel.Easy:
+                case MazeLevel.Easy:
                     if (randomNumber.NextDouble() < 0.5)
                     {
                         GenerateHorizonJungleMaze();
@@ -44,16 +44,16 @@ namespace BusinessLayer
                     
                     break;
 
-                case (int)MazeLevel.Medium:
+                case MazeLevel.Medium:
                     GenerateCrossMaze();
                     break;
 
-                case (int)MazeLevel.Hard:
+                case MazeLevel.Hard:
                     GenerateGridMaze();
                     break;
 
                 default:
-                    break;
+                    throw new SystemException("Invalid game mode passed to Maze class");
             }
 
 

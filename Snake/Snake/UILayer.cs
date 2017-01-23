@@ -7,10 +7,10 @@ namespace Snake
     class Program
     {
         private const int GameStepMilliseconds = 100;
-        private static KeyListner keyListner = new KeyListner();
 
+        private static KeyListner keyListner = new KeyListner();
         private static bool ExitGame = false;
-        private static BusinessLayer.gameMode currentGameMode;
+        private static gameMode currentGameMode;
         static bool gameSelected = false;
 
         static void Main(string[] args)
@@ -19,7 +19,7 @@ namespace Snake
 
             currentGameMode = gameMode.basic;
 
-            int mazeMode = ChooseMazeMode();
+            MazeLevel mazeMode = ChooseMazeMode();
 
             using (Engine gameEngine = new Engine(gameMode.basic, mazeMode))
             {
@@ -31,7 +31,7 @@ namespace Snake
 
                 do
                 {
-                    int score = Score.getScore();
+                    int score = gameEngine.getScore();
                     drawScore(score);
 
                     ConsoleKeyInfo keyInfo = keyListner.ReadKey(GameStepMilliseconds);
@@ -66,7 +66,7 @@ namespace Snake
                 }
                 while (ExitGame == false);
 
-                endGame();
+                endGame(gameEngine.getScore());
             }
         }
 
@@ -101,10 +101,11 @@ namespace Snake
             System.Console.WriteLine("Score: " + score);
         }
 
-        static void endGame()
+        static void endGame(int score) // and high score)
         {
-            Console.WriteLine("Your final score is " + Score.getScore());
-            Console.WriteLine("The high score is " + Score.getHighScore());
+            Console.WriteLine("Your final score is " + score);
+            // Console.WriteLine("The high score is " + Score.getHighScore());
+            throw new SystemException("Display high score unimplemented in UI");
             Console.WriteLine("Enter r to replay. q key to quit.");
 
             ConsoleKeyInfo keyInfo = keyListner.ReadKey(Int32.MaxValue);
@@ -125,7 +126,7 @@ namespace Snake
                 ClearCurrentConsoleLine();
             }
 
-            endGame();
+            endGame(score);
         }
 
         static void initialMenuLoad()
@@ -154,7 +155,7 @@ namespace Snake
 
 
 
-        public static int ChooseMazeMode()
+        public static MazeLevel ChooseMazeMode()
         {
             MazeLevel mazeMode;
 
@@ -173,7 +174,7 @@ namespace Snake
 
 
             Console.Clear();
-            return (int)mazeMode;
+            return mazeMode;
 
         }
 

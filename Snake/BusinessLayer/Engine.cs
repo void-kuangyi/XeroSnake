@@ -2,8 +2,6 @@ using BusinessLayer.FoodFolder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
@@ -19,17 +17,17 @@ namespace BusinessLayer
         private Elements[,] mazeArray { get; set; }
         private GameSound gameSound;
         private Maze gameMaze;
-        private int mazeMode;
+        private MazeLevel mazeMode;
         AI newAI;
 
         private GameSnake gameSnake1;
         // For future use, 2 player game mode
-        //private GameSnake gameSnake2;
         private Food food;
         private FoodGenerator foodGenerator;
         private gameMode currentGameMode;
+        Score score;
 
-        public Engine(gameMode mode , int mazeMode, int length = mazeRenderLength, int width = mazeRenderWidth)
+        public Engine(gameMode mode , MazeLevel mazeMode, int length = mazeRenderLength, int width = mazeRenderWidth)
         {
             mazeLength = length;
             mazeWidth = width;
@@ -37,9 +35,14 @@ namespace BusinessLayer
             gameSound = new GameSound();
             this.mazeMode = mazeMode;
 
-            Score.resetScore();
+            score = new Score(this.mazeMode.ToString());
             foodGenerator = new FoodGenerator();
             newAI = new AI();
+        }
+
+        public int getScore()
+        {
+            return score.getScore();
         }
 
         public Elements[,] initializeGame()
@@ -48,14 +51,13 @@ namespace BusinessLayer
             switch (currentGameMode)
             {
                 case gameMode.basic:
-                    gameMaze = new Maze(mazeWidth, mazeLength,mazeMode );
+                    gameMaze = new Maze(mazeWidth, mazeLength, mazeMode);
                     mazeArray = gameMaze.CreateMaze();
                     gameSnake1 = new GameSnake();
                     
                     List<Point> snakeCurrentBody = gameSnake1.createFirstSnake(mazeLength, mazeWidth, snakeInitialLength);
                     AddSnakeToTheMaze(snakeCurrentBody);
 
-                   // mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.blank;
                     bool isAIValid = true;
                     do
                     {
@@ -64,14 +66,11 @@ namespace BusinessLayer
                         isAIValid = validateNewAILocation(newAI);
                     } while (!isAIValid);
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
-
-
                     AddFoodToTheMaze();
 
                     break;
-
                 default:
-                    throw new System.Exception("Invalid Game Mode!");
+                    throw new SystemException("Invalid Game Mode!");
             }
 
             return mazeArray;
@@ -101,14 +100,9 @@ namespace BusinessLayer
                 case Elements.mazeBody:
                 case Elements.AI:
                     gameSound.SnakeDiesSound();
-                    if (Score.getScore() > Score.getHighScore())
-                    {
-                        gameSound.SnakeGetsHighScore();
-                        Score.setHighScore(Score.getScore());
-                    }
+                    score.handleHighScore();
                     mazeArray[0, 0] = Elements.snakeDeath;
                     return mazeArray;
-
 
                 case Elements.foodBasic:
                 case Elements.foodAdvanced:
@@ -121,7 +115,7 @@ namespace BusinessLayer
 
                     if ((newSnakeHead.returnX() == food.xLocation) && (newSnakeHead.returnY() == food.yLocation))
                     {
-                        Score.incrementScore(food.pointsWorth);
+                        score.incrementScore(food.pointsWorth);
                     }
 
                     food = null;
@@ -134,7 +128,6 @@ namespace BusinessLayer
                     mazeArray[SnakeCurrentPosition.First().returnX(), SnakeCurrentPosition.First().returnY()] = Elements.snakeBody;
                     snakesNewLocation = gameSnake1.snakeMove(snakeDirection, false);
                     mazeArray[snakesNewLocation.First().returnX(), snakesNewLocation.First().returnY()] = Elements.snakeHead;
-
 
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = 0;
 

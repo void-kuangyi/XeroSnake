@@ -1,5 +1,6 @@
 ﻿using DatabaseLayer;
 using System.Collections.Generic;
+using System;
 
 namespace BusinessLayer
 {
@@ -10,38 +11,47 @@ namespace BusinessLayer
         static Database db;
         string gameType;
 
-        public Score()
+        public Score(string gameType)
         {
             currentScore = NEWSCORE;
+            this.gameType = gameType;
             db = new Database(gameType);
+            currentScore = NEWSCORE;
         }
        
-        public static int getScore()
+        public int getScore()
         {
             return currentScore;
         }
 
-        public static void incrementScore(int increment)
+        public void incrementScore(int increment)
         {
             currentScore += increment;
         }
 
-        public static void resetScore()
-        {
-            currentScore = NEWSCORE;
-        }
 
-        public static List<HighScore> getHighScore()
+        public List<HighScore> getHighScore()
         {
             return db.getHighSCore();
         }
 
-        public static void setHighScore(int highScore)
+        public void setHighScore(int highScore)
         {
             if (db.setHighScore(highScore) == false)
             {
                 throw new System.Exception("Database fail");
             }
+        }
+
+        internal void handleHighScore()
+        {
+            List<HighScore> highScoreList = new List<HighScore>();
+            highScoreList = getHighScore();
+
+            // Check if current score is larger than smallest score in list
+            // If so, replace it and write to DB
+
+            throw new Exception("Not fully implemented");
         }
     }
 }
