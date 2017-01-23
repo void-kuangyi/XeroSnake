@@ -48,6 +48,7 @@ namespace BusinessLayer
             List<HighScore> highScoreList = new List<HighScore>();
             highScoreList = getHighScore();
 
+
             // Check if current score is larger than smallest score in list
             // If so, replace it and write to DB
 
