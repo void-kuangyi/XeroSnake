@@ -79,7 +79,12 @@ namespace BusinessLayer
 
         public Elements[,] updateGame(Direction snakeDirection)
         {
-            if (snakeDirection == Direction.Unchanged)
+            Direction directionFacing = gameSnake1.directionFacing;
+            if (snakeDirection == Direction.Unchanged ||
+                snakeDirection == Direction.Right && directionFacing == Direction.Left ||
+                snakeDirection == Direction.Left && directionFacing == Direction.Right ||
+                snakeDirection == Direction.Up && directionFacing == Direction.Down ||
+                snakeDirection == Direction.Down && directionFacing == Direction.Up)
             {
                 snakeDirection = gameSnake1.directionFacing;
             }
@@ -189,6 +194,9 @@ namespace BusinessLayer
             Point newSnakeHead;
             int x = snakeHead.returnX();
             int y = snakeHead.returnY();
+
+
+
             switch (snakeDirection)
             {
 
