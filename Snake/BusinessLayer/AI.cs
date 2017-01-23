@@ -18,7 +18,13 @@ namespace BusinessLayer
             {
                 return X;
             }
+
+            set
+            {
+                X = value;
+            }
         }
+
 
         public int YCoordinate
         {
@@ -26,7 +32,12 @@ namespace BusinessLayer
             {
                 return Y;
             }
+            set
+            {
+                Y = value;
+            }
         }
+
 
         public AI()
         {

@@ -21,7 +21,7 @@ namespace BusinessLayer
         private Maze gameMaze;
         private int mazeMode;
         AI newAI;
-
+        SmartAI newSmartAI;
         private GameSnake gameSnake1;
         // For future use, 2 player game mode
         //private GameSnake gameSnake2;
@@ -40,6 +40,7 @@ namespace BusinessLayer
             Score.resetScore();
             foodGenerator = new FoodGenerator();
             newAI = new AI();
+            newSmartAI = new SmartAI();
         }
 
         public Elements[,] initializeGame()
@@ -65,6 +66,13 @@ namespace BusinessLayer
                     } while (!isAIValid);
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
 
+                    do
+                    {
+
+                        newSmartAI.SpawnAI(mazeWidth, mazeLength);
+                        isAIValid = validateNewAILocation(newSmartAI);
+                    } while (!isAIValid);
+                    mazeArray[newSmartAI.XCoordinate, newSmartAI.YCoordinate] = Elements.SmartAI;
 
                     AddFoodToTheMaze();
 
@@ -139,6 +147,20 @@ namespace BusinessLayer
                         isAIValid = validateNewAILocation(newAI);
                     } while (!isAIValid);
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
+
+                    previousX = newSmartAI.XCoordinate;
+                    previousY = newSmartAI.YCoordinate;
+                    mazeArray[newSmartAI.XCoordinate, newSmartAI.YCoordinate] = 0;
+
+                    int temp = 0;
+                    Random rnd = new Random();
+                    temp = rnd.Next(2);
+                    do
+                    {
+                        newSmartAI.SmartMove(temp, SnakeCurrentPosition, previousX, previousY);
+                        isAIValid = validateNewAILocation(newSmartAI);
+                    } while (!isAIValid);
+                    mazeArray[newSmartAI.XCoordinate, newSmartAI.YCoordinate] = Elements.SmartAI;
 
                     break;
             }

@@ -44,6 +44,7 @@
     <Compile Include="AI.cs" />
     <Compile Include="gameMode.cs" />
     <Compile Include="Life.cs" />
+    <Compile Include="SmartAI.cs" />
     <Compile Include="SnakeAction.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Elements.cs" />
