@@ -14,16 +14,14 @@ namespace SnakeTest
         [TestMethod]
         public void initializeGameTestBorder()
         {
-            //note: checks only for borders. Uses default border as of the moment.
-            // Since food is randomly generated. It is not checked. Snake is not yet checked 
-            // because location is not yet finalized.
 
-            const int width = 20;
-            const int height = 40;
+
+            const int width = 70;
+            const int height = 20;
             Elements[,] expectedResult = createMaze(width, height);
 
             bool result;
-            using (BusinessLayer.Engine engine = new BusinessLayer.Engine(gameMode.basic, width, height))
+            using (Engine engine = new Engine(gameMode.basic,1, height,width))
             {
                 
                 Elements[,] resultingMaze = engine.initializeGame();
@@ -37,43 +35,43 @@ namespace SnakeTest
 
         public bool validateMazeBorder(Elements[,] resultingMaze, Elements[,] expectedResult, int width, int height)
         {
-            bool result = true;
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < height; x++)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < width; y++)
                 {
-                    if((x == 0) || (y == 0) || (x == (width -1)) || (x == (height - 1)))
+                    if((x == 0) || (y == 0) || (x == height - 1) || (y == width - 1))
                     { 
                         if (resultingMaze[x, y] != expectedResult[x, y])
                         {
-                            result = false;
+                            return false;
                         }
                     }
+
                 }
             }
-            return result;
+            return true;
         }
 
         private Elements[,] createMaze(int width, int height)
         {
-            Elements[,] maze = new Elements[width, height];
-            for (int x = 0; x < width; x++)
+            Elements[,] maze = new Elements[height,width];
+            for (int x = 0; x < height; x++)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < width; y++)
                 {
                     maze[x, y] = Elements.blank;
                 }
             }
 
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < width; y++)
             {
                 maze[0, y] = Elements.mazeBody;
-                maze[width - 1, y] = Elements.mazeBody;
+                maze[height - 1, y] = Elements.mazeBody;
             }
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < height; x++)
             {
                 maze[x, 0] = Elements.mazeBody;
-                maze[x, height -1] = Elements.mazeBody;
+                maze[x, width -1] = Elements.mazeBody;
             }
 
             return maze;
