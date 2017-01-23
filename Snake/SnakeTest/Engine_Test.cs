@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessLayer;
 
 namespace SnakeTest
@@ -21,9 +20,9 @@ namespace SnakeTest
             const int width = 20;
             const int height = 40;
             Elements[,] expectedResult = createMaze(width, height);
-
             bool result;
-            using (BusinessLayer.Engine engine = new BusinessLayer.Engine(gameMode.basic, width, height))
+
+            using (Engine engine = new Engine(gameMode.basic, MazeLevel.Easy, width, height))
             {
                 
                 Elements[,] resultingMaze = engine.initializeGame();

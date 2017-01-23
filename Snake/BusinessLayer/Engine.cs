@@ -76,6 +76,11 @@ namespace BusinessLayer
             return mazeArray;
         }
 
+        public List<string> getHighScoreList()
+        {
+            return score.getHighScoreList();
+        }
+
         public Elements[,] updateGame(Direction snakeDirection)
         {
             Direction directionFacing = gameSnake1.directionFacing;
@@ -90,9 +95,6 @@ namespace BusinessLayer
 
             Point newSnakeHead = getNewHead(snakeDirection);
             List<Point> snakesNewLocation;
-
-           
-
 
             switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
             {
