@@ -48,12 +48,25 @@ namespace DatabaseLayer
             return highScoreList;
         }
 
-        public bool setHighScore(int highScore)
+        public bool setHighScore(List<HighScore> highScoreList)
         {
-            using (BinaryWriter writer = new BinaryWriter(File.Open(FILENAME, FileMode.Create)))
+            cmd.CommandText = "REMOVE * FROM HighScores where GameType = '" + gameType + "'";
+            sqlConnection.Open();
+            sqlDataReader = cmd.ExecuteReader();
+
+            foreach (HighScore highScore in highScoreList)
             {
-                writer.Write(highScore);
+                cmd.CommandText = "INSERT INTO HighScores VALUES (" 
+                                + gameType
+                                + ", " 
+                                + highScore.score 
+                                + ", "
+                                + highScore.name
+                                + ")";
+                
+                cmd.ExecuteReader();
             }
+            sqlConnection.Close();
             return true;
         }
 
