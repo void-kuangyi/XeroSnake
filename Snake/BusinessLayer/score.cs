@@ -54,6 +54,8 @@ namespace BusinessLayer
             List<HighScore> highScoreList = new List<HighScore>();
             highScoreList = db.getHighSCore();
 
+            highScoreList.Sort((a, b) => a.score.CompareTo(b.score));
+
             foreach (HighScore highScore in highScoreList)
             {
                 highScoreStringList.Add(highScore.name + "  " + highScore.score.ToString());
