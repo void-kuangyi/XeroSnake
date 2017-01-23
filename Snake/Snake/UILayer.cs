@@ -118,6 +118,13 @@ namespace Snake
             {
                 Environment.Exit(0);
             }
+     
+            for (int i = 1; i < 3; i++)
+            {
+                Console.SetCursorPosition(0, Console.CursorTop - i);
+                ClearCurrentConsoleLine();
+            }
+
             endGame();
         }
 
@@ -151,14 +158,15 @@ namespace Snake
         {
             MazeLevel mazeMode;
 
-            Console.WriteLine("1. Easy Mode : Line Maze");
-            Console.WriteLine("2. Medium Mode : Cross Maze");
-            Console.WriteLine("3. Hard Mode : Grid Maze");
+            Console.WriteLine("1. Beginner Mode : Simple Maze");
+            Console.WriteLine("2. Easy Mode : Line Maze");
+            Console.WriteLine("3. Medium Mode : Cross Maze");
+            Console.WriteLine("4. Hard Mode : Grid Maze");
 
             do
             {
                 Console.WriteLine();
-                Console.Write("Please enter 1,2 or 3 : ");
+                Console.Write("Please enter 1,2,3 or 4 : ");
                 
             }
             while (!Enum.TryParse(keyListner.ReadKey(Int32.MaxValue).KeyChar.ToString(), out mazeMode) || !Enum.IsDefined(typeof(MazeLevel),mazeMode));
@@ -167,6 +175,14 @@ namespace Snake
             Console.Clear();
             return (int)mazeMode;
 
+        }
+
+        public static void ClearCurrentConsoleLine()
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, currentLineCursor);
         }
     }
 }
