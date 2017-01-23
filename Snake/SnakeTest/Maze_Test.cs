@@ -23,6 +23,7 @@ namespace SnakeTest
             const int width = 10;
             const int height = 10;
             Maze maze = new Maze(width, height, MazeLevel.Easy);
+
             Elements[,] newMaze = maze.CreateMaze();
 
             for (int i = 0; i < height; i++)
