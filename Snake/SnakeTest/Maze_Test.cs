@@ -16,6 +16,8 @@ namespace SnakeTest
 
             Elements[,] newMaze = maze.CreateMaze();
 
+
+
             Assert.IsInstanceOfType(newMaze, typeof(int[,]), "this is an instance of type int 2D array");
 
 
