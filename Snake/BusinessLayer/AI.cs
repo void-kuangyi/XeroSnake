@@ -46,8 +46,10 @@ namespace BusinessLayer
             this.Y = randomNumber.Next(YBorder - 1);
         }
 
-        public void MoveAI()
+        public void MoveAI(int previousX, int previousY)
         {
+            X = previousX;
+            Y = previousY;
             bool Opposite = true;
             Direction newDirection = Direction.Right;
 

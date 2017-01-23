@@ -136,8 +136,7 @@ namespace BusinessLayer
 
                     do
                     {
-                        newAI.MoveAI
-                            ();
+                        newAI.MoveAI(previousX, previousY);
 
                         isAIValid = validateNewAILocation(newAI);
 
