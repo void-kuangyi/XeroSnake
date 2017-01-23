@@ -15,6 +15,7 @@ namespace BusinessLayer
         foodBasic = 4,
         foodAdvanced = 5,
         snakeDeath = 6,
-        AI = 7
+        AI = 7,
+        SmartAI = 8
     }
 }

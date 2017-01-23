@@ -21,7 +21,8 @@ namespace BusinessLayer
         private Maze gameMaze;
         private int mazeMode;
         AI newAI;
-
+        bool smartMove = false;
+        AI newSmartAI;
         private GameSnake gameSnake1;
         // For future use, 2 player game mode
         //private GameSnake gameSnake2;
@@ -39,7 +40,8 @@ namespace BusinessLayer
 
             Score.resetScore();
             foodGenerator = new FoodGenerator();
-            newAI = new AI();
+            newAI = new AI(new Random());
+            newSmartAI = new AI(new Random());
         }
 
         public Elements[,] initializeGame()
@@ -65,6 +67,13 @@ namespace BusinessLayer
                     } while (!isAIValid);
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
 
+                    do
+                    {
+
+                        newSmartAI.SpawnAI(mazeWidth, mazeLength);
+                        isAIValid = validateNewAILocation(newSmartAI);
+                    } while (!isAIValid);
+                    mazeArray[newSmartAI.XCoordinate, newSmartAI.YCoordinate] = Elements.SmartAI;
 
                     AddFoodToTheMaze();
 
@@ -100,6 +109,7 @@ namespace BusinessLayer
                 case Elements.snakeBody:
                 case Elements.mazeBody:
                 case Elements.AI:
+                case Elements.SmartAI:
                     gameSound.SnakeDiesSound();
                     if (Score.getScore() > Score.getHighScore())
                     {
@@ -141,12 +151,39 @@ namespace BusinessLayer
                     bool isAIValid = true;
                     int previousX = newAI.XCoordinate;
                     int previousY = newAI.YCoordinate;
+
                     do
                     {
                         newAI.MoveAI(previousX, previousY);
+
                         isAIValid = validateNewAILocation(newAI);
+
                     } while (!isAIValid);
+
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
+                    mazeArray[newSmartAI.XCoordinate, newSmartAI.YCoordinate] = 0;
+    
+                    do
+                    {
+                        if (smartMove)
+                        {
+                            newSmartAI.SmartMove(SnakeCurrentPosition);
+                            isAIValid = validateNewAILocation(newSmartAI);
+                            if(isAIValid)
+                            {
+                                smartMove = false;
+                            }
+                            else
+                            {
+                                newSmartAI.moveBack();
+                            }
+                        }
+                        else
+                        {
+                            smartMove = true;
+                        }
+                    } while (!isAIValid);
+                    mazeArray[newSmartAI.XCoordinate, newSmartAI.YCoordinate] = Elements.SmartAI;
 
                     break;
             }

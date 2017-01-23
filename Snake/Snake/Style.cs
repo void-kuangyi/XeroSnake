@@ -48,7 +48,10 @@ namespace Snake
                     return "G";
                 case Elements.AI:
                     return "E";
-
+                case Elements.SmartAI:
+                    return "F";
+                case Elements.Laser:
+                    return "+";
                 default:
                     throw new System.Exception("Invalid Game Element Processed!");
             }
@@ -56,27 +59,70 @@ namespace Snake
 
         public static void menuImage()
         {
-            Console.WriteLine("");
-            Console.WriteLine("         uB@@@B@B@Bu  M@L       8@u    :B@B@B@B.    S@P       F@B  UBMB@B@B@B@@@");
-            Console.WriteLine("       77v1j22u22Uqi  @BL       B@5  r771uU1Uu27vi  0BG     JvjSu  U@MLuUU2u5uS1");
-            Console.WriteLine("       @Bi            M@r       G@j  @B5       ZBO  F@X    :@@:    u@E          ");
-            Console.WriteLine("       B@:            MBMB@     8Bu  G@L       F@S  SBF  0@M       J@P          ");
-            Console.WriteLine("       @BFvYYuY2J     O@277u2i  Z@J  ZBX7jLuYYr0BS  5@N7L77r       uB8rJLuLuF:  ");
-            Console.WriteLine("       B@@@@@@@B@     BBr  B@2  E@u  E@M@B@B@B@O@5  FBMB@,         Y@M@B@@@B@Y  ");
-            Console.WriteLine("                 @@L  M@7    7B@M@Y  GBY       FBk  5@1  GB@       uB0          ");
-            Console.WriteLine("                 B@L  BBv    .7:8Bu  E@J       k@F  SBX  :v7Sq,    J@q          ");
-            Console.WriteLine("                 8B7  M@v       Z@j  8B2       0BX  k@q     B@r..  uBG          ");
-            Console.WriteLine("       B@@@B@B@B@2$   @B2       @BP  B@q       M@O  OBM       ZB@  k@B@B@B@@@B@B");
-            Console.WriteLine("       ri:ii:i:ri7    ir.       :r,  ii:       :i:  :r:       ,7i  ,i::i:i:ii:;;");
-            Console.WriteLine("");
-            Console.WriteLine("                    ,,....,.........,.......,.,.......,.,.., ");
-            Console.WriteLine("                    @@@@B@B@B@B@B@B@B@B@B@@@B@B@B@B@B@B@B@B@Y");
-            Console.WriteLine("                    ..... . ....... . .. .... . .. .. .   MB7");
-            Console.WriteLine("                                                          O@r");
-            Console.WriteLine("                                                          MB7");
-            Console.WriteLine("                                        B@B       U@B@B@B@B@L");
-            Console.WriteLine("                                        2BO       rN52FUFuY1:");
-            Console.WriteLine("");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            Console.WriteLine("█                                                                                            █");
+            Console.WriteLine("█       ▄▄▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄     ▄▄▄▄▄    ▄▄▄▄▄▄▄▄▄▄▄    ▄▄▄▄▄    ▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄     █");
+            Console.WriteLine("█     ▄▄█uB@@@B@B@Bu█  █M@L█     █8@u█  ▄▄█:B@B@B@B.█▄▄  █S@P█  ▄▄█F@B█  █UBMB@B@B@B@@@█     █");
+            Console.WriteLine("█     █77v1j22u22Uqi█  █@BL█     █B@5█  █r771uU1Uu27vi█  █0BG█ ▄█JvjSu█  █U@MLuUU2u5uS1█     █");
+            Console.WriteLine("█     █@Bi█▀▀▀▀▀▀▀▀▀▀  █M@r█▄▄   █G@j█  █@B5█▀▀▀▀▀█ZBO█  █F@X█▄█:@@:█▀▀  █u@E█▀▀▀▀▀▀▀▀▀▀     █");
+            Console.WriteLine("█     █B@:█▄▄▄▄▄▄▄▄▄   █MBMB@█▄▄ █8Bu█  █G@L█▄▄▄▄▄█F@S█  █SBF██0@M█▀     █J@P█▄▄▄▄▄▄▄▄       █");
+            Console.WriteLine("█     █@BFvYYuYYu2J█   █O@277u2█▄█Z@J█  █ZBX7jLuYYr0BS█  █5@N7L77█▀      █uB8rJLuLuF:█       █");
+            Console.WriteLine("█     █B@@@@@@@B@B@█▄  █BBr██B@2██E@u█  █E@M@B@B@B@O@5█  █FBMB@,██▄      █Y@M@B@@@B@Y█       █");
+            Console.WriteLine("█     ▀▀▀▀▀▀▀▀▀▀█@@L█  █M@7█▀▀█7B@M@Y█  █GBYZ█▀▀▀█ZFBk█  █5@1██GB@█▄▄    █uB0█▀▀▀▀▀▀▀▀       █");
+            Console.WriteLine("█               █B@L█  █BBv█  ▀█7:8Bu█  █E@J█▀   ▀█k@F█  █SBX█▀█v7Sq█▄   █J@q█               █");
+            Console.WriteLine("█     ▄▄▄▄▄▄▄▄▄▄█8B7█  █M@v█   ▀▀█Z@j█  █8B2█     █0BX█  █k@q█ ▀█B@r.█   █uBG█▄▄▄▄▄▄▄▄▄▄     █");
+            Console.WriteLine("█     █B@@@B@B@B@2$█▀  █@B2█     █@BP█  █B@q█     █M@O█  █OBM█  ▀█ZB@█▄  █k@B@B@B@@@B@B█     █");
+            Console.WriteLine("█     █ri:ii:i:ri7█▀   █ir.█     █:r,█  █ii:█     █:i:█  █:r:█   ▀█,7i█  █,i::i:i:ii:;;█     █");
+            Console.WriteLine("█     ▀▀▀▀▀▀▀▀▀▀▀▀▀    ▀▀▀▀▀     ▀▀▀▀▀  ▀▀▀▀▀     ▀▀▀▀▀  ▀▀▀▀▀    ▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀     █");
+            Console.WriteLine("█                                                                                            █");
+            Console.Write("█                  ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("▄▄█████████████████████████████████████████▄                              ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("█");
+            Console.Write("█                  ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("█▒▒█▒▒█▒▒█▒▒█▒▒█▒▒█▒▒█▒▒█▒▒█▒▒█▒▒█▒▒█▒▒█▒▒██                              ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("█");
+            Console.Write("█                  ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write(" ▀██████████████████████████████████████████                              ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("█");
+
+
+            Console.Write("█                                                          ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("█▒▒█                              ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("█");
+
+            Console.Write("█                                       ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("▄█▄       ?▄███████████                              ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("█");
+
+            Console.Write("█                                       ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("█▒█       ?██▒▒█▒▒█▒▒██                              ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("█");
+
+            Console.Write("█                                       ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("▀█▀        ▀█████████▀▀                              ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("█");
+
+
+            Console.WriteLine("█                                                                                            █");
+            Console.WriteLine("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Please select a game mode:");
             Console.WriteLine("1. Single Player");
 
