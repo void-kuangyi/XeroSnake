@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Dapper;
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
@@ -25,9 +24,8 @@ namespace DatabaseLayer
 
         const string FILENAME = "highscores.txt";
 
-        public int getHighSCore()
+        public List<HighScore> getHighSCore()
         {
-            int highScore = 100;
             cmd.CommandText = "SELECT * FROM HighScores where GameType = '" + gameType + "'";
             List<HighScore> highScoreList = new List<HighScore>(5);
 
@@ -47,7 +45,7 @@ namespace DatabaseLayer
 
             sqlConnection.Close();
 
-            return highScore;
+            return highScoreList;
         }
 
         public bool setHighScore(int highScore)

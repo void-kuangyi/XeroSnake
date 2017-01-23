@@ -1,4 +1,5 @@
 ﻿using DatabaseLayer;
+using System.Collections.Generic;
 
 namespace BusinessLayer
 {
@@ -6,11 +7,13 @@ namespace BusinessLayer
     {
         private static int currentScore;
         private const int NEWSCORE = 0;
-        static Database db = new Database();
+        static Database db;
+        string gameType;
 
         public Score()
         {
             currentScore = NEWSCORE;
+            db = new Database(gameType);
         }
        
         public static int getScore()
@@ -28,7 +31,7 @@ namespace BusinessLayer
             currentScore = NEWSCORE;
         }
 
-        public static int getHighScore()
+        public static List<HighScore> getHighScore()
         {
             return db.getHighSCore();
         }
