@@ -67,12 +67,12 @@ namespace Snake
                 while (ExitGame == false);
 
                 Console.Write("Please enter your name: ");
-                string highScoreName = Console.ReadLine();
+                string highScoreName = keyListner.ReadKey(Int32.MaxValue).KeyChar.ToString() + Console.ReadLine();
 
                 gameEngine.setName(highScoreName);
                 gameEngine.handleHighSCore();
 
-                endGame(gameEngine.getScore(), gameEngine.getHighScoreList());
+                EndGame(gameEngine.getScore(), gameEngine.getHighScoreList());
             }
         }
 
@@ -107,11 +107,11 @@ namespace Snake
             System.Console.WriteLine("Score: " + score);
         }
 
-        static void endGame(int score, List<string> highScoreList)
+        static void EndGame(int score, List<string> highScoreList)
         {
             Console.WriteLine("Your final score is " + score);
 
-            Console.Write("High Scores:");
+            Console.WriteLine("High Scores:");
             foreach (string str in highScoreList)
             {
                 Console.WriteLine(str);

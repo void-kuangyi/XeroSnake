@@ -10,22 +10,22 @@ namespace DatabaseLayer
         private SqlConnection sqlConnection;
         private SqlCommand cmd;
         private SqlDataReader sqlDataReader;
-        private string gameType;
+        private string mazeLevel;
 
-        public Database(string gameType)
+        public Database(string mazeLevel)
         {
             sqlConnection = new SqlConnection("Server= localhost; Database= SnakeHighScores; Integrated Security=True;");
             cmd = new SqlCommand();
             cmd.CommandType = CommandType.Text;
             cmd.Connection = sqlConnection;
-            this.gameType = gameType;
+            this.mazeLevel = mazeLevel;
         }
 
         const string FILENAME = "highscores.txt";
 
         public List<HighScore> getHighSCore()
         {
-            cmd.CommandText = "SELECT * FROM HighScores where GameType = '" + gameType + "'";
+            cmd.CommandText = "SELECT * FROM HighScores where GameType = '" + mazeLevel + "'";
             List<HighScore> highScoreList = new List<HighScore>(5);
 
             sqlConnection.Open();
@@ -49,7 +49,7 @@ namespace DatabaseLayer
 
         public bool setHighScore(List<HighScore> highScoreList)
         {
-            cmd.CommandText = "DELETE FROM HighScores where GameType='" + gameType + "'";
+            cmd.CommandText = "DELETE FROM HighScores where GameType='" + mazeLevel + "'";
             sqlConnection.Open();
             sqlDataReader = cmd.ExecuteReader();
             sqlConnection.Close();
@@ -58,7 +58,7 @@ namespace DatabaseLayer
             {
                 sqlConnection.Open();
                 cmd.CommandText = "INSERT INTO HighScores VALUES ( '" 
-                                + gameType
+                                + mazeLevel
                                 + "', " 
                                 + highScore.score 
                                 + ", '"

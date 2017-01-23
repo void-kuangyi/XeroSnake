@@ -9,13 +9,13 @@ namespace BusinessLayer
         private static int currentScore;
         private const int NEWSCORE = 0;
         static Database db;
-        string gameType;
+        string mazeLevel;
 
-        public Score(string gameType)
+        public Score(string mazeLevel)
         {
             currentScore = NEWSCORE;
-            this.gameType = gameType;
-            db = new Database(gameType);
+            this.mazeLevel = mazeLevel;
+            db = new Database(mazeLevel);
             currentScore = NEWSCORE;
         }
        
