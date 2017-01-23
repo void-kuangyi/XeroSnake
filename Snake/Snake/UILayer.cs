@@ -66,7 +66,7 @@ namespace Snake
                 }
                 while (ExitGame == false);
 
-                endGame(gameEngine.getScore());
+                endGame(gameEngine.getScore(), gameEngine.getHighScoreList());
             }
         }
 
@@ -101,11 +101,14 @@ namespace Snake
             System.Console.WriteLine("Score: " + score);
         }
 
-        static void endGame(int score) // and high score)
+        static void endGame(int score, List<string> highScoreList)
         {
             Console.WriteLine("Your final score is " + score);
-            // Console.WriteLine("The high score is " + Score.getHighScore());
-            throw new SystemException("Display high score unimplemented in UI");
+            Console.Write("High Scores:");
+            foreach (string str in highScoreList)
+            {
+                Console.WriteLine(str);
+            }
             Console.WriteLine("Enter r to replay. q key to quit.");
 
             ConsoleKeyInfo keyInfo = keyListner.ReadKey(Int32.MaxValue);
@@ -126,7 +129,7 @@ namespace Snake
                 ClearCurrentConsoleLine();
             }
 
-            endGame(score);
+            endGame(score, highScoreList);
         }
 
         static void initialMenuLoad()

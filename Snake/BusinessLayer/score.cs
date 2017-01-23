@@ -29,12 +29,6 @@ namespace BusinessLayer
             currentScore += increment;
         }
 
-
-        public List<HighScore> getHighScore()
-        {
-            return db.getHighSCore();
-        }
-
         public void setHighScore(int highScore)
         {
             if (db.setHighScore(highScore) == false)
@@ -46,12 +40,26 @@ namespace BusinessLayer
         internal void handleHighScore()
         {
             List<HighScore> highScoreList = new List<HighScore>();
-            highScoreList = getHighScore();
+            highScoreList = db.getHighSCore();
 
             // Check if current score is larger than smallest score in list
             // If so, replace it and write to DB
 
             throw new Exception("Not fully implemented");
+        }
+
+        internal List<string> getHighScoreList()
+        {
+            List<string> highScoreStringList = new List<string>();
+            List<HighScore> highScoreList = new List<HighScore>();
+            highScoreList = db.getHighSCore();
+
+            foreach (HighScore highScore in highScoreList)
+            {
+                highScoreStringList.Add(highScore.name + "  " + highScore.score.ToString());
+            }
+
+            return highScoreStringList;
         }
     }
 }
