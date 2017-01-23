@@ -8,10 +8,11 @@ namespace DatabaseLayer
 {
     public class Database
     {
-        SqlConnection sqlConnection;
-        SqlCommand cmd;
-        SqlDataReader sqlDataReader;
-        string gameType;
+        private const int MaxNoOfScores = 5;
+        private SqlConnection sqlConnection;
+        private SqlCommand cmd;
+        private SqlDataReader sqlDataReader;
+        private string gameType;
 
         public Database(string gameType)
         {
@@ -27,11 +28,8 @@ namespace DatabaseLayer
         public int getHighSCore()
         {
             int highScore = 100;
-
             cmd.CommandText = "SELECT * FROM HighScores where GameType = '" + gameType + "'";
-
-            List<int> highScoreList = new List<int>();
-            List<string> nameList = new List<string>();
+            List<HighScore> highScoreList = new List<HighScore>(5);
 
             sqlConnection.Open();
             sqlDataReader = cmd.ExecuteReader();
@@ -40,8 +38,10 @@ namespace DatabaseLayer
             {
                 while (sqlDataReader.Read())
                 {
-                    highScoreList.Add(sqlDataReader.GetInt32(2));
-                    nameList.Add(sqlDataReader.GetString(3));
+                    HighScore tempHSObject = new HighScore();
+                    tempHSObject.score = sqlDataReader.GetInt32(2);
+                    tempHSObject.name = sqlDataReader.GetString(3);
+                    highScoreList.Add(tempHSObject);
                 }
             }
 
