@@ -29,19 +29,18 @@ namespace BusinessLayer
             {
 
                 case (int)MazeLevel.Beginner:
-                    if (randomNumber.NextDouble() < 0.5)
-                    {
-                        GenerateSuperEasyMaze();
-                    }
-                    else
-                    {
-                        GenerateSuperEasyMaze();
-                    }
+                    GenerateSuperEasyMaze();
                     break;
 
                 case (int)MazeLevel.Easy:
-                   
+                    if (randomNumber.NextDouble() < 0.5)
+                    {
                         GenerateHorizonJungleMaze();
+                    }
+                    else
+                    {
+                        GenerateVerticalJungleMaze();
+                    }
                     
                     break;
 
