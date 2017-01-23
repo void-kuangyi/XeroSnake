@@ -34,20 +34,24 @@ namespace BusinessLayer
             List<HighScore> highScoreList = new List<HighScore>();
             highScoreList = db.getHighSCore();
 
-
             highScoreList.Sort((a, b) => a.score.CompareTo(b.score));
 
-            if (currentScore > highScoreList[0].score)
+            if (highScoreList.Count < 5 && currentScore != 0)
+            {
+                HighScore hs = new HighScore();
+                hs.name = currentName;
+                hs.score = currentScore;
+                highScoreList.Add(hs);
+
+                db.setHighScore(highScoreList);
+            }
+            else if (currentScore > highScoreList[0].score)
             {
                 highScoreList[0].score = currentScore;
                 highScoreList[0].name = currentName;
 
                 db.setHighScore(highScoreList);
- 
             }
-            // If so, replace it and write to DB
-
-            throw new Exception("Not fully implemented");
         }
 
         internal List<string> getHighScoreList()
@@ -56,7 +60,7 @@ namespace BusinessLayer
             List<HighScore> highScoreList = new List<HighScore>();
             highScoreList = db.getHighSCore();
 
-            highScoreList.Sort((a, b) => a.score.CompareTo(b.score));
+            highScoreList.Sort((a, b) => -1 * a.score.CompareTo(b.score)); // "-1 *" to sort in descending order
 
             foreach (HighScore highScore in highScoreList)
             {

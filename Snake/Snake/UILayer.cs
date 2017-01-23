@@ -61,7 +61,7 @@ namespace Snake
                     {
                         ExitGame = true;
                     }
-                    System.Console.Clear();
+                    Console.Clear();
                     Draw(updateMaze);
                 }
                 while (ExitGame == false);
@@ -70,6 +70,7 @@ namespace Snake
                 string highScoreName = Console.ReadLine();
 
                 gameEngine.setName(highScoreName);
+                gameEngine.handleHighSCore();
 
                 endGame(gameEngine.getScore(), gameEngine.getHighScoreList());
             }
@@ -109,9 +110,6 @@ namespace Snake
         static void endGame(int score, List<string> highScoreList)
         {
             Console.WriteLine("Your final score is " + score);
-            
-            
-
 
             Console.Write("High Scores:");
             foreach (string str in highScoreList)

@@ -108,7 +108,6 @@ namespace BusinessLayer
                 case Elements.mazeBody:
                 case Elements.AI:
                     gameSound.SnakeDiesSound();
-                    score.handleHighScore(name);
                     mazeArray[0, 0] = Elements.snakeDeath;
                     return mazeArray;
 
@@ -268,6 +267,11 @@ namespace BusinessLayer
                 return false;
             }
             return true;
+        }
+
+        public void handleHighSCore()
+        {
+            score.handleHighScore(name);
         }
 
         public void Dispose()

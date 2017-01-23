@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 
@@ -50,23 +49,26 @@ namespace DatabaseLayer
 
         public bool setHighScore(List<HighScore> highScoreList)
         {
-            cmd.CommandText = "REMOVE * FROM HighScores where GameType = '" + gameType + "'";
+            cmd.CommandText = "DELETE FROM HighScores where GameType='" + gameType + "'";
             sqlConnection.Open();
             sqlDataReader = cmd.ExecuteReader();
+            sqlConnection.Close();
 
             foreach (HighScore highScore in highScoreList)
             {
-                cmd.CommandText = "INSERT INTO HighScores VALUES (" 
+                sqlConnection.Open();
+                cmd.CommandText = "INSERT INTO HighScores VALUES ( '" 
                                 + gameType
-                                + ", " 
+                                + "', " 
                                 + highScore.score 
-                                + ", "
+                                + ", '"
                                 + highScore.name
-                                + ")";
+                                + "')";
                 
                 cmd.ExecuteReader();
+                sqlConnection.Close();
             }
-            sqlConnection.Close();
+
             return true;
         }
 
