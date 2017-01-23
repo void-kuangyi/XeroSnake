@@ -27,15 +27,22 @@ namespace BusinessLayer
 
             switch (mazeMode)
             {
-                case (int)MazeLevel.Easy:
+
+                case (int)MazeLevel.Beginner:
                     if (randomNumber.NextDouble() < 0.5)
                     {
-                        GenerateHorizonJungleMaze();
+                        GenerateSuperEasyMaze();
                     }
                     else
                     {
-                        GenerateVerticalJungleMaze();
+                        GenerateSuperEasyMaze();
                     }
+                    break;
+
+                case (int)MazeLevel.Easy:
+                   
+                        GenerateHorizonJungleMaze();
+                    
                     break;
 
                 case (int)MazeLevel.Medium:
@@ -132,6 +139,23 @@ namespace BusinessLayer
 
         }
 
+        public void GenerateSuperEasyMaze()
+        {
+            const int gapBetweenTwoRectangle = 20;
+            const int rectangleWidth = 3;
+            const int rectangleHeight = 5;
+            for (int i = 7; i < height - 1; i = i + gapBetweenTwoRectangle)
+            {
+                for (int j = 12; j < width - 1; j = j + gapBetweenTwoRectangle)
+                {
+
+                    GenerateRectangleObstacle(i, j, rectangleWidth, rectangleHeight);
+
+                }
+
+            }
+
+        }
 
         public void GenerateCrossMaze()
         {
