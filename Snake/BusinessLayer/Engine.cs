@@ -21,6 +21,7 @@ namespace BusinessLayer
         private Maze gameMaze;
         private int mazeMode;
         AI newAI;
+        bool smartMove = false;
         SmartAI newSmartAI;
         private GameSnake gameSnake1;
         // For future use, 2 player game mode
@@ -108,6 +109,7 @@ namespace BusinessLayer
                 case Elements.snakeBody:
                 case Elements.mazeBody:
                 case Elements.AI:
+                case Elements.SmartAI:
                     gameSound.SnakeDiesSound();
                     if (Score.getScore() > Score.getHighScore())
                     {
@@ -165,8 +167,19 @@ namespace BusinessLayer
                     temp = rnd.Next(2);
                     do
                     {
-                        newSmartAI.SmartMove(temp, SnakeCurrentPosition, previousX, previousY);
-                        isAIValid = validateNewAILocation(newSmartAI);
+                        if (smartMove)
+                        {
+                            newSmartAI.SmartMove(temp, SnakeCurrentPosition, previousX, previousY);
+                            isAIValid = validateNewAILocation(newSmartAI);
+                            if(isAIValid)
+                            {
+                                smartMove = false;
+                            }
+                        }
+                        else
+                        {
+                            smartMove = true;
+                        }
                     } while (!isAIValid);
                     mazeArray[newSmartAI.XCoordinate, newSmartAI.YCoordinate] = Elements.SmartAI;
 
