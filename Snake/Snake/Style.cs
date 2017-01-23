@@ -48,7 +48,8 @@ namespace Snake
                     return "G";
                 case Elements.AI:
                     return "E";
-
+                case Elements.SmartAI:
+                    return "F";
                 default:
                     throw new System.Exception("Invalid Game Element Processed!");
             }

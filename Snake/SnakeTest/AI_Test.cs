@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using BusinessLayer;
 
 namespace SnakeTest
 {
@@ -37,5 +38,25 @@ namespace SnakeTest
             int rnd = randomNUmber.Next(4);
             Assert.IsTrue(rnd <= 4);
         }
+
+        [TestMethod]
+
+        public void SmartMove_moves_towards_snake()
+        {
+            Random random = new Random();
+            BusinessLayer.AI testAI = new BusinessLayer.AI(random);
+            testAI.SpawnAI(40, 40);
+            testAI.XCoordinate = 3;
+            testAI.YCoordinate = 20;
+            List<Point> snakePoints = new List<Point>();
+            Point head = new Point(20, 20);
+            snakePoints.Add(head);
+
+            testAI.SmartMove(0, snakePoints, 3, 20);
+            Assert.IsTrue(testAI.XCoordinate == 4);
+            Assert.IsTrue(testAI.YCoordinate == 20);
+
+        }
+
     }
 }

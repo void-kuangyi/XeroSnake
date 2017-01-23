@@ -18,13 +18,23 @@ namespace BusinessLayer
             {
                 return X;
             }
+
+            set
+            {
+                X = value;
+            }
         }
+
 
         public int YCoordinate
         {
             get
             {
                 return Y;
+            }
+            set
+            {
+                Y = value;
             }
         }
 
@@ -91,6 +101,42 @@ namespace BusinessLayer
             }
 
             currentDirection = newDirection;
+        }
+
+        public void SmartMove(int verticalOrHorizontal, List<Point> snakePoints, int previousX, int previousY)
+        {
+            int middle = snakePoints.Count / 2;
+            Point middlePoint = snakePoints.ElementAt(middle);
+
+            int distanceFromX = middlePoint.returnX() - previousX;
+            //  - means move up
+            //  + means move down            
+            int distanceFromY = middlePoint.returnY() - previousY;
+            // - means move left
+            //  + means move right
+
+            if (verticalOrHorizontal == 0)
+            {
+                if (distanceFromX > 0)
+                {
+                    XCoordinate = XCoordinate + 1;
+                }
+                else
+                {
+                    XCoordinate = XCoordinate - 1;
+                }
+            }
+            else
+            {
+                if (distanceFromY > 0)
+                {
+                    YCoordinate = YCoordinate + 1;
+                }
+                else
+                {
+                    YCoordinate = YCoordinate - 1;
+                }
+            }
         }
     }
 }
