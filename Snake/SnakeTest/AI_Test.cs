@@ -43,18 +43,19 @@ namespace SnakeTest
 
         public void SmartMove_moves_towards_snake()
         {
-            Random random = new Random();
-            BusinessLayer.AI testAI = new BusinessLayer.AI(random);
-            testAI.SpawnAI(40, 40);
-            testAI.XCoordinate = 3;
-            testAI.YCoordinate = 20;
+     
+            Mock<Random> mockRandom = new Mock<Random>();
+            mockRandom.Setup(r => r.Next(It.IsAny<int>())).Returns(0);
+
+            BusinessLayer.AI testAI = new BusinessLayer.AI(mockRandom.Object);
+            testAI.SpawnAI(3, 20);
             List<Point> snakePoints = new List<Point>();
             Point head = new Point(20, 20);
             snakePoints.Add(head);
 
-            testAI.SmartMove(0, snakePoints, 3, 20);
-            Assert.IsTrue(testAI.XCoordinate == 4);
-            Assert.IsTrue(testAI.YCoordinate == 20);
+            testAI.SmartMove(snakePoints);
+            Assert.IsTrue(testAI.XCoordinate == 1);
+            Assert.IsTrue(testAI.YCoordinate == 0);
 
         }
 

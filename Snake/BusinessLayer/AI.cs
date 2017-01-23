@@ -9,6 +9,8 @@ namespace BusinessLayer
     public class AI
     {
         private Direction currentDirection;
+        private int previousX;
+        private int previousY;
         private int X;
         private int Y;
         Random randomNumber;
@@ -18,11 +20,6 @@ namespace BusinessLayer
             {
                 return X;
             }
-
-            set
-            {
-                X = value;
-            }
         }
 
 
@@ -31,10 +28,6 @@ namespace BusinessLayer
             get
             {
                 return Y;
-            }
-            set
-            {
-                Y = value;
             }
         }
 
@@ -49,7 +42,7 @@ namespace BusinessLayer
         {
             if (XBorder < 0 || YBorder < 0)
             {
-                throw new Exception("BAD");
+                throw new Exception("Invalid AI Location");
             }
 
             this.X = randomNumber.Next(XBorder - 1);
@@ -103,8 +96,12 @@ namespace BusinessLayer
             currentDirection = newDirection;
         }
 
-        public void SmartMove(int verticalOrHorizontal, List<Point> snakePoints, int previousX, int previousY)
+        public void SmartMove(List<Point> snakePoints)
         {
+            previousX = X;
+            previousY = Y;
+            int verticalOrHorizontal = randomNumber.Next(0, 2);
+
             int middle = snakePoints.Count / 2;
             Point middlePoint = snakePoints.ElementAt(middle);
 
@@ -119,24 +116,31 @@ namespace BusinessLayer
             {
                 if (distanceFromX > 0)
                 {
-                    XCoordinate = XCoordinate + 1;
+                    X = XCoordinate + 1;
                 }
                 else
                 {
-                    XCoordinate = XCoordinate - 1;
+                    X = XCoordinate - 1;
                 }
             }
             else
             {
                 if (distanceFromY > 0)
                 {
-                    YCoordinate = YCoordinate + 1;
+                    Y = YCoordinate + 1;
                 }
                 else
                 {
-                    YCoordinate = YCoordinate - 1;
+                    Y = YCoordinate - 1;
                 }
             }
         }
+
+         public void moveBack()
+        {
+            X = previousX;
+            Y = previousY;
+        }
+        
     }
 }

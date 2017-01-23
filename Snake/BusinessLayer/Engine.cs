@@ -161,20 +161,13 @@ namespace BusinessLayer
                     } while (!isAIValid);
 
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
-
-                    previousX = newSmartAI.XCoordinate;
-                    previousY = newSmartAI.YCoordinate;
                     mazeArray[newSmartAI.XCoordinate, newSmartAI.YCoordinate] = 0;
-
-                    int temp = 0;
-                    Random rnd = new Random();
-                   
+    
                     do
                     {
                         if (smartMove)
                         {
-                            temp = rnd.Next(2);
-                            newSmartAI.SmartMove(temp, SnakeCurrentPosition, previousX, previousY);
+                            newSmartAI.SmartMove(SnakeCurrentPosition);
                             isAIValid = validateNewAILocation(newSmartAI);
                             if(isAIValid)
                             {
@@ -182,8 +175,7 @@ namespace BusinessLayer
                             }
                             else
                             {
-                                newSmartAI.XCoordinate = previousX;
-                                newSmartAI.YCoordinate = previousY;
+                                newSmartAI.moveBack();
                             }
                         }
                         else
