@@ -23,7 +23,6 @@ namespace BusinessLayer
         AI newAI;
         bool smartMove = false;
         AI newSmartAI;
-        Laser AILaser;
         private GameSnake gameSnake1;
         // For future use, 2 player game mode
         //private GameSnake gameSnake2;
@@ -68,16 +67,15 @@ namespace BusinessLayer
                     } while (!isAIValid);
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
 
-                    AILaser = new Laser(newAI.XCoordinate, newAI.YCoordinate, newAI.AIDirection);
-                    gameSound.SoundOfLaserShooting();
+                    newAI.InitializeLaser();
                     gameSound.SoundWhilePlaying();
-                    if ((mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.mazeBody) || (mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.foodBasic) || (mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.foodAdvanced))
+                    if ((mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] == Elements.mazeBody) || (mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] == Elements.foodBasic) || (mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] == Elements.foodAdvanced))
                     {
-                        AILaser = null;
+                        newAI.laser = null;
                     }
                     else
                     {
-                        mazeArray[AILaser.returnX(), AILaser.returnY()] = Elements.Laser;
+                        mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] = Elements.Laser;
                     }
                     do
                     {
@@ -113,8 +111,18 @@ namespace BusinessLayer
             Point newSnakeHead = getNewHead(snakeDirection);
             List<Point> snakesNewLocation;
 
-           
-
+            List<Point> curSnakeHead = gameSnake1.returnCurrentSnakePosition();
+            if (mazeArray[curSnakeHead[0].returnX(), curSnakeHead[0].returnY()] == Elements.Laser)
+            {
+                gameSound.SnakeDiesSound();
+                if (Score.getScore() > Score.getHighScore())
+                {
+                    gameSound.SnakeGetsHighScore();
+                    Score.setHighScore(Score.getScore());
+                }
+                mazeArray[0, 0] = Elements.snakeDeath;
+                return mazeArray;
+            }
 
             switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
             {
@@ -174,28 +182,27 @@ namespace BusinessLayer
 
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
 
-                    if(AILaser == null)
+                    if(newAI.laser == null)
                     {
-                        AILaser = new Laser(newAI.XCoordinate, newAI.YCoordinate, newAI.AIDirection);
-                        gameSound.SoundOfLaserShooting();
+                        newAI.InitializeLaser();
                         gameSound.SoundWhilePlaying();
                     }
                     else
                     {
-                        mazeArray[AILaser.returnX(), AILaser.returnY()] = Elements.blank;
-                        AILaser.Move();
-                        if (mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.mazeBody)
+                        mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] = Elements.blank;
+                        newAI.laser.Move();
+                        if (mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] == Elements.mazeBody)
                         {
-                            AILaser = null;
+                            newAI.laser = null;
                         }
                         else
                         {
-                            if((mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.foodBasic) || (mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.foodAdvanced))
+                            if((mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] == Elements.foodBasic) || (mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] == Elements.foodAdvanced))
                             {
                                 food = null;
                                 AddFoodToTheMaze();
                             }
-                            mazeArray[AILaser.returnX(), AILaser.returnY()] = Elements.Laser;
+                            mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] = Elements.Laser;
                         }
                     }
 
