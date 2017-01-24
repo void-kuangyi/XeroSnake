@@ -10,6 +10,7 @@ namespace BusinessLayer
         private const int NEWSCORE = 0;
         static Database db;
         string mazeLevel;
+        GameSound sound;
 
         public Score(MazeLevel mazeLevel)
         {
@@ -17,6 +18,7 @@ namespace BusinessLayer
             this.mazeLevel = mazeLevel.ToString();
             db = new Database();
             currentScore = NEWSCORE;
+            sound = new GameSound();
         }
        
         public int getScore()
@@ -42,14 +44,14 @@ namespace BusinessLayer
                     hs.name = currentName;
                     hs.score = currentScore;
                     highScoreList.Add(hs);
-
+                    sound.SnakeGetsHighScore();
                     db.SetHighScore(highScoreList, mazeLevel);
                 }
                 else if (currentScore > highScoreList[0].score)
                 {
                     highScoreList[0].score = currentScore;
                     highScoreList[0].name = currentName;
-
+                    sound.SnakeGetsHighScore();
                     db.SetHighScore(highScoreList, mazeLevel);
                 }
             }
