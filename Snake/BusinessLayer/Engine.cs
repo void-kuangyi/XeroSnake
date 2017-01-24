@@ -124,18 +124,6 @@ namespace BusinessLayer
             Point newSnakeHead = getNewHead(snakeDirection);
             List<Point> snakesNewLocation;
 
-            List<Point> curSnakeHead = gameSnake1.returnCurrentSnakePosition();
-            if (mazeArray[curSnakeHead[0].returnX(), curSnakeHead[0].returnY()] == Elements.Laser)
-            {
-                gameSound.SnakeDiesSound();
-                if (Score.getScore() > Score.getHighScore())
-                {
-                    gameSound.SnakeGetsHighScore();
-                    Score.setHighScore(Score.getScore());
-                }
-                mazeArray[0, 0] = Elements.snakeDeath;
-                return mazeArray;
-            }
             switch (mazeArray[newSnakeHead.returnX(), newSnakeHead.returnY()])
             {
                 case Elements.snakeBody:
