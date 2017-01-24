@@ -51,7 +51,7 @@ namespace BusinessLayer
 
         public Elements[,] initializeGame()
         {
-            gameSound.SoundWhilePlaying();
+            
             switch (currentGameMode)
             {
                 case gameMode.basic:
@@ -71,6 +71,16 @@ namespace BusinessLayer
                     } while (!isAIValid);
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
 
+                    newAI.InitializeLaser();
+                    gameSound.SoundWhilePlaying();
+                    if ((mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] == Elements.mazeBody) || (mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] == Elements.foodBasic) || (mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] == Elements.foodAdvanced))
+                    {
+                        newAI.laser = null;
+                    }
+                    else
+                    {
+                        mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] = Elements.Laser;
+                    }
                     do
                     {
 
@@ -120,6 +130,7 @@ namespace BusinessLayer
                 case Elements.mazeBody:
                 case Elements.AI:
                 case Elements.SmartAI:
+                case Elements.Laser:
                     gameSound.SnakeDiesSound();
                     mazeArray[0, 0] = Elements.snakeDeath;
                     return mazeArray;
@@ -154,7 +165,6 @@ namespace BusinessLayer
                     bool isAIValid = true;
                     int previousX = newAI.XCoordinate;
                     int previousY = newAI.YCoordinate;
-
                     do
                     {
                         newAI.MoveAI(previousX, previousY);
@@ -164,6 +174,35 @@ namespace BusinessLayer
                     } while (!isAIValid);
 
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
+
+                    if(newAI.laser == null)
+                    {
+                        newAI.InitializeLaser();
+                        gameSound.SoundWhilePlaying();
+                    }
+                    else
+                    {
+                        mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] = Elements.blank;
+                        newAI.laser.Move();
+                        if (mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] == Elements.mazeBody)
+                        {
+                            newAI.laser = null;
+                        }
+                        else
+                        {
+                            if((mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] == Elements.foodBasic) || (mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] == Elements.foodAdvanced))
+                            {
+                                food = null;
+                                AddFoodToTheMaze();
+                            }
+                            mazeArray[newAI.laser.returnX(), newAI.laser.returnY()] = Elements.Laser;
+                        }
+                    }
+
+                    
+
+                    previousX = newSmartAI.XCoordinate;
+                    previousY = newSmartAI.YCoordinate;
                     mazeArray[newSmartAI.XCoordinate, newSmartAI.YCoordinate] = 0;
     
                     do

@@ -14,6 +14,8 @@ namespace BusinessLayer
         private int X;
         private int Y;
         Random randomNumber;
+        public Laser laser;
+        private GameSound sound = new GameSound();
         public int XCoordinate
         {
             get
@@ -49,6 +51,11 @@ namespace BusinessLayer
             this.Y = randomNumber.Next(YBorder - 1);
         }
 
+        public void InitializeLaser()
+        {
+            laser = new Laser(X, Y, currentDirection);
+            sound.SoundOfLaserShooting();
+        }
         public void MoveAI(int previousX, int previousY)
         {
             X = previousX;
