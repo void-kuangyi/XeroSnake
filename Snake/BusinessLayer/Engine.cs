@@ -71,7 +71,7 @@ namespace BusinessLayer
                     AILaser = new Laser(newAI.XCoordinate, newAI.YCoordinate, newAI.AIDirection);
                     gameSound.SoundOfLaserShooting();
                     gameSound.SoundWhilePlaying();
-                    if (mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.mazeBody)
+                    if ((mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.mazeBody) || (mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.foodBasic) || (mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.foodAdvanced))
                     {
                         AILaser = null;
                     }
@@ -190,6 +190,11 @@ namespace BusinessLayer
                         }
                         else
                         {
+                            if((mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.foodBasic) || (mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.foodAdvanced))
+                            {
+                                food = null;
+                                AddFoodToTheMaze();
+                            }
                             mazeArray[AILaser.returnX(), AILaser.returnY()] = Elements.Laser;
                         }
                     }
