@@ -7,10 +7,10 @@ namespace Snake
     class Program
     {
         private const int GameStepMilliseconds = 100;
-        private static KeyListner keyListner = new KeyListner();
 
+        private static KeyListner keyListner = new KeyListner();
         private static bool ExitGame = false;
-        private static BusinessLayer.gameMode currentGameMode;
+        private static gameMode currentGameMode;
         static bool gameSelected = false;
 
         static void Main(string[] args)
@@ -19,7 +19,7 @@ namespace Snake
 
             currentGameMode = gameMode.basic;
 
-            int mazeMode = ChooseMazeMode();
+            MazeLevel mazeMode = ChooseMazeMode();
 
             using (Engine gameEngine = new Engine(gameMode.basic, mazeMode))
             {
@@ -31,7 +31,7 @@ namespace Snake
 
                 do
                 {
-                    int score = Score.getScore();
+                    int score = gameEngine.getScore();
                     drawScore(score);
 
                     ConsoleKeyInfo keyInfo = keyListner.ReadKey(GameStepMilliseconds);
@@ -61,12 +61,18 @@ namespace Snake
                     {
                         ExitGame = true;
                     }
-                    System.Console.Clear();
+                    Console.Clear();
                     Draw(updateMaze);
                 }
                 while (ExitGame == false);
 
-                endGame();
+                Console.Write("Please enter your name: ");
+                string highScoreName = keyListner.ReadKey(Int32.MaxValue).KeyChar.ToString() + Console.ReadLine();
+
+                gameEngine.setName(highScoreName);
+                gameEngine.handleHighSCore();
+
+                EndGame(gameEngine.getScore(), gameEngine.getHighScoreList());
             }
         }
 
@@ -101,31 +107,31 @@ namespace Snake
             System.Console.WriteLine("Score: " + score);
         }
 
-        static void endGame()
+        static void EndGame(int score, List<string> highScoreList)
         {
-            Console.WriteLine("Your final score is " + Score.getScore());
-            Console.WriteLine("The high score is " + Score.getHighScore());
+            Console.WriteLine("Your final score is " + score);
+
+            Console.WriteLine("High Scores:");
+            foreach (string str in highScoreList)
+            {
+                Console.WriteLine(str);
+            }
             Console.WriteLine("Enter r to replay. q key to quit.");
 
-            ConsoleKeyInfo keyInfo = keyListner.ReadKey(Int32.MaxValue);
-            if (keyInfo.KeyChar.ToString().Equals("r", StringComparison.OrdinalIgnoreCase))
+            do
             {
-                ExitGame = false;
-                Console.Clear();
-                Main(null);
-            }
-            else if (keyInfo.KeyChar.ToString().Equals("q", StringComparison.OrdinalIgnoreCase))
-            {
-                Environment.Exit(0);
-            }
-     
-            for (int i = 1; i < 3; i++)
-            {
-                Console.SetCursorPosition(0, Console.CursorTop - i);
-                ClearCurrentConsoleLine();
-            }
-
-            endGame();
+                ConsoleKeyInfo keyInfo = keyListner.ReadKey(Int32.MaxValue);
+                if (keyInfo.KeyChar.ToString().Equals("r", StringComparison.OrdinalIgnoreCase))
+                {
+                    ExitGame = false;
+                    Console.Clear();
+                    Main(null);
+                }
+                else if (keyInfo.KeyChar.ToString().Equals("q", StringComparison.OrdinalIgnoreCase))
+                {
+                    Environment.Exit(0);
+                }
+            } while (true);
         }
 
         static void initialMenuLoad()
@@ -154,7 +160,7 @@ namespace Snake
 
 
 
-        public static int ChooseMazeMode()
+        public static MazeLevel ChooseMazeMode()
         {
             MazeLevel mazeMode;
 
@@ -173,7 +179,7 @@ namespace Snake
 
 
             Console.Clear();
-            return (int)mazeMode;
+            return mazeMode;
 
         }
 

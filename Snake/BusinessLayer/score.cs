@@ -1,4 +1,6 @@
 ﻿using DatabaseLayer;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLayer
 {
@@ -6,39 +8,62 @@ namespace BusinessLayer
     {
         private static int currentScore;
         private const int NEWSCORE = 0;
-        static Database db = new Database();
+        static Database db;
+        string mazeLevel;
 
-        public Score()
+        public Score(MazeLevel mazeLevel)
         {
+            currentScore = NEWSCORE;
+            this.mazeLevel = mazeLevel.ToString();
+            db = new Database();
             currentScore = NEWSCORE;
         }
        
-        public static int getScore()
+        public int getScore()
         {
             return currentScore;
         }
 
-        public static void incrementScore(int increment)
+        public void incrementScore(int increment)
         {
             currentScore += increment;
         }
 
-        public static void resetScore()
+        internal void handleHighScore(string currentName)
         {
-            currentScore = NEWSCORE;
-        }
+            List<HighScore> highScoreList = new List<HighScore>();
+            highScoreList = db.GetHighScore(mazeLevel).OrderBy(hs => hs.score).ToList();
 
-        public static int getHighScore()
-        {
-            return db.getHighSCore();
-        }
-
-        public static void setHighScore(int highScore)
-        {
-            if (db.setHighScore(highScore) == false)
+            if (highScoreList.Count < 5 && currentScore != 0)
             {
-                throw new System.Exception("Database fail");
+                HighScore hs = new HighScore();
+                hs.name = currentName;
+                hs.score = currentScore;
+                highScoreList.Add(hs);
+
+                db.SetHighScore(highScoreList, mazeLevel);
             }
+            else if (currentScore > highScoreList[0].score)
+            {
+                highScoreList[0].score = currentScore;
+                highScoreList[0].name = currentName;
+
+                db.SetHighScore(highScoreList, mazeLevel);
+            }
+        }
+
+        internal List<string> getHighScoreList()
+        {
+            List<string> highScoreStringList = new List<string>();
+            List<HighScore> highScoreList = new List<HighScore>();
+            highScoreList = db.GetHighScore(mazeLevel).OrderByDescending(hs => hs.score).ToList();
+            
+            foreach (HighScore highScore in highScoreList)
+            {
+                highScoreStringList.Add(highScore.name + "  " + highScore.score.ToString());
+            }
+
+            return highScoreStringList;
         }
     }
 }
