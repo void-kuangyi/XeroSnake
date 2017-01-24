@@ -7,18 +7,16 @@ namespace Snake
     class Program
     {
         private const int GameStepMilliseconds = 100;
+        private static bool ExitGame = false;
+        static bool gameSelected = false;
 
         private static KeyListner keyListner = new KeyListner();
-        private static bool ExitGame = false;
         private static gameMode currentGameMode;
-        static bool gameSelected = false;
 
         static void Main(string[] args)
         {
             initialMenuLoad();
-
             currentGameMode = gameMode.basic;
-
             MazeLevel mazeMode = ChooseMazeMode();
 
             using (Engine gameEngine = new Engine(gameMode.basic, mazeMode))
@@ -110,8 +108,8 @@ namespace Snake
         static void EndGame(int score, List<string> highScoreList)
         {
             Console.WriteLine("Your final score is " + score);
-
             Console.WriteLine("High Scores:");
+
             foreach (string str in highScoreList)
             {
                 Console.WriteLine(str);
@@ -136,10 +134,9 @@ namespace Snake
 
         static void initialMenuLoad()
         {
+            Style.menuImage();
             do
-            {
-
-                Style.menuImage();
+            {               
                 try
                 {
                     currentGameMode = (gameMode)Convert.ToInt32(Console.ReadLine());
@@ -156,9 +153,6 @@ namespace Snake
             }
             while (gameSelected == false);
         }
-
-
-
 
         public static MazeLevel ChooseMazeMode()
         {
@@ -177,10 +171,8 @@ namespace Snake
             }
             while (!Enum.TryParse(keyListner.ReadKey(Int32.MaxValue).KeyChar.ToString(), out mazeMode) || !Enum.IsDefined(typeof(MazeLevel),mazeMode));
 
-
             Console.Clear();
             return mazeMode;
-
         }
 
         public static void ClearCurrentConsoleLine()
