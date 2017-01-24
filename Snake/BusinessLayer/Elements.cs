@@ -17,6 +17,6 @@ namespace BusinessLayer
         snakeDeath = 6,
         AI = 7,
         SmartAI = 8,
-        Laser =9
+        Laser = 9
     }
 }
