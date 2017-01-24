@@ -34,22 +34,26 @@ namespace BusinessLayer
             List<HighScore> highScoreList = new List<HighScore>();
             highScoreList = db.GetHighScore(mazeLevel).OrderBy(hs => hs.score).ToList();
 
-            if (highScoreList.Count < 5 && currentScore != 0)
+            if (currentScore != 0)
             {
-                HighScore hs = new HighScore();
-                hs.name = currentName;
-                hs.score = currentScore;
-                highScoreList.Add(hs);
+                if (highScoreList.Count < 5)
+                {
+                    HighScore hs = new HighScore();
+                    hs.name = currentName;
+                    hs.score = currentScore;
+                    highScoreList.Add(hs);
 
-                db.SetHighScore(highScoreList, mazeLevel);
-            }
-            else if (currentScore > highScoreList[0].score)
-            {
-                highScoreList[0].score = currentScore;
-                highScoreList[0].name = currentName;
+                    db.SetHighScore(highScoreList, mazeLevel);
+                }
+                else if (currentScore > highScoreList[0].score)
+                {
+                    highScoreList[0].score = currentScore;
+                    highScoreList[0].name = currentName;
 
-                db.SetHighScore(highScoreList, mazeLevel);
+                    db.SetHighScore(highScoreList, mazeLevel);
+                }
             }
+            
         }
 
         internal List<string> getHighScoreList()
