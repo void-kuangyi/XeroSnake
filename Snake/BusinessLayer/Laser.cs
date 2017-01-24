@@ -15,8 +15,6 @@ namespace BusinessLayer
             setX(newX);
             setY(newY);
             currentDirection = direction;
-
-
         }
         public void Move()
         {

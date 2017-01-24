@@ -4,10 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SnakeTest
 {
     [TestClass]
-    public class Laser_Test
+    public class LaserTest
     {
         [TestMethod]
-        public void Move_Test_if_Laser_Moves_Down()
+        public void Check_Move_if_Laser_Moves_Down()
         {
 
             BusinessLayer.Laser testLaser = new BusinessLayer.Laser(2,2, BusinessLayer.Direction.Down);
@@ -19,7 +19,7 @@ namespace SnakeTest
         }
 
         [TestMethod]
-        public void Move_Test_if_Laser_Moves_Up()
+        public void Check_Move_if_Laser_Moves_Up()
         {
 
             BusinessLayer.Laser testLaser = new BusinessLayer.Laser(2, 2, BusinessLayer.Direction.Up);
@@ -31,7 +31,7 @@ namespace SnakeTest
         }
 
         [TestMethod]
-        public void Move_Test_if_Laser_Moves_Right()
+        public void Check_Move_if_Laser_Moves_Right()
         {
 
             BusinessLayer.Laser testLaser = new BusinessLayer.Laser(2, 2, BusinessLayer.Direction.Right);
@@ -43,7 +43,7 @@ namespace SnakeTest
         }
 
         [TestMethod]
-        public void Move_Test_if_Laser_Moves_Left()
+        public void Check_Move_if_Laser_Moves_Left()
         {
 
             BusinessLayer.Laser testLaser = new BusinessLayer.Laser(2, 2, BusinessLayer.Direction.Left);
