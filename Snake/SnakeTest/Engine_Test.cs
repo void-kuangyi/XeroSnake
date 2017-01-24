@@ -13,20 +13,16 @@ namespace SnakeTest
         [TestMethod]
         public void initializeGameTestBorder()
         {
-
-
             const int width = 70;
             const int height = 20;
             Elements[,] expectedResult = createMaze(width, height);
             bool result;
 
-            using (Engine engine = new Engine(gameMode.basic, MazeLevel.Easy, width, height))
-            {
-                
+            using (Engine engine = new Engine(gameMode.basic, MazeLevel.Easy, height, width))
+            { 
                 Elements[,] resultingMaze = engine.initializeGame();
 
                 result = validateMazeBorder(resultingMaze, expectedResult, width, height);
-
             }
 
             Assert.IsTrue(result, "Valid maze generated");
