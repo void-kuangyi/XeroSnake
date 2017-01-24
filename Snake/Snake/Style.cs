@@ -89,7 +89,7 @@ namespace Snake
             Console.WriteLine("█");
             Console.Write("█                  ");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write(" ▀██████████████████████████████████████████                              ");
+            Console.Write("▀▀██████████████████████████████████████████                              ");
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("█");
 

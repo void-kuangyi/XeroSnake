@@ -23,6 +23,7 @@ namespace BusinessLayer
         AI newAI;
         bool smartMove = false;
         AI newSmartAI;
+        Laser AILaser;
         private GameSnake gameSnake1;
         // For future use, 2 player game mode
         //private GameSnake gameSnake2;
@@ -46,7 +47,7 @@ namespace BusinessLayer
 
         public Elements[,] initializeGame()
         {
-            gameSound.SoundWhilePlaying();
+            
             switch (currentGameMode)
             {
                 case gameMode.basic:
@@ -67,6 +68,17 @@ namespace BusinessLayer
                     } while (!isAIValid);
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
 
+                    AILaser = new Laser(newAI.XCoordinate, newAI.YCoordinate, newAI.AIDirection);
+                    gameSound.SoundOfLaserShooting();
+                    gameSound.SoundWhilePlaying();
+                    if (mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.mazeBody)
+                    {
+                        AILaser = null;
+                    }
+                    else
+                    {
+                        mazeArray[AILaser.returnX(), AILaser.returnY()] = Elements.Laser;
+                    }
                     do
                     {
 
@@ -110,6 +122,7 @@ namespace BusinessLayer
                 case Elements.mazeBody:
                 case Elements.AI:
                 case Elements.SmartAI:
+                case Elements.Laser:
                     gameSound.SnakeDiesSound();
                     if (Score.getScore() > Score.getHighScore())
                     {
@@ -151,7 +164,6 @@ namespace BusinessLayer
                     bool isAIValid = true;
                     int previousX = newAI.XCoordinate;
                     int previousY = newAI.YCoordinate;
-
                     do
                     {
                         newAI.MoveAI(previousX, previousY);
@@ -161,6 +173,31 @@ namespace BusinessLayer
                     } while (!isAIValid);
 
                     mazeArray[newAI.XCoordinate, newAI.YCoordinate] = Elements.AI;
+
+                    if(AILaser == null)
+                    {
+                        AILaser = new Laser(newAI.XCoordinate, newAI.YCoordinate, newAI.AIDirection);
+                        gameSound.SoundOfLaserShooting();
+                        gameSound.SoundWhilePlaying();
+                    }
+                    else
+                    {
+                        mazeArray[AILaser.returnX(), AILaser.returnY()] = Elements.blank;
+                        AILaser.Move();
+                        if (mazeArray[AILaser.returnX(), AILaser.returnY()] == Elements.mazeBody)
+                        {
+                            AILaser = null;
+                        }
+                        else
+                        {
+                            mazeArray[AILaser.returnX(), AILaser.returnY()] = Elements.Laser;
+                        }
+                    }
+
+                    
+
+                    previousX = newSmartAI.XCoordinate;
+                    previousY = newSmartAI.YCoordinate;
                     mazeArray[newSmartAI.XCoordinate, newSmartAI.YCoordinate] = 0;
     
                     do

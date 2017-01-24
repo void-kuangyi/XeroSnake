@@ -15,6 +15,7 @@ namespace BusinessLayer
         SoundPlayer soundOfEatingFood;
         SoundPlayer soundOfGettingHighScore;
         SoundPlayer soundWhilePlaying;
+        SoundPlayer soundOfLaserShooting;
 
         public GameSound()
         {
@@ -22,6 +23,7 @@ namespace BusinessLayer
             soundOfEatingFood = new SoundPlayer(Properties.Resources.eatFood); ;
             soundOfGettingHighScore = new SoundPlayer(Properties.Resources.highScore);
             soundWhilePlaying = new SoundPlayer(Properties.Resources.gameAudio);
+            soundOfLaserShooting = new SoundPlayer(Properties.Resources.laser);
         }
         public void SoundWhilePlaying()
         {
@@ -31,6 +33,11 @@ namespace BusinessLayer
         public void StopPlayingSound()
         {
             soundWhilePlaying.Stop();
+        }
+
+        public void SoundOfLaserShooting()
+        {
+            soundOfLaserShooting.Play();
         }
 
         public void SnakeEatsSound()

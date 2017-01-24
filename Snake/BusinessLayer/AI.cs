@@ -9,6 +9,14 @@ namespace BusinessLayer
     public class AI
     {
         private Direction currentDirection;
+        public Direction AIDirection
+        {
+            get
+            {
+                return currentDirection;
+            }
+        }
+
         private int previousX;
         private int previousY;
         private int X;
