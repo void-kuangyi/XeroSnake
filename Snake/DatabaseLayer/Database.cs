@@ -1,36 +1,83 @@
-﻿using System.IO;
+﻿using System.Data;
+using System.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace DatabaseLayer
 {
     public class Database
     {
-        const string FILENAME = "highscores.txt";
+        private const int MaxNoOfScores = 5;
+        private SqlDataReader sqlDataReader;
+        private const string connectionString = "Server= localhost; Database= SnakeHighScores; Integrated Security=True;";
 
-        public int getHighSCore()
+
+        public List<HighScore> GetHighScore(string mazeLevel)
         {
-            int highScore;
+            List<HighScore> highScoreList;
 
-            if (File.Exists(FILENAME))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
-                using (BinaryReader reader = new BinaryReader(File.Open(FILENAME, FileMode.Open)))
+                using (SqlCommand cmd = sqlConnection.CreateCommand())
                 {
-                    highScore = reader.ReadInt32();
+                    sqlConnection.Open();
+                    cmd.CommandText = "SELECT * FROM HighScores where GameType = '" + mazeLevel + "'";
+                    sqlDataReader = cmd.ExecuteReader();
                 }
-            }
-            else
-            {
-                return 0;
+
+                highScoreList = new List<HighScore>(5);
+                if (sqlDataReader.HasRows)
+                {
+                    while (sqlDataReader.Read())
+                    {
+                        HighScore tempHSObject = new HighScore();
+                        tempHSObject.score = sqlDataReader.GetInt32(2);
+                        tempHSObject.name = sqlDataReader.GetString(3);
+                        highScoreList.Add(tempHSObject);
+                    }
+                }
+
+                sqlConnection.Close();
             }
 
-            return highScore;
+            return highScoreList;
         }
 
-        public bool setHighScore(int highScore)
+        public bool SetHighScore(List<HighScore> highScoreList, string mazeLevel)
         {
-            using (BinaryWriter writer = new BinaryWriter(File.Open(FILENAME, FileMode.Create)))
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
-                writer.Write(highScore);
+                sqlConnection.Open();
+
+                using (SqlCommand cmd = sqlConnection.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM HighScores where GameType='" + mazeLevel + "'";
+                    sqlDataReader = cmd.ExecuteReader();
+                }
+
+                sqlConnection.Close();
+
+                foreach (HighScore highScore in highScoreList)
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand cmd = sqlConnection.CreateCommand())
+                    {
+
+                        cmd.CommandText = "INSERT INTO HighScores VALUES ( '"
+                                        + mazeLevel
+                                        + "', "
+                                        + highScore.score
+                                        + ", '"
+                                        + highScore.name
+                                        + "')";
+
+                        cmd.ExecuteReader();
+                    }
+                    sqlConnection.Close();
+                }
+
+                sqlConnection.Close();
             }
+
             return true;
         }
 
