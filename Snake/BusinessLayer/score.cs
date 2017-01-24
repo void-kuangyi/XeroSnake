@@ -1,6 +1,6 @@
 ﻿using DatabaseLayer;
 using System.Collections.Generic;
-using System;
+using System.Linq;
 
 namespace BusinessLayer
 {
@@ -11,11 +11,11 @@ namespace BusinessLayer
         static Database db;
         string mazeLevel;
 
-        public Score(string mazeLevel)
+        public Score(MazeLevel mazeLevel)
         {
             currentScore = NEWSCORE;
-            this.mazeLevel = mazeLevel;
-            db = new Database(mazeLevel);
+            this.mazeLevel = mazeLevel.ToString();
+            db = new Database();
             currentScore = NEWSCORE;
         }
        
@@ -32,9 +32,7 @@ namespace BusinessLayer
         internal void handleHighScore(string currentName)
         {
             List<HighScore> highScoreList = new List<HighScore>();
-            highScoreList = db.getHighSCore();
-
-            highScoreList.Sort((a, b) => a.score.CompareTo(b.score));
+            highScoreList = db.GetHighScore(mazeLevel).OrderBy(hs => hs.score).ToList();
 
             if (highScoreList.Count < 5 && currentScore != 0)
             {
@@ -43,14 +41,14 @@ namespace BusinessLayer
                 hs.score = currentScore;
                 highScoreList.Add(hs);
 
-                db.setHighScore(highScoreList);
+                db.SetHighScore(highScoreList, mazeLevel);
             }
             else if (currentScore > highScoreList[0].score)
             {
                 highScoreList[0].score = currentScore;
                 highScoreList[0].name = currentName;
 
-                db.setHighScore(highScoreList);
+                db.SetHighScore(highScoreList, mazeLevel);
             }
         }
 
@@ -58,10 +56,8 @@ namespace BusinessLayer
         {
             List<string> highScoreStringList = new List<string>();
             List<HighScore> highScoreList = new List<HighScore>();
-            highScoreList = db.getHighSCore();
-
-            highScoreList.Sort((a, b) => -1 * a.score.CompareTo(b.score)); // "-1 *" to sort in descending order
-
+            highScoreList = db.GetHighScore(mazeLevel).OrderByDescending(hs => hs.score).ToList();
+            
             foreach (HighScore highScore in highScoreList)
             {
                 highScoreStringList.Add(highScore.name + "  " + highScore.score.ToString());

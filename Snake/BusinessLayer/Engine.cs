@@ -38,7 +38,7 @@ namespace BusinessLayer
             gameSound = new GameSound();
             this.mazeMode = mazeMode;
 
-            score = new Score(this.mazeMode.ToString());
+            score = new Score(this.mazeMode);
             foodGenerator = new FoodGenerator();
             newAI = new AI(new Random());
             newSmartAI = new AI(new Random());

@@ -11,7 +11,7 @@ namespace SnakeTest
         {
             int initialisedScore;
 
-            Score score = new Score(MazeLevel.Beginner.ToString());
+            Score score = new Score(MazeLevel.Beginner);
             initialisedScore = score.getScore();
 
             Assert.IsTrue(initialisedScore == 0, "Score not initialised to zero at the start");
@@ -23,7 +23,7 @@ namespace SnakeTest
             int incrementValue1 = 30;
             int incrementValue2 = 30;
             int incrementedScore;
-            Score score = new Score(MazeLevel.Beginner.ToString());
+            Score score = new Score(MazeLevel.Beginner);
 
             score.incrementScore(incrementValue1);
             score.incrementScore(incrementValue2);
@@ -37,7 +37,7 @@ namespace SnakeTest
         {
             int currentScore;
             int NEWSCORE = 0;
-            Score score = new Score(MazeLevel.Beginner.ToString());
+            Score score = new Score(MazeLevel.Beginner);
 
             currentScore = score.getScore();
 

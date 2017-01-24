@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DatabaseLayer;
-using BusinessLayer;
-using System.IO;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace SnakeTest
 {
@@ -14,13 +13,13 @@ namespace SnakeTest
         [TestMethod]
         public void getHighSCore_Database_Will_Write_Score()
         {
-            Database db = new Database(testMazeLevel);
+            Database db = new Database();
             HighScore highSCore = new HighScore();
             highSCore.score = 10;
             highSCore.name = "Test_DB_Will_Write_Score";
             List<HighScore> highScoreList = new List<HighScore>();
 
-            bool checkCompleted = db.setHighScore(highScoreList);
+            bool checkCompleted = db.SetHighScore(highScoreList, testMazeLevel);
 
             Assert.IsTrue(checkCompleted, "Score not written");
         }
@@ -28,16 +27,15 @@ namespace SnakeTest
         [TestMethod]
         public void setHighSCore_Database_Will_Store_Score()
         {
-            Database db = new Database(testMazeLevel);
+            Database db = new Database();
             HighScore highSCore = new HighScore();
             highSCore.score = Int16.MaxValue;
             highSCore.name = "Test_DB_Will_Save_Score";
             List<HighScore> highScoreList = new List<HighScore>();
             highScoreList.Add(highSCore);
-            db.setHighScore(highScoreList);
+            db.SetHighScore(highScoreList, testMazeLevel);
 
-            highScoreList = db.getHighSCore();
-            highScoreList.Sort((a, b) => -1 * a.score.CompareTo(b.score)); // Sort descending
+            highScoreList = db.GetHighScore(testMazeLevel).OrderByDescending(hs => hs.score).ToList();
 
             Assert.IsTrue(highScoreList[0].score == Int16.MaxValue, "Invalid Score");
         }
@@ -45,7 +43,7 @@ namespace SnakeTest
         [TestMethod]
         public void setHighSCore_Database_Will_Replace_Score()
         {
-            Database db = new Database(MazeLevel.Hard.ToString());
+            Database db = new Database();
             int sampleHighScore1 = Int16.MaxValue - 1;
             int sampleHighScore2 = Int16.MaxValue;
             HighScore highSCore1 = new HighScore();
@@ -57,10 +55,9 @@ namespace SnakeTest
             List<HighScore> highScoreList = new List<HighScore>();
             highScoreList.Add(highSCore1);
             highScoreList.Add(highSCore2);
-            db.setHighScore(highScoreList);
+            db.SetHighScore(highScoreList, testMazeLevel);
 
-            highScoreList = db.getHighSCore();
-            highScoreList.Sort((a, b) => -1 * a.score.CompareTo(b.score)); // Sort descending
+            highScoreList = db.GetHighScore(testMazeLevel).OrderByDescending(hs => hs.score).ToList();
 
             Assert.IsTrue(highScoreList[0].score == Int16.MaxValue, "Invalid Score");
         }

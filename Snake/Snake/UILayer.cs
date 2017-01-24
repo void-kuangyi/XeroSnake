@@ -118,21 +118,20 @@ namespace Snake
             }
             Console.WriteLine("Enter r to replay. q key to quit.");
 
-            label:  ConsoleKeyInfo keyInfo = keyListner.ReadKey(Int32.MaxValue);
-            if (keyInfo.KeyChar.ToString().Equals("r", StringComparison.OrdinalIgnoreCase))
+            do
             {
-                ExitGame = false;
-                Console.Clear();
-                Main(null);
-            }
-            else if (keyInfo.KeyChar.ToString().Equals("q", StringComparison.OrdinalIgnoreCase))
-            {
-                Environment.Exit(0);
-            }
-            else
-            {
-                goto label;
-            }
+                ConsoleKeyInfo keyInfo = keyListner.ReadKey(Int32.MaxValue);
+                if (keyInfo.KeyChar.ToString().Equals("r", StringComparison.OrdinalIgnoreCase))
+                {
+                    ExitGame = false;
+                    Console.Clear();
+                    Main(null);
+                }
+                else if (keyInfo.KeyChar.ToString().Equals("q", StringComparison.OrdinalIgnoreCase))
+                {
+                    Environment.Exit(0);
+                }
+            } while (true);
         }
 
         static void initialMenuLoad()
